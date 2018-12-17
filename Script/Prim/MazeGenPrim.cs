@@ -18,7 +18,7 @@ public class MazeGenPrim : MonoBehaviour {
         originPos = new Vector3(1, 1, 0);
         for(int i=0; i < width; i++) {
             for(int j =0; j< height; j++) {
-                GameObject singleCube = Instantiate(cube, new Vector3(i, j, 0), new Quaternion());
+                GameObject singleCube = Instantiate(cube, new Vector3(i, 0, j), new Quaternion());      //cube里的y对应的是实际的场景的z
                 singleCube.GetComponent<Cube>().x = i;
                 singleCube.GetComponent<Cube>().y = j;
                 mazeObject[i, j] = singleCube;                                 //0代表墙，1代表可通过
