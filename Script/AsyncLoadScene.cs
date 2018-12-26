@@ -42,7 +42,7 @@ public class AsyncLoadScene : MonoBehaviour {
 
         if ((int)(loadingSlider.value * 100) == 100) {
             operation.allowSceneActivation = true;      //允许异步加载完毕后自动切换场景
-            MyDelegate.OnSceneEvent(Globe.nextSceneName, 5);
+            //MyDelegate.OnSceneEvent(Globe.nextSceneName, 5);
         }
 	}
 

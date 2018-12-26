@@ -173,7 +173,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1047022514
 GameObject:
@@ -183,10 +183,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1047022517}
-  - component: {fileID: 1047022516}
   - component: {fileID: 1047022515}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: MainMenuManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,21 +202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a438f639bc7ff34ebdb42d2d0b42c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1047022516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1047022514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 245701cce007838448182ebb20335596, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 41
-  height: 31
-  cube: {fileID: 1479856308536302, guid: 0e911763c4ee39643a9b5df693e1f31c, type: 2}
-  mazeParent: {fileID: 0}
 --- !u!4 &1047022517
 Transform:
   m_ObjectHideFlags: 0
@@ -229,7 +213,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1131782982
 GameObject:
@@ -459,7 +443,7 @@ RectTransform:
   m_Children:
   - {fileID: 1654011887}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -555,7 +539,7 @@ GameObject:
   - component: {fileID: 1654011889}
   - component: {fileID: 1654011888}
   m_Layer: 5
-  m_Name: Button
+  m_Name: PlayBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -666,3 +650,43 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1654011886}
   m_CullTransparentMesh: 0
+--- !u!1 &1971565985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1971565986}
+  - component: {fileID: 1971565987}
+  m_Layer: 0
+  m_Name: DataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1971565986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1971565985}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1971565987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1971565985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21debb61b643254d9a30510aa96e35f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

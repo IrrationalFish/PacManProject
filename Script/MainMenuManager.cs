@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class Manager : MonoBehaviour {
+public class MainMenuManager : MonoBehaviour {
 
     void Start() {
-        //GetComponent<MazeGenPrim>().Generate();
-        DontDestroyOnLoad(gameObject);
-        MyDelegate.SceneEvent += PrintScene;
+        //MyDelegate.SceneEvent += PrintScene;
     }
 
-    // Update is called once per frame
     void Update() {
 
     }
@@ -21,7 +18,4 @@ public class Manager : MonoBehaviour {
         SceneManager.LoadScene("LoadingScene");
     }
 
-    public void PrintScene(string sceneName, int n) {
-        Debug.Log(sceneName + "" + n);
-    }
 }
