@@ -7,8 +7,9 @@ public class MazeGenPrim : MonoBehaviour {
     public int width = 11;
     public int height = 11;
     public GameObject cube;
-    public Transform mazeParent;
+    public GameObject mazeParentPrefab;
 
+    private Transform mazeParentTrans;
     private GameObject[,] mazeObject;
     private Vector3 originPos;
     private List<GameObject> wallsList = new List<GameObject>();
@@ -97,6 +98,12 @@ public class MazeGenPrim : MonoBehaviour {
         }*/
     }
 
+    public GameObject generateMazeParent() {
+        GameObject maze = Instantiate(mazeParentPrefab);
+        mazeParentTrans = maze.transform;
+        return maze;
+    }
+
     public void Generate() {
         mazeObject = new GameObject[width, height];     //网上代码：先y后x，（1,2）代表第一行第二列(2,1)
         originPos = new Vector3(1, 1, 0);
@@ -106,7 +113,7 @@ public class MazeGenPrim : MonoBehaviour {
                 singleCube.GetComponent<Cube>().x = i;
                 singleCube.GetComponent<Cube>().y = j;
                 mazeObject[i, j] = singleCube;                                 //0代表墙，1代表可通过
-                singleCube.transform.parent = mazeParent;
+                singleCube.transform.parent = mazeParentTrans;
             }
         }
         int xPos = (int)originPos.x;
