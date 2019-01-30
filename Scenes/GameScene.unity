@@ -8991,8 +8991,8 @@ GameObject:
   - component: {fileID: 2091401301}
   - component: {fileID: 2091401302}
   - component: {fileID: 2091401300}
-  - component: {fileID: 2091401303}
   - component: {fileID: 2091401304}
+  - component: {fileID: 2091401303}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -9043,6 +9043,8 @@ MonoBehaviour:
   mazeHeight: 13
   maze: {fileID: 0}
   pacMan: {fileID: 0}
+  Prim: 0
+  RD: 1
 --- !u!114 &2091401303
 MonoBehaviour:
   m_ObjectHideFlags: 0
