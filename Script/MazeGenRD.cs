@@ -18,35 +18,25 @@ public class MazeGenRD : MonoBehaviour {
 
     public GameObject GenerateMazeParent(int width, int height) {
         maze = Instantiate(mazePrefab);
-        mazeObject = maze.GetComponent<Maze>().initialiseMazeObject(width, height);  //这里的mazeobj是maze的引用
+        mazeObject = maze.GetComponent<Maze>().InitialiseMazeObject(width, height);  //这里的mazeobj是maze的引用
         return maze;
     }
 
     public void Generate(int width, int height) {
-        mazeObject = new GameObject[width, height];
         GenBoundary(width, height);
         GenMaze(1, 1, width - 2, height - 2);
     }
 
-        private void GenBoundary(int width, int height) {
-        GameObject singleCell;
+    private void GenBoundary(int width, int height) {
         for (int i = 0; i < width; i++) {
-            singleCell = Instantiate(cube, new Vector3(i, 0, 0), new Quaternion());
-            mazeObject[i, 0] = singleCell;
-            singleCell.GetComponent<Cube>().SetCoordinateAttributeAndParent(i, 0, maze.transform);
+            GenerateSingleCube(i, 0);
 
-            singleCell = Instantiate(cube, new Vector3(i, 0, height-1), new Quaternion());
-            mazeObject[i, height-1] = singleCell;
-            singleCell.GetComponent<Cube>().SetCoordinateAttributeAndParent(i, height - 1, maze.transform);
+            GenerateSingleCube(i, height - 1);
         }
         for (int i = 0; i < height; i++) {
-            singleCell = Instantiate(cube, new Vector3(0, 0, i), new Quaternion());
-            mazeObject[0, i] = singleCell;
-            singleCell.GetComponent<Cube>().SetCoordinateAttributeAndParent(0, i, maze.transform);
+            GenerateSingleCube(0, i);
 
-            singleCell = Instantiate(cube, new Vector3(width-1, 0, i), new Quaternion());
-            mazeObject[width-1, i] = singleCell;
-            singleCell.GetComponent<Cube>().SetCoordinateAttributeAndParent(width-1, i, maze.transform);
+            GenerateSingleCube(width-1, i);
         }
     }
 
@@ -73,18 +63,14 @@ public class MazeGenRD : MonoBehaviour {
         xPos = x + ((int)Random.Range(0, (width / 2) - 1)) * 2 + 1;      //竖线
         for(int i = y; i < y + height; i++) {
             if (mazeObject[xPos, i] == null) {
-                GameObject singleCell = Instantiate(cube, new Vector3(xPos, 0, i), new Quaternion());
-                mazeObject[xPos, i] = singleCell;
-                singleCell.GetComponent<Cube>().SetCoordinateAttributeAndParent(xPos, i, maze.transform);
+                GenerateSingleCube(xPos, i);
             }
         }
 
         yPos = y + ((int)Random.Range(0, (height / 2) - 1)) * 2 + 1;       //横线
         for (int i = x; i < x + width; i++) {
             if(mazeObject[i,yPos] == null) {
-                GameObject singleCell = Instantiate(cube, new Vector3(i, 0, yPos), new Quaternion());
-                mazeObject[i, yPos] = singleCell;
-                singleCell.GetComponent<Cube>().SetCoordinateAttributeAndParent(i, yPos, maze.transform);
+                GenerateSingleCube(i, yPos);
             }
         }
 

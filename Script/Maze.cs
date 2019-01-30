@@ -16,8 +16,10 @@ public class Maze : MonoBehaviour {
 
     }
 
-    public GameObject[,] initialiseMazeObject(int width, int height) {
-        mazeObject = new GameObject[width, height];
+    public GameObject[,] InitialiseMazeObject(int widthPar, int heightPar) {
+        mazeObject = new GameObject[widthPar, heightPar];
+        width = widthPar;
+        height = heightPar;
         return mazeObject;
     }
 }

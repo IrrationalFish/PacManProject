@@ -98,14 +98,14 @@ public class MazeGenPrim : MonoBehaviour {
 
     public GameObject GenerateMazeParent(int width, int height) {
         maze = Instantiate(mazePrefab);
-        mazeObject = maze.GetComponent<Maze>().initialiseMazeObject(width,height);  //这里的mazeobj是maze的引用
+        mazeObject = maze.GetComponent<Maze>().InitialiseMazeObject(width,height);  //这里的mazeobj是maze的引用
         return maze;
     }
 
     public void Generate(int width, int height) {
         //mazeObject = new GameObject[width, height];     //网上代码：先y后x，（1,2）代表第一行第二列(2,1)
-        maze.GetComponent<Maze>().width = width;
-        maze.GetComponent<Maze>().height = height;
+        //maze.GetComponent<Maze>().width = width;
+        //maze.GetComponent<Maze>().height = height;
         originPos = new Vector3(1, 1, 0);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
