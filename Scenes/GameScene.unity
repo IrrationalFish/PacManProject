@@ -77593,11 +77593,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 245701cce007838448182ebb20335596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 41
-  height: 31
   cube: {fileID: 1479856308536302, guid: 0e911763c4ee39643a9b5df693e1f31c, type: 2}
-  mazeParentPrefab: {fileID: 1226414614219642, guid: 26de15027b3b26c4db509a0e456f8f61,
-    type: 2}
+  mazePrefab: {fileID: 1226414614219642, guid: 26de15027b3b26c4db509a0e456f8f61, type: 2}
 --- !u!4 &2091401301
 Transform:
   m_ObjectHideFlags: 0
@@ -77624,7 +77621,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera1: {fileID: 426333362}
   startPoint: {fileID: 1851615751}
-  mazeParent: {fileID: 0}
+  mazeWidth: 11
+  mazeHeight: 11
+  maze: {fileID: 0}
   pacMan: {fileID: 0}
 --- !u!114 &2091401303
 MonoBehaviour:

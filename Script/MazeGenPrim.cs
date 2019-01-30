@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class MazeGenPrim : MonoBehaviour {
 
-    public int width = 11;
-    public int height = 11;
     public GameObject cube;
-    public GameObject mazeParentPrefab;
+    public GameObject mazePrefab;
 
-    private Transform mazeParentTrans;
     private GameObject[,] mazeObject;
     private Vector3 originPos;
     private List<GameObject> wallsList = new List<GameObject>();
+    private GameObject maze;
 
     void Start() {
         /*mazeObject = new GameObject[width, height];     //网上代码：先y后x，（1,2）代表第一行第二列(2,1)
@@ -98,14 +96,16 @@ public class MazeGenPrim : MonoBehaviour {
         }*/
     }
 
-    public GameObject generateMazeParent() {
-        GameObject maze = Instantiate(mazeParentPrefab);
-        mazeParentTrans = maze.transform;
+    public GameObject GenerateMazeParent(int width, int height) {
+        maze = Instantiate(mazePrefab);
+        mazeObject = maze.GetComponent<Maze>().initialiseMazeObject(width,height);  //这里的mazeobj是maze的引用
         return maze;
     }
 
-    public void Generate() {
-        mazeObject = new GameObject[width, height];     //网上代码：先y后x，（1,2）代表第一行第二列(2,1)
+    public void Generate(int width, int height) {
+        //mazeObject = new GameObject[width, height];     //网上代码：先y后x，（1,2）代表第一行第二列(2,1)
+        maze.GetComponent<Maze>().width = width;
+        maze.GetComponent<Maze>().height = height;
         originPos = new Vector3(1, 1, 0);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -113,7 +113,7 @@ public class MazeGenPrim : MonoBehaviour {
                 singleCube.GetComponent<Cube>().x = i;
                 singleCube.GetComponent<Cube>().y = j;
                 mazeObject[i, j] = singleCube;                                 //0代表墙，1代表可通过
-                singleCube.transform.parent = mazeParentTrans;
+                singleCube.transform.parent = maze.transform;
             }
         }
         int xPos = (int)originPos.x;

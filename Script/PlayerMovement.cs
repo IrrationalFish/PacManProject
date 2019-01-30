@@ -6,21 +6,26 @@ public class PlayerMovement : MonoBehaviour {
 
     public float moveSpeed = 0.1f;
 
-    [SerializeField] private char nextMoveDir;
+    public char nextMoveDir;
+    public bool startMovement;
 
     void Start() {
-        //enabled = false;
+        startMovement = false;
     }
 
     private void Update() {
         if (Input.GetKeyDown("w")) {
             nextMoveDir = 'w';
+            startMovement = true;
         } else if (Input.GetKeyDown("a")) {
             nextMoveDir = 'a';
+            startMovement = true;
         } else if (Input.GetKeyDown("s")) {
             nextMoveDir = 's';
+            startMovement = true;
         } else if (Input.GetKeyDown("d")) {
             nextMoveDir = 'd';
+            startMovement = true;
         }
 
         if (nextMoveDir == 'a' && Valid('a')) {
@@ -35,6 +40,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        if (startMovement == false) {
+            return;
+        }
         transform.Translate(Vector3.forward * moveSpeed);
     }
 
@@ -50,7 +58,7 @@ public class PlayerMovement : MonoBehaviour {
         } else if (dir == 'w') {
             dirVector = new Vector3(0, 0, 1);
         }
-        Debug.DrawLine(gameObject.transform.position, gameObject.transform.position + dirVector, Color.blue);
+        Debug.DrawLine(gameObject.transform.position, gameObject.transform.position + dirVector, Color.red);
         if (Physics.Linecast(gameObject.transform.position, gameObject.transform.position + dirVector, out hit)) {
             return false;       //在想要走向的方向上有障碍，无效
         } else {
@@ -58,11 +66,4 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    public char getNextMoveDir() {
-        return nextMoveDir;
-    }
-
-    public void setNextMoveDir(char dir) {
-        nextMoveDir = dir;
-    }
 }
