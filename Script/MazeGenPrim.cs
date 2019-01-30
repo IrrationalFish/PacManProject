@@ -26,8 +26,8 @@ public class MazeGenPrim : MonoBehaviour {
         }
         int xPos = (int)originPos.x;
         int yPos = (int)originPos.y;
-        breakWall(xPos, yPos);
-        //breakWall(1, height - 2);
+        BreakWall(xPos, yPos);
+        //BreakWall(1, height - 2);
         if (xPos > 1) {
             wallsList.Add(mazeObject[xPos - 1, yPos]);
             mazeObject[xPos - 1, yPos].GetComponent<Cube>().blockDir = 0;//把左边墙进表
@@ -71,8 +71,8 @@ public class MazeGenPrim : MonoBehaviour {
             }
 
             if(mazeObject[xPos,yPos] != null) {
-                breakWall(xPos, yPos);              //把“左边的左边”打通
-                breakWall(wallsList[randomNumber].GetComponent<Cube>().x, wallsList[randomNumber].GetComponent<Cube>().y);      //把“左边”打通
+                BreakWall(xPos, yPos);              //把“左边的左边”打通
+                BreakWall(wallsList[randomNumber].GetComponent<Cube>().x, wallsList[randomNumber].GetComponent<Cube>().y);      //把“左边”打通
                 if(xPos>1 && mazeObject[xPos-1,yPos] != null && mazeObject[xPos - 2, yPos] !=null) {    //左边的邻墙
                     mazeObject[xPos - 1, yPos].GetComponent<Cube>().blockDir = 0;
                     wallsList.Add(mazeObject[xPos - 1, yPos]);
@@ -118,8 +118,8 @@ public class MazeGenPrim : MonoBehaviour {
         }
         int xPos = (int)originPos.x;
         int yPos = (int)originPos.y;
-        breakWall(xPos, yPos);
-        //breakWall(1, height - 2);
+        BreakWall(xPos, yPos);
+        //BreakWall(1, height - 2);
         if (xPos > 1) {
             wallsList.Add(mazeObject[xPos - 1, yPos]);
             mazeObject[xPos - 1, yPos].GetComponent<Cube>().blockDir = 0;//把左边墙进表
@@ -163,8 +163,8 @@ public class MazeGenPrim : MonoBehaviour {
             }
 
             if (mazeObject[xPos, yPos] != null) {
-                breakWall(xPos, yPos);              //把“左边的左边”打通
-                breakWall(wallsList[randomNumber].GetComponent<Cube>().x, wallsList[randomNumber].GetComponent<Cube>().y);      //把“左边”打通
+                BreakWall(xPos, yPos);              //把“左边的左边”打通
+                BreakWall(wallsList[randomNumber].GetComponent<Cube>().x, wallsList[randomNumber].GetComponent<Cube>().y);      //把“左边”打通
                 if (xPos > 1 && mazeObject[xPos - 1, yPos] != null && mazeObject[xPos - 2, yPos] != null) {    //左边的邻墙
                     mazeObject[xPos - 1, yPos].GetComponent<Cube>().blockDir = 0;
                     wallsList.Add(mazeObject[xPos - 1, yPos]);
@@ -188,7 +188,7 @@ public class MazeGenPrim : MonoBehaviour {
         }
     }
 
-    private void breakWall(int x, int y) {
+    private void BreakWall(int x, int y) {
         Destroy(mazeObject[x, y]);
         mazeObject[x, y] = null;
     }

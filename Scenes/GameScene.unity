@@ -68035,7 +68035,7 @@ GameObject:
   m_Layer: 0
   m_Name: StartPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -77636,7 +77636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3bfaf5e9aa08d468147082a3aabad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pacManPrefab: {fileID: 1382425521970924, guid: 055aee78455f56f4faf7b631bd4b353e,
+  pacManPrefab: {fileID: 1729086579488296, guid: 87cdfea9c382f474fa85571a2e500d4f,
     type: 2}
 --- !u!1 &2098211847
 GameObject:
