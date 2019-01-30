@@ -16,11 +16,13 @@ public class GameSceneManager : MonoBehaviour {
     void Start () {
         pacMan = this.GetComponent<PacManRespawn>().respawnPacMan(startPoint);
         virtualCamera1.Follow = pacMan.transform;
-        maze = this.GetComponent<MazeGenPrim>().GenerateMazeParent(mazeWidth, mazeHeight);
-        GetComponent<MazeGenPrim>().Generate(mazeWidth, mazeHeight);
-	}
-	
-	void Update () {
+        //maze = this.GetComponent<MazeGenPrim>().GenerateMazeParent(mazeWidth, mazeHeight);
+        //GetComponent<MazeGenPrim>().Generate(mazeWidth, mazeHeight);
+        maze = this.GetComponent<MazeGenRD>().GenerateMazeParent(mazeWidth, mazeHeight);
+        GetComponent<MazeGenRD>().Generate(mazeWidth, mazeHeight);
+    }
+
+    void Update () {
 		
 	}
 }

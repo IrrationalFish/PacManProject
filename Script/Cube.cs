@@ -16,4 +16,19 @@ public class Cube : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void SetCoordinateAttribute(int xPar, int yPar) {
+        x = xPar;
+        y = yPar;
+    }
+
+    public void SetParent(Transform parentPar) {
+        this.transform.parent = parentPar;
+    }
+
+    public void SetCoordinateAttributeAndParent(int xPar, int yPar, Transform parentPar) {
+        this.x = xPar;
+        this.y = yPar;
+        this.transform.parent = parentPar;
+    }
 }
