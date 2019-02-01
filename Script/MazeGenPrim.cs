@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class MazeGenPrim : MazeGenerator {
 
-    //public GameObject cube;
-    //public GameObject mazePrefab;
-
-    //private GameObject[,] mazeObject;
     private Vector3 originPos;
     private List<GameObject> wallsList = new List<GameObject>();
-    //private GameObject maze;
 
     override public GameObject GenerateMaze(int width, int height) {
         GenerateMazeParent(width, height);
@@ -21,13 +16,9 @@ public class MazeGenPrim : MazeGenerator {
     private void GenerateMazeParent(int width, int height) {
         maze = Instantiate(mazePrefab);
         mazeObject = maze.GetComponent<Maze>().InitialiseMazeObject(width,height);  //这里的mazeobj是maze的引用
-        //return maze;
     }
 
     private void GenMaze(int width, int height) {
-        //mazeObject = new GameObject[width, height];     //网上代码：先y后x，（1,2）代表第一行第二列(2,1)
-        //maze.GetComponent<Maze>().width = width;
-        //maze.GetComponent<Maze>().height = height;
         originPos = new Vector3(1, 1, 0);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -58,7 +49,6 @@ public class MazeGenPrim : MazeGenerator {
             wallsList.Add(mazeObject[xPos, yPos - 1]);//把下边墙进表
             mazeObject[xPos, yPos - 1].GetComponent<Cube>().blockDir = 3;
         }
-        //Debug.Log("s");
 
         while (wallsList.Count > 0) {
             int randomNumber = Random.Range(0, wallsList.Count);

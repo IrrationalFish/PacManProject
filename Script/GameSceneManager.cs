@@ -21,15 +21,11 @@ public class GameSceneManager : MonoBehaviour {
         pacMan = this.GetComponent<PacManRespawn>().respawnPacMan(startPoint);
         virtualCamera1.Follow = pacMan.transform;
         if (Prim) {
-            //maze = this.GetComponent<MazeGenPrim>().GenerateMazeParent(mazeWidth, mazeHeight);
-            //GetComponent<MazeGenPrim>().Generate(mazeWidth, mazeHeight);
             mazeGenerator = GetComponent<MazeGenPrim>();
             maze = mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
             Debug.Log(maze.GetComponent<Maze>().mazeObject[0, 0] == null);
             Debug.Log(maze.GetComponent<Maze>().mazeObject[1, 2] == null);
         } else if (RD) {
-            //maze = this.GetComponent<MazeGenRD>().GenerateMazeParent(mazeWidth, mazeHeight);
-            //GetComponent<MazeGenRD>().Generate(mazeWidth, mazeHeight);
             mazeGenerator = GetComponent<MazeGenRD>();
             maze = mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
             Debug.Log(maze.GetComponent<Maze>().mazeObject[0, 0] == null);

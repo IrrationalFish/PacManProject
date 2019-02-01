@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class MazeGenRD : MazeGenerator {
 
-    //public GameObject cube;
-    //public GameObject mazePrefab;
-
-    //private GameObject[,] mazeObject;       //最左下角是0,0
-    //private GameObject maze;
-
     override public GameObject GenerateMaze(int width, int height) {
         GenerateMazeParent(width, height);
         GenBoundary(width, height);
@@ -20,7 +14,6 @@ public class MazeGenRD : MazeGenerator {
     private void GenerateMazeParent(int width, int height) {
         maze = Instantiate(mazePrefab);
         mazeObject = maze.GetComponent<Maze>().InitialiseMazeObject(width, height);  //这里的mazeobj是maze的引用
-        //return maze;
     }
 
     private void GenBoundary(int width, int height) {

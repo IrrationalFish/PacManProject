@@ -11,15 +11,10 @@ public abstract class MazeGenerator : MonoBehaviour {
     protected GameObject maze;
 
     void Start () {
-		
 	}
 	
-	void Update () {
-		
+	void Update () {	
 	}
 
     public abstract GameObject GenerateMaze(int width, int height);
-
-    //public abstract void GenerateMazeParent(int width, int height);
-
 }
