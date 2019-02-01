@@ -10,21 +10,17 @@ public class MazeGenRD : MonoBehaviour {
     private GameObject[,] mazeObject;       //最左下角是0,0
     private GameObject maze;
 
-    void Start () {
-        /*mazeObject = new GameObject[width,height];
-        GenBoundary();
-        GenMaze(1, 1, width-2, height-2);*/
-    }
-
-    public GameObject GenerateMazeParent(int width, int height) {
-        maze = Instantiate(mazePrefab);
-        mazeObject = maze.GetComponent<Maze>().InitialiseMazeObject(width, height);  //这里的mazeobj是maze的引用
+    public GameObject GenerateMaze(int width, int height) {
+        GenerateMazeParent(width, height);
+        GenBoundary(width, height);
+        GenMaze(1, 1, width - 2, height - 2);
         return maze;
     }
 
-    public void Generate(int width, int height) {
-        GenBoundary(width, height);
-        GenMaze(1, 1, width - 2, height - 2);
+    private void GenerateMazeParent(int width, int height) {
+        maze = Instantiate(mazePrefab);
+        mazeObject = maze.GetComponent<Maze>().InitialiseMazeObject(width, height);  //这里的mazeobj是maze的引用
+        //return maze;
     }
 
     private void GenBoundary(int width, int height) {
