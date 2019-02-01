@@ -4,8 +4,13 @@ using UnityEngine;
 
 public abstract class MazeGenerator : MonoBehaviour {
 
+    public GameObject cube;
+    public GameObject mazePrefab;
 
-	void Start () {
+    protected GameObject[,] mazeObject;       //最左下角是0,0
+    protected GameObject maze;
+
+    void Start () {
 		
 	}
 	
@@ -13,8 +18,8 @@ public abstract class MazeGenerator : MonoBehaviour {
 		
 	}
 
-    public abstract GameObject GenerateMazeParent(int width, int height);
+    public abstract GameObject GenerateMaze(int width, int height);
 
-    public abstract void Generate(int width, int height);
+    //public abstract void GenerateMazeParent(int width, int height);
 
 }

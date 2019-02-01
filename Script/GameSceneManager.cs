@@ -12,6 +12,7 @@ public class GameSceneManager : MonoBehaviour {
 
     [SerializeField]private GameObject maze;
     [SerializeField]private GameObject pacMan;
+    private MazeGenerator mazeGenerator;
 
     public bool Prim;
     public bool RD;
@@ -22,11 +23,17 @@ public class GameSceneManager : MonoBehaviour {
         if (Prim) {
             //maze = this.GetComponent<MazeGenPrim>().GenerateMazeParent(mazeWidth, mazeHeight);
             //GetComponent<MazeGenPrim>().Generate(mazeWidth, mazeHeight);
-            maze = GetComponent<MazeGenPrim>().GenerateMaze(mazeWidth, mazeHeight);
+            mazeGenerator = GetComponent<MazeGenPrim>();
+            maze = mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
+            Debug.Log(maze.GetComponent<Maze>().mazeObject[0, 0] == null);
+            Debug.Log(maze.GetComponent<Maze>().mazeObject[1, 2] == null);
         } else if (RD) {
             //maze = this.GetComponent<MazeGenRD>().GenerateMazeParent(mazeWidth, mazeHeight);
             //GetComponent<MazeGenRD>().Generate(mazeWidth, mazeHeight);
-            maze = GetComponent<MazeGenRD>().GenerateMaze(mazeWidth, mazeHeight);
+            mazeGenerator = GetComponent<MazeGenRD>();
+            maze = mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
+            Debug.Log(maze.GetComponent<Maze>().mazeObject[0, 0] == null);
+            Debug.Log(maze.GetComponent<Maze>().mazeObject[1, 2] == null);
         }
     }
 

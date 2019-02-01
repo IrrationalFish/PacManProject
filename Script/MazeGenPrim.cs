@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MazeGenPrim : MonoBehaviour {
+public class MazeGenPrim : MazeGenerator {
 
-    public GameObject cube;
-    public GameObject mazePrefab;
+    //public GameObject cube;
+    //public GameObject mazePrefab;
 
-    private GameObject[,] mazeObject;
+    //private GameObject[,] mazeObject;
     private Vector3 originPos;
     private List<GameObject> wallsList = new List<GameObject>();
-    private GameObject maze;
+    //private GameObject maze;
 
-    public GameObject GenerateMaze(int width, int height) {
+    override public GameObject GenerateMaze(int width, int height) {
         GenerateMazeParent(width, height);
         GenMaze(width, height);
         return maze;

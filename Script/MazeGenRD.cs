@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MazeGenRD : MonoBehaviour {
+public class MazeGenRD : MazeGenerator {
 
-    public GameObject cube;
-    public GameObject mazePrefab;
+    //public GameObject cube;
+    //public GameObject mazePrefab;
 
-    private GameObject[,] mazeObject;       //最左下角是0,0
-    private GameObject maze;
+    //private GameObject[,] mazeObject;       //最左下角是0,0
+    //private GameObject maze;
 
-    public GameObject GenerateMaze(int width, int height) {
+    override public GameObject GenerateMaze(int width, int height) {
         GenerateMazeParent(width, height);
         GenBoundary(width, height);
         GenMaze(1, 1, width - 2, height - 2);

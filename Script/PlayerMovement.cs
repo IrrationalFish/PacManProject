@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour {
             startMovement = true;
         }
 
-        /*if (nextMoveDir == 'a' && Valid('a')) {
+        if (nextMoveDir == 'a' && Valid('a')) {
             transform.localEulerAngles = new Vector3(0, -90, 0);
         } else if (nextMoveDir == 's' && Valid('s')) {
             transform.localEulerAngles = new Vector3(0, 180, 0);
@@ -36,9 +36,9 @@ public class PlayerMovement : MonoBehaviour {
             transform.localEulerAngles = new Vector3(0, 90, 0);
         } else if (nextMoveDir == 'w' && Valid('w')) {
             transform.localEulerAngles = new Vector3(0, 0, 0);
-        }*/
+        }
 
-        if (nextMoveDir == 'a') {
+        /*if (nextMoveDir == 'a') {
             transform.localEulerAngles = new Vector3(0, -90, 0);
         } else if (nextMoveDir == 's') {
             transform.localEulerAngles = new Vector3(0, 180, 0);
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour {
             transform.localEulerAngles = new Vector3(0, 90, 0);
         } else if (nextMoveDir == 'w') {
             transform.localEulerAngles = new Vector3(0, 0, 0);
-        }
+        }*/
     }
 
     void FixedUpdate() {
