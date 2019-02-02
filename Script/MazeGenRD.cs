@@ -13,7 +13,7 @@ public class MazeGenRD : MazeGenerator {
 
     private void GenerateMazeParent(int width, int height) {
         maze = Instantiate(mazePrefab);
-        mazeObject = maze.GetComponent<Maze>().InitialiseMazeObject(width, height);  //这里的mazeobj是maze的引用
+        mazeObjects = maze.GetComponent<Maze>().InitialiseMazeObject(width, height);  //这里的mazeobj是maze的引用
     }
 
     private void GenBoundary(int width, int height) {
@@ -33,10 +33,10 @@ public class MazeGenRD : MazeGenerator {
         int pos;
         if (x1.Equals(x2)) {
             pos = y1 + ((int)Random.Range(0, ((y2 - y1) / 2))) * 2;
-            Destroy(mazeObject[x1,pos]); 
+            Destroy(mazeObjects[x1,pos]); 
         }else if (y1 == y2) {
             pos = x1 + ((int)Random.Range(0, ((x2 - x1) / 2))) * 2;
-            Destroy(mazeObject[pos, y1]);
+            Destroy(mazeObjects[pos, y1]);
         } else {
             Debug.Log("Wrong");
         }
@@ -51,14 +51,14 @@ public class MazeGenRD : MazeGenerator {
 
         xPos = x + ((int)Random.Range(0, (width / 2) - 1)) * 2 + 1;      //竖线
         for(int i = y; i < y + height; i++) {
-            if (mazeObject[xPos, i] == null) {
+            if (mazeObjects[xPos, i] == null) {
                 GenerateSingleCube(xPos, i);
             }
         }
 
         yPos = y + ((int)Random.Range(0, (height / 2) - 1)) * 2 + 1;       //横线
         for (int i = x; i < x + width; i++) {
-            if(mazeObject[i,yPos] == null) {
+            if(mazeObjects[i,yPos] == null) {
                 GenerateSingleCube(i, yPos);
             }
         }
@@ -96,7 +96,7 @@ public class MazeGenRD : MazeGenerator {
 
     private void GenerateSingleCube(int xPar, int yPar) {
         GameObject singleCell = Instantiate(cube, new Vector3(xPar, 0, yPar), new Quaternion());
-        mazeObject[xPar, yPar] = singleCell;
+        mazeObjects[xPar, yPar] = singleCell;
         singleCell.GetComponent<Cube>().SetCoordinateAttributeAndParent(xPar, yPar, maze.transform);
     }
 }

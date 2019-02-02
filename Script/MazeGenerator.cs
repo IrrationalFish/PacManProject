@@ -7,7 +7,7 @@ public abstract class MazeGenerator : MonoBehaviour {
     public GameObject cube;
     public GameObject mazePrefab;
 
-    protected GameObject[,] mazeObject;       //最左下角是0,0
+    protected GameObject[,] mazeObjects;       //最左下角是0,0
     protected GameObject maze;
 
     void Start () {

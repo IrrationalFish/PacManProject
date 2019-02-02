@@ -15,39 +15,39 @@ public class MazeGenPrim : MazeGenerator {
 
     private void GenerateMazeParent(int width, int height) {
         maze = Instantiate(mazePrefab);
-        mazeObject = maze.GetComponent<Maze>().InitialiseMazeObject(width,height);  //这里的mazeobj是maze的引用
+        mazeObjects = maze.GetComponent<Maze>().InitialiseMazeObject(width,height);  //这里的mazeobj是maze的引用
     }
 
     private void GenMaze(int width, int height) {
-        originPos = new Vector3(1, 1, 0);
+        originPos = new Vector3(1, 0, 1);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 GameObject singleCube = Instantiate(cube, new Vector3(i, 0, j), new Quaternion());      //cube里的y对应的是实际的场景的z
                 singleCube.GetComponent<Cube>().x = i;
                 singleCube.GetComponent<Cube>().y = j;
-                mazeObject[i, j] = singleCube;                                 //0代表墙，1代表可通过
+                mazeObjects[i, j] = singleCube;                                 //0代表墙，1代表可通过    //这里改一下
                 singleCube.transform.parent = maze.transform;
             }
         }
         int xPos = (int)originPos.x;
-        int yPos = (int)originPos.y;
+        int yPos = (int)originPos.z;
         BreakWall(xPos, yPos);
         //BreakWall(1, height - 2);
         if (xPos > 1) {
-            wallsList.Add(mazeObject[xPos - 1, yPos]);
-            mazeObject[xPos - 1, yPos].GetComponent<Cube>().blockDir = 0;//把左边墙进表
+            wallsList.Add(mazeObjects[xPos - 1, yPos]);
+            mazeObjects[xPos - 1, yPos].GetComponent<Cube>().blockDir = 0;//把左边墙进表
         }
         if (yPos < height - 2) {
-            wallsList.Add(mazeObject[xPos, yPos + 1]);//把上边墙进表
-            mazeObject[xPos, yPos + 1].GetComponent<Cube>().blockDir = 1;
+            wallsList.Add(mazeObjects[xPos, yPos + 1]);//把上边墙进表
+            mazeObjects[xPos, yPos + 1].GetComponent<Cube>().blockDir = 1;
         }
         if (xPos < width - 2) {
-            wallsList.Add(mazeObject[xPos + 1, yPos]);//把右边墙进表
-            mazeObject[xPos + 1, yPos].GetComponent<Cube>().blockDir = 2;
+            wallsList.Add(mazeObjects[xPos + 1, yPos]);//把右边墙进表
+            mazeObjects[xPos + 1, yPos].GetComponent<Cube>().blockDir = 2;
         }
         if (yPos > 1) {
-            wallsList.Add(mazeObject[xPos, yPos - 1]);//把下边墙进表
-            mazeObject[xPos, yPos - 1].GetComponent<Cube>().blockDir = 3;
+            wallsList.Add(mazeObjects[xPos, yPos - 1]);//把下边墙进表
+            mazeObjects[xPos, yPos - 1].GetComponent<Cube>().blockDir = 3;
         }
 
         while (wallsList.Count > 0) {
@@ -74,24 +74,24 @@ public class MazeGenPrim : MazeGenerator {
                     break;
             }
 
-            if (mazeObject[xPos, yPos] != null) {
+            if (mazeObjects[xPos, yPos] != null) {
                 BreakWall(xPos, yPos);              //把“左边的左边”打通
                 BreakWall(wallsList[randomNumber].GetComponent<Cube>().x, wallsList[randomNumber].GetComponent<Cube>().y);      //把“左边”打通
-                if (xPos > 1 && mazeObject[xPos - 1, yPos] != null && mazeObject[xPos - 2, yPos] != null) {    //左边的邻墙
-                    mazeObject[xPos - 1, yPos].GetComponent<Cube>().blockDir = 0;
-                    wallsList.Add(mazeObject[xPos - 1, yPos]);
+                if (xPos > 1 && mazeObjects[xPos - 1, yPos] != null && mazeObjects[xPos - 2, yPos] != null) {    //左边的邻墙
+                    mazeObjects[xPos - 1, yPos].GetComponent<Cube>().blockDir = 0;
+                    wallsList.Add(mazeObjects[xPos - 1, yPos]);
                 }
-                if (yPos < height - 2 && mazeObject[xPos, yPos + 1] != null && mazeObject[xPos, yPos + 2] != null) {    //上边的邻墙
-                    mazeObject[xPos, yPos + 1].GetComponent<Cube>().blockDir = 1;
-                    wallsList.Add(mazeObject[xPos, yPos + 1]);
+                if (yPos < height - 2 && mazeObjects[xPos, yPos + 1] != null && mazeObjects[xPos, yPos + 2] != null) {    //上边的邻墙
+                    mazeObjects[xPos, yPos + 1].GetComponent<Cube>().blockDir = 1;
+                    wallsList.Add(mazeObjects[xPos, yPos + 1]);
                 }
-                if (xPos < width - 2 && mazeObject[xPos + 1, yPos] != null && mazeObject[xPos + 2, yPos] != null) {    //右边的邻墙
-                    mazeObject[xPos + 1, yPos].GetComponent<Cube>().blockDir = 2;
-                    wallsList.Add(mazeObject[xPos + 1, yPos]);
+                if (xPos < width - 2 && mazeObjects[xPos + 1, yPos] != null && mazeObjects[xPos + 2, yPos] != null) {    //右边的邻墙
+                    mazeObjects[xPos + 1, yPos].GetComponent<Cube>().blockDir = 2;
+                    wallsList.Add(mazeObjects[xPos + 1, yPos]);
                 }
-                if (yPos > 1 && mazeObject[xPos, yPos - 1] != null && mazeObject[xPos, yPos - 2] != null) {    //下边的邻墙
-                    mazeObject[xPos, yPos - 1].GetComponent<Cube>().blockDir = 3;
-                    wallsList.Add(mazeObject[xPos, yPos - 1]);
+                if (yPos > 1 && mazeObjects[xPos, yPos - 1] != null && mazeObjects[xPos, yPos - 2] != null) {    //下边的邻墙
+                    mazeObjects[xPos, yPos - 1].GetComponent<Cube>().blockDir = 3;
+                    wallsList.Add(mazeObjects[xPos, yPos - 1]);
                 }
             }
 
@@ -101,7 +101,7 @@ public class MazeGenPrim : MazeGenerator {
     }
 
     private void BreakWall(int x, int y) {
-        Destroy(mazeObject[x, y]);
-        mazeObject[x, y] = null;
+        Destroy(mazeObjects[x, y]);
+        mazeObjects[x, y] = null;
     }
 }
