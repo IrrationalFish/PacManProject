@@ -24,18 +24,18 @@ public class GameSceneManager : MonoBehaviour {
         if (Prim) {
             mazeGenerator = GetComponent<MazeGenPrim>();
             maze = mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
-            Debug.Log(maze.GetComponent<Maze>().mazeObject[0, 0] == null);
-            Debug.Log(maze.GetComponent<Maze>().mazeObject[1, 2] == null);
+            Debug.Log(maze.GetComponent<Maze>().mazeObjects[0, 0] != null);
+            Debug.Log(maze.GetComponent<Maze>().mazeObjects[1, 2] != null);
         } else if (RD) {
             mazeGenerator = GetComponent<MazeGenRD>();
             maze = mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
-            Debug.Log(maze.GetComponent<Maze>().mazeObject[0, 0] == null);
-            Debug.Log(maze.GetComponent<Maze>().mazeObject[1, 2] == null);
+            Debug.Log(maze.GetComponent<Maze>().mazeObjects[0, 0] != null);
+            Debug.Log(maze.GetComponent<Maze>().mazeObjects[1, 2] != null);
         }else if (RB) {
             mazeGenerator = GetComponent<MazeGenRB>();
             maze = mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
-            Debug.Log(maze.GetComponent<Maze>().mazeObject[0, 0] == null);
-            Debug.Log(maze.GetComponent<Maze>().mazeObject[1, 2] == null);
+            Debug.Log(maze.GetComponent<Maze>().mazeObjects[0, 0] != null);
+            Debug.Log(maze.GetComponent<Maze>().mazeObjects[1, 2] != null);
         }
     }
 

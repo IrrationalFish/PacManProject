@@ -13,10 +13,10 @@ public class MazeGenPrim : MazeGenerator {
         return maze;
     }
 
-    private void GenerateMazeParent(int width, int height) {
+    /*private void GenerateMazeParent(int width, int height) {
         maze = Instantiate(mazePrefab);
         mazeObjects = maze.GetComponent<Maze>().InitialiseMazeObject(width,height);  //这里的mazeobj是maze的引用
-    }
+    }*/
 
     private void GenMaze(int width, int height) {
         originPos = new Vector3(1, 0, 1);
@@ -100,8 +100,8 @@ public class MazeGenPrim : MazeGenerator {
         }
     }
 
-    private void BreakWall(int x, int y) {
+    /*private void BreakWall(int x, int y) {
         Destroy(mazeObjects[x, y]);
         mazeObjects[x, y] = null;
-    }
+    }*/
 }

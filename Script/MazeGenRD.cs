@@ -11,10 +11,10 @@ public class MazeGenRD : MazeGenerator {
         return maze;
     }
 
-    private void GenerateMazeParent(int width, int height) {
+    /*private void GenerateMazeParent(int width, int height) {
         maze = Instantiate(mazePrefab);
         mazeObjects = maze.GetComponent<Maze>().InitialiseMazeObject(width, height);  //这里的mazeobj是maze的引用
-    }
+    }*/
 
     private void GenBoundary(int width, int height) {
         for (int i = 0; i < width; i++) {
@@ -29,14 +29,18 @@ public class MazeGenRD : MazeGenerator {
         }
     }
 
-    private void BreakWall(int x1, int y1, int x2, int y2) {
+    private void OpenDoorOnWalls(int x1, int y1, int x2, int y2) {
         int pos;
         if (x1.Equals(x2)) {
             pos = y1 + ((int)Random.Range(0, ((y2 - y1) / 2))) * 2;
-            Destroy(mazeObjects[x1,pos]); 
-        }else if (y1 == y2) {
+            BreakWall(x1, pos);
+            /*Destroy(mazeObjects[x1,pos]);
+            mazeObjects[x1, pos] = null;*/
+        } else if (y1 == y2) {
             pos = x1 + ((int)Random.Range(0, ((x2 - x1) / 2))) * 2;
-            Destroy(mazeObjects[pos, y1]);
+            BreakWall(pos, y1);
+            /*Destroy(mazeObjects[pos, y1]);
+            mazeObjects[pos, y1] = null;*/
         } else {
             Debug.Log("Wrong");
         }
@@ -66,24 +70,24 @@ public class MazeGenRD : MazeGenerator {
         int closedWall = Random.Range(1, 4);
         switch (closedWall) {
             case 1:
-                BreakWall(xPos + 1, yPos, x + width - 1, yPos);     //right
-                BreakWall(xPos, yPos+1, xPos, y + height - 1);     //up
-                BreakWall(x, yPos, xPos - 1, yPos);     //left
+                OpenDoorOnWalls(xPos + 1, yPos, x + width - 1, yPos);     //right
+                OpenDoorOnWalls(xPos, yPos+1, xPos, y + height - 1);     //up
+                OpenDoorOnWalls(x, yPos, xPos - 1, yPos);     //left
                 break;
             case 2:
-                BreakWall(xPos, y, xPos, yPos-1);       // buttom
-                BreakWall(xPos, yPos + 1, xPos, y + height - 1);     //up
-                BreakWall(xPos + 1, yPos, x + width - 1, yPos);     //right
+                OpenDoorOnWalls(xPos, y, xPos, yPos-1);       // buttom
+                OpenDoorOnWalls(xPos, yPos + 1, xPos, y + height - 1);     //up
+                OpenDoorOnWalls(xPos + 1, yPos, x + width - 1, yPos);     //right
                 break;
             case 3:
-                BreakWall(x, yPos, xPos - 1, yPos);     //left
-                BreakWall(xPos + 1, yPos, x + width - 1, yPos);     //right
-                BreakWall(xPos, y, xPos, yPos - 1);       // buttom
+                OpenDoorOnWalls(x, yPos, xPos - 1, yPos);     //left
+                OpenDoorOnWalls(xPos + 1, yPos, x + width - 1, yPos);     //right
+                OpenDoorOnWalls(xPos, y, xPos, yPos - 1);       // buttom
                 break;
             case 4:
-                BreakWall(xPos, y, xPos, yPos - 1);       // buttom
-                BreakWall(x, yPos, xPos - 1, yPos);     //left
-                BreakWall(xPos, yPos + 1, xPos, y + height - 1);     //up
+                OpenDoorOnWalls(xPos, y, xPos, yPos - 1);       // buttom
+                OpenDoorOnWalls(x, yPos, xPos - 1, yPos);     //left
+                OpenDoorOnWalls(xPos, yPos + 1, xPos, y + height - 1);     //up
                 break;
             default:
                 break;

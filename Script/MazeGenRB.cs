@@ -16,10 +16,10 @@ public class MazeGenRB : MazeGenerator {
         return maze;
     }
 
-    private void GenerateMazeParent(int width, int height) {
+    /*private void GenerateMazeParent(int width, int height) {
         maze = Instantiate(mazePrefab);
         mazeObjects = maze.GetComponent<Maze>().InitialiseMazeObject(width, height);  //这里的mazeobj是maze的引用
-    }
+    }*/
 
     private void GenMaze(int width, int height) {
         InitialiseMazeBoard(width, height);
@@ -79,8 +79,8 @@ public class MazeGenRB : MazeGenerator {
         return a;
     }
 
-    private void BreakWall(int x, int y) {
+    /*private void BreakWall(int x, int y) {
         Destroy(mazeObjects[x, y]);
         mazeObjects[x, y] = null;
-    }
+    }*/
 }

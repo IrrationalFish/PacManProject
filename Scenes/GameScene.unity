@@ -9040,13 +9040,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera1: {fileID: 426333362}
   startPoint: {fileID: 1851615751}
-  mazeWidth: 11
+  mazeWidth: 15
   mazeHeight: 13
   maze: {fileID: 0}
   pacMan: {fileID: 0}
-  Prim: 0
+  Prim: 1
   RD: 0
-  RB: 1
+  RB: 0
 --- !u!114 &2091401303
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,5 +16,15 @@ public abstract class MazeGenerator : MonoBehaviour {
 	void Update () {	
 	}
 
+    protected void GenerateMazeParent(int width, int height) {
+        maze = Instantiate(mazePrefab);
+        mazeObjects = maze.GetComponent<Maze>().InitialiseMazeObject(width, height);  //这里的mazeobj是maze的引用
+    }
+
+    protected void BreakWall(int x, int y) {
+        Destroy(mazeObjects[x, y]);
+        mazeObjects[x, y] = null;
+    }
+
     public abstract GameObject GenerateMaze(int width, int height);
 }
