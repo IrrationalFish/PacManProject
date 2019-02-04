@@ -8,6 +8,7 @@ public class MazeGenRD : MazeGenerator {
         GenerateMazeParent(width, height);
         GenBoundary(width, height);
         GenMaze(1, 1, width - 2, height - 2);
+        RemoveDeadEnds(width, height);
         return maze;
     }
 

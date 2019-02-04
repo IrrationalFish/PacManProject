@@ -10,6 +10,7 @@ public class MazeGenPrim : MazeGenerator {
     override public GameObject GenerateMaze(int width, int height) {
         GenerateMazeParent(width, height);
         GenMaze(width, height);
+        RemoveDeadEnds(width, height);
         return maze;
     }
 
