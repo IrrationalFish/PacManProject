@@ -20,6 +20,9 @@ public abstract class MazeGenerator : MonoBehaviour {
     }
 
     protected void BreakWall(int x, int y) {
+        if (x==0||y==0||x==maze.GetComponent<Maze>().width-1||y==maze.GetComponent<Maze>().height-1) {
+            return;
+        }
         Destroy(mazeObjects[x, y]);
         mazeObjects[x, y]=null;
     }
@@ -43,7 +46,34 @@ public abstract class MazeGenerator : MonoBehaviour {
         }
     }
 
-    private void RemoveUpAndDownDeadEnds(int width, int height) {
+    public void BreakLongWalls(int width, int height) {
+        Debug.Log("break");
+        for (int i = 2; i<=width-3; i++) {
+            for (int j = 2; j<=height-3; j++) {
+                if (mazeObjects[i, j]==null) continue;
+                if(mazeObjects[i-1, j]!=null&&mazeObjects[i-2, j]!=null&&mazeObjects[i+1, j]!=null&&mazeObjects[i+2, j]!=null) {    //横超过5格
+                    if(mazeObjects[i, j+1]==null && mazeObjects[i, j-1]==null) {
+                        BreakWall(i, j);
+                    }
+                }else if (mazeObjects[i, j-1]!=null&&mazeObjects[i, j-2]!=null&&mazeObjects[i, j+1]!=null&&mazeObjects[i, j+2]!=null) { //竖
+                    if (mazeObjects[i+1, j]==null && mazeObjects[i-1, j]==null) {
+                        BreakWall(i, j);
+                    }
+                }
+            }
+        }
+    }
+
+    private void RemoveOneDeadEnd(int x, int y) {
+        if (deadEndShouldRemove) {
+            BreakWall(x, y);
+            deadEndShouldRemove=false;
+        } else {
+            deadEndShouldRemove=true;
+        }
+    }
+
+    /*private void RemoveUpAndDownDeadEnds(int width, int height) {
         for (int i = 1; i<=width-2; i++) {          //[1,w-2],[1,w-2]
             for (int j = 2; j<=height-3; j++) {     //[2,h-4],[3,h-3]
                 if (mazeObjects[i, j]==null) continue;
@@ -85,14 +115,5 @@ public abstract class MazeGenerator : MonoBehaviour {
                 }
             }
         }
-    }
-
-    private void RemoveOneDeadEnd(int x, int y) {
-        if (deadEndShouldRemove) {
-            BreakWall(x, y);
-            deadEndShouldRemove=true;
-        } else {
-            deadEndShouldRemove=true;
-        }
-    }
+    }*/
 }

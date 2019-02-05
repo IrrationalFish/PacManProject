@@ -17,15 +17,15 @@ public class GameSceneManager : MonoBehaviour {
     [SerializeField]private GameObject pacMan;
     private MazeGenerator mazeGenerator;
 
-    public bool Prim;
     public bool RD;
+    public bool Prim;
     public bool RB;
 
     void Start () {
         pacMan = this.GetComponent<PacManRespawn>().respawnPacMan(startPoint);
         virtualCamera1.Follow = pacMan.transform;
         BuildMaze();
-        removeBtn.onClick.AddListener(delegate () {mazeGenerator.RemoveDeadEnds(mazeWidth,mazeHeight);});
+        removeBtn.onClick.AddListener(delegate () {mazeGenerator.BreakLongWalls(mazeWidth,mazeHeight);});
         buildMazeBtn.onClick.AddListener(delegate () { this.BuildMaze(); });
     }
 
@@ -36,14 +36,14 @@ public class GameSceneManager : MonoBehaviour {
         if(maze !=null) {
             Destroy(maze);
         }
-        if (Prim) {
-            mazeGenerator=GetComponent<MazeGenPrim>();
+        if (RD) {
+            mazeGenerator=GetComponent<MazeGenRD>();
             maze=mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
             Debug.Log(maze.GetComponent<Maze>().mazeObjects[0, 0]!=null);
             Debug.Log(maze.GetComponent<Maze>().mazeObjects[1, 2]!=null);
-            Debug.Log("Maze is built by Prim");
-        } else if (RD) {
-            mazeGenerator=GetComponent<MazeGenRD>();
+            Debug.Log("Maze is built by RD");
+        } else if (Prim) {
+            mazeGenerator=GetComponent<MazeGenPrim>();
             maze=mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
             Debug.Log(maze.GetComponent<Maze>().mazeObjects[0, 0]!=null);
             Debug.Log(maze.GetComponent<Maze>().mazeObjects[1, 2]!=null);
@@ -53,7 +53,7 @@ public class GameSceneManager : MonoBehaviour {
             maze=mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
             Debug.Log(maze.GetComponent<Maze>().mazeObjects[0, 0]!=null);
             Debug.Log(maze.GetComponent<Maze>().mazeObjects[1, 2]!=null);
-            Debug.Log("Maze is built by Prim");
+            Debug.Log("Maze is built by RB");
         }
     }
 }

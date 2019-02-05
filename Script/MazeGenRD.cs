@@ -9,13 +9,9 @@ public class MazeGenRD : MazeGenerator {
         GenBoundary(width, height);
         GenMaze(1, 1, width - 2, height - 2);
         RemoveDeadEnds(width, height);
+        BreakLongWalls(width, height);
         return maze;
     }
-
-    /*private void GenerateMazeParent(int width, int height) {
-        maze = Instantiate(mazePrefab);
-        mazeObjects = maze.GetComponent<Maze>().InitialiseMazeObject(width, height);  //这里的mazeobj是maze的引用
-    }*/
 
     private void GenBoundary(int width, int height) {
         for (int i = 0; i < width; i++) {
@@ -35,13 +31,9 @@ public class MazeGenRD : MazeGenerator {
         if (x1.Equals(x2)) {
             pos = y1 + ((int)Random.Range(0, ((y2 - y1) / 2))) * 2;
             BreakWall(x1, pos);
-            /*Destroy(mazeObjects[x1,pos]);
-            mazeObjects[x1, pos] = null;*/
         } else if (y1 == y2) {
             pos = x1 + ((int)Random.Range(0, ((x2 - x1) / 2))) * 2;
             BreakWall(pos, y1);
-            /*Destroy(mazeObjects[pos, y1]);
-            mazeObjects[pos, y1] = null;*/
         } else {
             Debug.Log("Wrong");
         }

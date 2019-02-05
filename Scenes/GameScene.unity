@@ -11269,7 +11269,7 @@ GameObject:
   - component: {fileID: 974283588}
   - component: {fileID: 974283587}
   m_Layer: 5
-  m_Name: RemoveDeadEnds
+  m_Name: BreakLongWalls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20225,8 +20225,8 @@ MonoBehaviour:
   buildMazeBtn: {fileID: 1900006856}
   maze: {fileID: 0}
   pacMan: {fileID: 0}
-  Prim: 1
-  RD: 0
+  RD: 1
+  Prim: 0
   RB: 0
 --- !u!114 &2091401303
 MonoBehaviour:
