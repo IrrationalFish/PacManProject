@@ -21,6 +21,7 @@ public abstract class MazeGenerator : MonoBehaviour {
 
     protected void BreakWall(int x, int y) {
         if (x==0||y==0||x==maze.GetComponent<Maze>().width-1||y==maze.GetComponent<Maze>().height-1) {
+            Debug.Log("Boundary Break Fail!");
             return;
         }
         Destroy(mazeObjects[x, y]);
@@ -47,17 +48,18 @@ public abstract class MazeGenerator : MonoBehaviour {
     }
 
     public void BreakLongWalls(int width, int height) {
-        Debug.Log("break");
         for (int i = 2; i<=width-3; i++) {
             for (int j = 2; j<=height-3; j++) {
                 if (mazeObjects[i, j]==null) continue;
                 if(mazeObjects[i-1, j]!=null&&mazeObjects[i-2, j]!=null&&mazeObjects[i+1, j]!=null&&mazeObjects[i+2, j]!=null) {    //横超过5格
-                    if(mazeObjects[i, j+1]==null && mazeObjects[i, j-1]==null) {
-                        BreakWall(i, j);
+                    int randomX = Random.Range(-2, 3);          //由于可能随机到的上下有墙，所以一次清理不完，再次运行可再次清理
+                    if (mazeObjects[i+randomX, j+1]==null && mazeObjects[i+randomX, j-1]==null &&mazeObjects[i+randomX-1, j]!=null&&mazeObjects[i+randomX+1, j]!=null) {
+                        BreakWall(i+randomX, j);                                             //i+randomX在边界时，上下有墙，不通过前面的if，所以不会溢出
                     }
                 }else if (mazeObjects[i, j-1]!=null&&mazeObjects[i, j-2]!=null&&mazeObjects[i, j+1]!=null&&mazeObjects[i, j+2]!=null) { //竖
-                    if (mazeObjects[i+1, j]==null && mazeObjects[i-1, j]==null) {
-                        BreakWall(i, j);
+                    int randomY = Random.Range(-2, 3);
+                    if (mazeObjects[i+1, j+randomY]==null && mazeObjects[i-1, j+randomY]==null&&mazeObjects[i, j+randomY-1]!=null&&mazeObjects[i, j+randomY+1]!=null) {
+                        BreakWall(i, j+randomY);
                     }
                 }
             }
