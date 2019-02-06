@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour {
             dirVector = new Vector3(0, 0, 1);
         }
         Debug.DrawLine(gameObject.transform.position, gameObject.transform.position + dirVector, Color.red);
-        if (Physics.Linecast(gameObject.transform.position, gameObject.transform.position + dirVector, out hit)) {
+        if (Physics.Linecast(gameObject.transform.position, gameObject.transform.position + dirVector, out hit, 9)) {
             return false;       //在想要走向的方向上有障碍，无效
         } else {
             return true;        //无障碍，有效

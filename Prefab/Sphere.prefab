@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.1
   nextMoveDir: 0
+  startMovement: 0
 --- !u!135 &135843604597415600
 SphereCollider:
   m_ObjectHideFlags: 1
