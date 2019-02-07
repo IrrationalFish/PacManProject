@@ -13520,6 +13520,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1729086579488296, guid: 87cdfea9c382f474fa85571a2e500d4f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114745744211966280, guid: 87cdfea9c382f474fa85571a2e500d4f,
+        type: 2}
+      propertyPath: turningLineDistance
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87cdfea9c382f474fa85571a2e500d4f, type: 2}
   m_IsPrefabAsset: 0
@@ -26014,7 +26023,6 @@ GameObject:
   - component: {fileID: 2091401300}
   - component: {fileID: 2091401304}
   - component: {fileID: 2091401305}
-  - component: {fileID: 2091401303}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -26063,26 +26071,16 @@ MonoBehaviour:
   startPoint: {fileID: 1851615751}
   mazeWidth: 21
   mazeHeight: 21
+  pacManPrefab: {fileID: 1729086579488296, guid: 87cdfea9c382f474fa85571a2e500d4f,
+    type: 2}
+  maxItemsNumber: 3
   removeBtn: {fileID: 974283587}
   buildMazeBtn: {fileID: 1900006856}
   maze: {fileID: 0}
   pacMan: {fileID: 0}
-  RD: 0
+  RD: 1
   Prim: 0
   RB: 0
---- !u!114 &2091401303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2091401299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee3bfaf5e9aa08d468147082a3aabad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pacManPrefab: {fileID: 1729086579488296, guid: 87cdfea9c382f474fa85571a2e500d4f,
-    type: 2}
 --- !u!114 &2091401304
 MonoBehaviour:
   m_ObjectHideFlags: 0

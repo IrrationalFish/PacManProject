@@ -376,6 +376,7 @@ MonoBehaviour:
   moveSpeed: 0.1
   nextMoveDir: 0
   startMovement: 0
+  turningLineDistance: 0.4
 --- !u!114 &114753136365944162
 MonoBehaviour:
   m_ObjectHideFlags: 1

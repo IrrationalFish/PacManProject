@@ -10,6 +10,8 @@ public class GameSceneManager : MonoBehaviour {
     public Transform startPoint;
     public int mazeWidth;           //长宽包含了边界的2格,一定是奇数
     public int mazeHeight;
+    public GameObject pacManPrefab;
+    public int maxItemsNumber;
     public Button removeBtn;
     public Button buildMazeBtn;
 
@@ -22,7 +24,7 @@ public class GameSceneManager : MonoBehaviour {
     public bool RB;
 
     void Start () {
-        pacMan = this.GetComponent<PacManRespawn>().respawnPacMan(startPoint);
+        pacMan = RespawnPacMan(startPoint);
         virtualCamera1.Follow = pacMan.transform;
         BuildMaze();
         removeBtn.onClick.AddListener(delegate () {mazeGenerator.BreakLongWalls(mazeWidth,mazeHeight);});
@@ -55,5 +57,11 @@ public class GameSceneManager : MonoBehaviour {
             Debug.Log(maze.GetComponent<Maze>().mazeObjects[1, 2]!=null);
             Debug.Log("Maze is built by RB");
         }
+    }
+
+    public GameObject RespawnPacMan(Transform point) {
+        GameObject pacman = Instantiate(pacManPrefab, point.position, point.rotation);
+        pacman.GetComponent<Player>().maxItemsNumber=this.maxItemsNumber;
+        return pacman;
     }
 }
