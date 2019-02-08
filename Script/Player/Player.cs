@@ -4,21 +4,36 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    public int maxItemsNumber = 5;
+    public int maxItemsNumber;
     public string[] itemsNameList;
+    public bool isUsingItem;
 
     private Item[] itemsList;
     [SerializeField]private int energy = 0;
     [SerializeField]private int ownedItems = 0;
+    private GameSceneManager gameManagerScript;
 
 	void Start () {
+        gameManagerScript=GameObject.Find("GameManager").GetComponent<GameSceneManager>();
+        maxItemsNumber=gameManagerScript.maxItemsNumber;
         itemsList=new Item[maxItemsNumber];
         itemsNameList=new string[maxItemsNumber];
     }
 	
 	void Update () {
-
+        CheckItemButton();
 	}
+    public void UseItem(int index) {
+        if (itemsList[index]==null) {
+            Debug.Log("No available item");
+            return;
+        }
+        Debug.Log(itemsNameList[index]+" is used");
+        itemsList[index]=null;
+        itemsNameList[index]=null;
+        ownedItems--;
+        gameManagerScript.PlayerUsrItem(index);
+    }
 
     public void GetItem(string itemName) {
         Item item = ScriptableObject.CreateInstance<Item>();
@@ -28,6 +43,7 @@ public class Player : MonoBehaviour {
                 itemsList[i]=item;
                 itemsNameList[i]=item.GetItemName();
                 ownedItems++;
+                gameManagerScript.PlayerGetItem(i, itemName);
                 break;
             }
         }
@@ -39,5 +55,36 @@ public class Player : MonoBehaviour {
 
     public bool ItemsListHasSpace() {
         return ownedItems<maxItemsNumber;
+    }
+
+    private void CheckItemButton() {
+        if (isUsingItem) {
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            Debug.Log("1 is pressed");
+            UseItem(0);
+        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            Debug.Log("2 is pressed");
+            UseItem(1);
+        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            Debug.Log("3 is pressed");
+            UseItem(2);
+        } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
+            Debug.Log("4 is pressed");
+            UseItem(3);
+        } else if (Input.GetKeyDown(KeyCode.Alpha5)) {
+            Debug.Log("5 is pressed");
+            UseItem(4);
+        } else if (Input.GetKeyDown(KeyCode.Alpha6)) {
+            Debug.Log("6 is pressed");
+            UseItem(5);
+        } else if (Input.GetKeyDown(KeyCode.Alpha7)) {
+            Debug.Log("7 is pressed");
+            UseItem(6);
+        } else if (Input.GetKeyDown(KeyCode.Alpha8)) {
+            Debug.Log("8 is pressed");
+            UseItem(7);
+        }
     }
 }
