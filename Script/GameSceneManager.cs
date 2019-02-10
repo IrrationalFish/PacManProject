@@ -40,7 +40,7 @@ public class GameSceneManager : MonoBehaviour {
         itemObjectButtonList[index].GetComponent<ItemObjectButton>().SetItemObjectType(itemName);
     }
 
-    public void PlayerUsrItem(int index) {
+    public void PlayerUseItem(int index) {
         itemObjectButtonList[index].GetComponent<ItemObjectButton>().ItemISUsed();
     }
 

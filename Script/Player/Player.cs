@@ -8,6 +8,8 @@ public class Player : MonoBehaviour {
     public string[] itemsNameList;
     public bool isUsingItem;
     public GameObject wallBreaker;
+    public GameObject portalAInstance;
+    public GameObject portalBInstance;
 
     private Item[] itemsList;
     [SerializeField]private int energy = 0;
@@ -29,13 +31,18 @@ public class Player : MonoBehaviour {
             Debug.Log("No available item");
             return;
         }
-        CreateItemInstance(itemsList[index].GetItemName());
+        string itemName = itemsList[index].GetItemName();
+        CreateItemInstance(itemName);
 
         Debug.Log(itemsNameList[index]+" is used");
         itemsList[index]=null;
         itemsNameList[index]=null;
         ownedItems--;
-        gameManagerScript.PlayerUsrItem(index);
+        gameManagerScript.PlayerUseItem(index);
+
+        if(itemName =="Portal") {
+            GetItem("PortalB");
+        }
     }
 
     public void GetItem(string itemName) {
@@ -94,10 +101,24 @@ public class Player : MonoBehaviour {
     private void CreateItemInstance(string name) {
         if(name =="WallBreaker") {
             CreateWallBreakerInstance();
+        } else if(name =="Portal") {
+            CreatePortalAInstance();
+        } else if(name =="PortalB") {
+            CreatePortalBInstance();
         }
     }
 
     private void CreateWallBreakerInstance() {
         Instantiate(wallBreaker, this.transform);
+    }
+
+    private void CreatePortalAInstance() {
+        Debug.Log("Portal Instance created!");
+        Instantiate(portalAInstance, this.transform.position, Quaternion.Euler(0,0,0));
+    }
+
+    private void CreatePortalBInstance() {
+        Debug.Log("PortalB Instance created!");
+        Instantiate(portalBInstance, this.transform.position, Quaternion.Euler(0, 0, 0));
     }
 }

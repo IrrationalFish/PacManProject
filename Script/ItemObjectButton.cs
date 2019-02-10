@@ -40,6 +40,9 @@ public class ItemObjectButton : MonoBehaviour {
         } else if (itemObjectType=="Portal") {
             gameObject.GetComponentsInChildren<Image>()[1].sprite=portalImage;
             gameObject.GetComponentsInChildren<RectTransform>()[1].sizeDelta=new Vector2(90f, 90f);
+        } else if (itemObjectType=="PortalB") {
+            gameObject.GetComponentsInChildren<Image>()[1].sprite=portalImage;
+            gameObject.GetComponentsInChildren<RectTransform>()[1].sizeDelta=new Vector2(90f, 90f);
         } else {
             gameObject.GetComponentsInChildren<Image>()[1].sprite=emptyImage;
         }
