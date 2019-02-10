@@ -397,6 +397,13 @@ MonoBehaviour:
     type: 2}
   portalBInstance: {fileID: 1155481065586700, guid: a1cb3cb150a0e8342973f2dac74062c7,
     type: 2}
+  laserInstance: {fileID: 1130823152220640, guid: 794a611e7fdf36345b77c573f88d48ed,
+    type: 2}
+  laserChildInstance: {fileID: 1145021798092494, guid: 206a92b87484d6a49a2fbd338b4faf14,
+    type: 2}
+  laserMaxTime: 5
+  laserLastTime: 0
+  isUsingLaser: 0
   energy: 0
   ownedItems: 0
 --- !u!114 &114914531522076230

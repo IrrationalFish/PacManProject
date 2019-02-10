@@ -10,6 +10,11 @@ public class Player : MonoBehaviour {
     public GameObject wallBreaker;
     public GameObject portalAInstance;
     public GameObject portalBInstance;
+    public GameObject laserInstance;
+    public GameObject laserChildInstance;
+    public float laserMaxTime;
+    public float laserLastTime;
+    public bool isUsingLaser;
 
     private Item[] itemsList;
     [SerializeField]private int energy = 0;
@@ -21,11 +26,27 @@ public class Player : MonoBehaviour {
         maxItemsNumber=gameManagerScript.maxItemsNumber;
         itemsList=new Item[maxItemsNumber];
         itemsNameList=new string[maxItemsNumber];
+        GetItem("Laser");
     }
 	
 	void Update () {
         CheckItemButton();
-	}
+        if (isUsingLaser) {
+            laserLastTime=laserLastTime+Time.deltaTime;
+            Debug.Log(laserLastTime);
+        }
+        if(laserLastTime >=laserMaxTime) {
+            isUsingLaser=false;
+        }
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward)*1000, Color.red);
+    }
+
+    private void FixedUpdate() {
+        if (isUsingLaser) {
+            CreateLaserInstance();
+        }
+    }
+
     public void UseItem(int index) {
         if (itemsList[index]==null) {
             Debug.Log("No available item");
@@ -105,6 +126,9 @@ public class Player : MonoBehaviour {
             CreatePortalAInstance();
         } else if(name =="PortalB") {
             CreatePortalBInstance();
+        } else if (name=="Laser") {
+            laserLastTime=0;
+            isUsingLaser=true;
         }
     }
 
@@ -120,5 +144,18 @@ public class Player : MonoBehaviour {
     private void CreatePortalBInstance() {
         Debug.Log("PortalB Instance created!");
         Instantiate(portalBInstance, this.transform.position, Quaternion.Euler(0, 0, 0));
+    }
+
+    private void CreateLaserInstance() {
+        RaycastHit hit;
+        Debug.Log("Laser Instance created!");
+        //GameObject laserParent = Instantiate(laserInstance,this.transform);
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, 9)) {
+            Debug.Log(hit.point);
+            Debug.Log("Did Hit");
+            Vector3 dir = transform.TransformDirection(Vector3.forward);
+            Instantiate(laserChildInstance, this.transform.position, this.transform.rotation);
+        }
+
     }
 }
