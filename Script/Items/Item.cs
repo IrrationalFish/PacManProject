@@ -10,7 +10,8 @@ public class Item : ScriptableObject {
         itemName=name;
     }
 
-	public string GetItemName() {
+    public string GetItemName() {
         return itemName;
     }
+
 }

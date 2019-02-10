@@ -7,6 +7,7 @@ public class Cube : MonoBehaviour {
     public int x;
     public int y;
     public int blockDir;
+    public bool isBoundary;
 
 	void Start () {
 		
@@ -20,6 +21,7 @@ public class Cube : MonoBehaviour {
     public void SetCoordinateAttribute(int xPar, int yPar) {
         x = xPar;
         y = yPar;
+        isBoundary=IsBoundary();
     }
 
     public void SetParent(Transform parentPar) {
@@ -30,5 +32,17 @@ public class Cube : MonoBehaviour {
         this.x = xPar;
         this.y = yPar;
         this.transform.parent = parentPar;
+        isBoundary=IsBoundary();
+    }
+
+    private bool IsBoundary() {
+        GameSceneManager gameManagerScript = GameObject.Find("GameManager").GetComponent<GameSceneManager>();
+        int width = gameManagerScript.mazeWidth;
+        int height = gameManagerScript.mazeHeight;
+        if(x==0 || x==width-1 || y==0 ||y==height-1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

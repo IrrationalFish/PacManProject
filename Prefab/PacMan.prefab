@@ -390,6 +390,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxItemsNumber: 3
   itemsNameList: []
+  isUsingItem: 0
+  wallBreaker: {fileID: 1185836708818556, guid: cc484aa99bce4fb46a42900a8a6d41f1,
+    type: 2}
   energy: 0
   ownedItems: 0
 --- !u!114 &114914531522076230

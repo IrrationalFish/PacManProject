@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
     public int maxItemsNumber;
     public string[] itemsNameList;
     public bool isUsingItem;
+    public GameObject wallBreaker;
 
     private Item[] itemsList;
     [SerializeField]private int energy = 0;
@@ -28,6 +29,8 @@ public class Player : MonoBehaviour {
             Debug.Log("No available item");
             return;
         }
+        CreateItemInstance(itemsList[index].GetItemName());
+
         Debug.Log(itemsNameList[index]+" is used");
         itemsList[index]=null;
         itemsNameList[index]=null;
@@ -86,5 +89,15 @@ public class Player : MonoBehaviour {
             Debug.Log("8 is pressed");
             UseItem(7);
         }
+    }
+
+    private void CreateItemInstance(string name) {
+        if(name =="WallBreaker") {
+            CreateWallBreakerInstance();
+        }
+    }
+
+    private void CreateWallBreakerInstance() {
+        Instantiate(wallBreaker, this.transform);
     }
 }

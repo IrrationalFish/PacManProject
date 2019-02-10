@@ -44,6 +44,16 @@ public class GameSceneManager : MonoBehaviour {
         itemObjectButtonList[index].GetComponent<ItemObjectButton>().ItemISUsed();
     }
 
+    public void GmBreakWall(int x, int y) {
+        if (x==0||y==0||x==maze.GetComponent<Maze>().width-1||y==maze.GetComponent<Maze>().height-1) {
+            Debug.Log("Boundary GMBreak Fail!");
+            return;
+        }
+        GameObject[,] mazeArray = maze.GetComponent<Maze>().mazeObjects;
+        Destroy(mazeArray[x, y]);
+        mazeArray[x, y]=null;
+    }
+
     private void InitialiseItemObjectButtons() {
         for (int i = 0; i<maxItemsNumber; i++) {
             GameObject button = Instantiate(itemObjectButtonPrefab, canvas.transform);
