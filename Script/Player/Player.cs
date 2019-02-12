@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
     public GameObject portalBInstance;
     public GameObject laserInstance;
     public GameObject laserChildInstance;
+    public GameObject grenadeInstance;
     public float laserMaxTime;
     public float laserLastTime;
     public bool isUsingLaser;
@@ -26,7 +27,6 @@ public class Player : MonoBehaviour {
         maxItemsNumber=gameManagerScript.maxItemsNumber;
         itemsList=new Item[maxItemsNumber];
         itemsNameList=new string[maxItemsNumber];
-        GetItem("Laser");
     }
 	
 	void Update () {
@@ -129,6 +129,8 @@ public class Player : MonoBehaviour {
         } else if (name=="Laser") {
             laserLastTime=0;
             isUsingLaser=true;
+        } else if(name =="Grenade") {
+            CreateGrenadeInstance();
         }
     }
 
@@ -157,5 +159,9 @@ public class Player : MonoBehaviour {
             Instantiate(laserChildInstance, this.transform.position, this.transform.rotation);
         }
 
+    }
+
+    private void CreateGrenadeInstance() {
+        Instantiate(grenadeInstance, this.transform.position + new Vector3(0,0.75f,0), this.transform.rotation);
     }
 }

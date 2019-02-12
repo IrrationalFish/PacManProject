@@ -26,6 +26,7 @@ public class GameSceneManager : MonoBehaviour {
     public bool RB;
 
     void Start() {
+        Physics.IgnoreLayerCollision(8, 10);
         pacMan=RespawnPacMan(startPoint);
         virtualCamera1.Follow=pacMan.transform;
         InitialiseItemObjectButtons();

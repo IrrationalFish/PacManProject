@@ -401,6 +401,8 @@ MonoBehaviour:
     type: 2}
   laserChildInstance: {fileID: 1145021798092494, guid: 206a92b87484d6a49a2fbd338b4faf14,
     type: 2}
+  grenadeInstance: {fileID: 1566321737675610, guid: dd190936c68c3c14d89b69594ce4e13e,
+    type: 2}
   laserMaxTime: 5
   laserLastTime: 0
   isUsingLaser: 0
