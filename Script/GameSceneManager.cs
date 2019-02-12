@@ -95,4 +95,8 @@ public class GameSceneManager : MonoBehaviour {
         pacman.GetComponent<Player>().maxItemsNumber=this.maxItemsNumber;
         return pacman;
     }
+
+    public GameObject GetPlayer() {
+        return pacMan;
+    }
 }

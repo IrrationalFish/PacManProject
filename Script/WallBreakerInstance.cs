@@ -34,5 +34,6 @@ public class WallBreakerInstance : MonoBehaviour {
         }
 
         Destroy(this.gameObject);
+        gmScript.GetPlayer().GetComponent<Player>().isUsingItem=false;
     }
 }

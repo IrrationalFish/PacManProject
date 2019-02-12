@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
 
     public int maxItemsNumber;
     public string[] itemsNameList;
-    public bool isUsingItem;
+    public bool isUsingItem = false;
     public GameObject wallBreaker;
     public GameObject portalAInstance;
     public GameObject portalBInstance;
@@ -33,12 +33,11 @@ public class Player : MonoBehaviour {
         CheckItemButton();
         if (isUsingLaser) {
             laserLastTime=laserLastTime+Time.deltaTime;
-            Debug.Log(laserLastTime);
         }
         if(laserLastTime >=laserMaxTime) {
             isUsingLaser=false;
+            isUsingItem=false;
         }
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward)*1000, Color.red);
     }
 
     private void FixedUpdate() {
@@ -48,6 +47,7 @@ public class Player : MonoBehaviour {
     }
 
     public void UseItem(int index) {
+        isUsingItem=true;
         if (itemsList[index]==null) {
             Debug.Log("No available item");
             return;
@@ -90,6 +90,7 @@ public class Player : MonoBehaviour {
 
     private void CheckItemButton() {
         if (isUsingItem) {
+            Debug.Log("Is Using Item!");
             return;
         }
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
@@ -124,13 +125,16 @@ public class Player : MonoBehaviour {
             CreateWallBreakerInstance();
         } else if(name =="Portal") {
             CreatePortalAInstance();
+            isUsingItem=false;
         } else if(name =="PortalB") {
             CreatePortalBInstance();
+            isUsingItem=false;
         } else if (name=="Laser") {
             laserLastTime=0;
             isUsingLaser=true;
         } else if(name =="Grenade") {
             CreateGrenadeInstance();
+            isUsingItem=false;
         }
     }
 
@@ -149,16 +153,14 @@ public class Player : MonoBehaviour {
     }
 
     private void CreateLaserInstance() {
-        RaycastHit hit;
-        Debug.Log("Laser Instance created!");
+        //RaycastHit hit;
         //GameObject laserParent = Instantiate(laserInstance,this.transform);
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, 9)) {
-            Debug.Log(hit.point);
-            Debug.Log("Did Hit");
+        /*if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, 9)) {
             Vector3 dir = transform.TransformDirection(Vector3.forward);
             Instantiate(laserChildInstance, this.transform.position, this.transform.rotation);
-        }
-
+        }*/
+        Instantiate(laserChildInstance, this.transform.position, this.transform.rotation);
+        Debug.Log("Laser Instance created!");
     }
 
     private void CreateGrenadeInstance() {
