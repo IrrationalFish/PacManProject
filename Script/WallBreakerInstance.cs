@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class WallBreakerInstance : MonoBehaviour {
 
+    public float rotateSpeed;
     GameSceneManager gmScript;
 
 	void Start () {
         gmScript=GameObject.Find("GameManager").GetComponent<GameSceneManager>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    private void FixedUpdate() {
+        transform.Rotate(new Vector3(0, 0, 1)*rotateSpeed);
+    }
 
     /*private void OnTriggerEnter(Collider other) {
         if(other.tag =="Ghost") {

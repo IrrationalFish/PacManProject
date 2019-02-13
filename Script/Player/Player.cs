@@ -10,7 +10,6 @@ public class Player : MonoBehaviour {
     public GameObject wallBreaker;
     public GameObject portalAInstance;
     public GameObject portalBInstance;
-    public GameObject laserInstance;
     public GameObject laserChildInstance;
     public GameObject grenadeInstance;
     public float laserMaxTime;
@@ -47,11 +46,11 @@ public class Player : MonoBehaviour {
     }
 
     public void UseItem(int index) {
-        isUsingItem=true;
         if (itemsList[index]==null) {
             Debug.Log("No available item");
             return;
         }
+        isUsingItem=true;
         string itemName = itemsList[index].GetItemName();
         CreateItemInstance(itemName);
 

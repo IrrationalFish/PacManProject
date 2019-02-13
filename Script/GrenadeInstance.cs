@@ -6,6 +6,7 @@ public class GrenadeInstance : MonoBehaviour {
 
     public float movePower;
     public float moveSpeed;
+    public float rotateSpeed;
 
     private bool isMoving = false;
 
@@ -22,13 +23,22 @@ public class GrenadeInstance : MonoBehaviour {
 	void Update () {
         if(isMoving ==true) {
             this.GetComponent<Rigidbody>().velocity=this.transform.forward*moveSpeed;
+            Debug.Log(this.transform.forward);
         }
+    }
+
+    private void FixedUpdate() {
+        GetComponentsInChildren<Transform>()[1].Rotate(new Vector3(0, 0, 1)*rotateSpeed);
     }
 
     private void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.tag =="Ghost") {
             Destroy(gameObject);
             Destroy(collision.gameObject);
+        }else if(collision.gameObject.tag =="Wall") {
+            //GameSceneManager gm = GameObject.Find("GameManager").GetComponent<GameSceneManager>();
+            //gm.GmBreakWall(collision.gameObject.GetComponent<Cube>().x, collision.gameObject.GetComponent<Cube>().y);
+            Destroy(gameObject);
         }
     }
 }

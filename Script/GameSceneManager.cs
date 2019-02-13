@@ -15,6 +15,8 @@ public class GameSceneManager : MonoBehaviour {
     public GameObject itemObjectButtonPrefab;
     public GameObject canvas;
     public Button buildMazeBtn;
+    public Button getGrenadeBtn;
+    public Button getWallBreakerBtn;
 
     [SerializeField] private List<GameObject> itemObjectButtonList;
     [SerializeField] private GameObject maze;
@@ -32,6 +34,8 @@ public class GameSceneManager : MonoBehaviour {
         InitialiseItemObjectButtons();
         BuildMaze();
         buildMazeBtn.onClick.AddListener(delegate () { this.BuildMaze(); });
+        getGrenadeBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("Grenade"); });
+        getWallBreakerBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("WallBreaker"); });
     }
 
     void Update() {
