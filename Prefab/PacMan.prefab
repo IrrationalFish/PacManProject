@@ -393,11 +393,9 @@ MonoBehaviour:
   isUsingItem: 0
   wallBreaker: {fileID: 1185836708818556, guid: cc484aa99bce4fb46a42900a8a6d41f1,
     type: 2}
-  portalAInstance: {fileID: 1101525203183946, guid: 7924619b418d83c478ef3919e7ee57b5,
+  portalAInstance: {fileID: 1199249056558378, guid: 7924619b418d83c478ef3919e7ee57b5,
     type: 2}
   portalBInstance: {fileID: 1155481065586700, guid: a1cb3cb150a0e8342973f2dac74062c7,
-    type: 2}
-  laserInstance: {fileID: 1130823152220640, guid: 794a611e7fdf36345b77c573f88d48ed,
     type: 2}
   laserChildInstance: {fileID: 1145021798092494, guid: 206a92b87484d6a49a2fbd338b4faf14,
     type: 2}

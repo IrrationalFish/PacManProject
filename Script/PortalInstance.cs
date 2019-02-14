@@ -28,8 +28,8 @@ public class PortalInstance : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("Meet portal!");
-        if(linkedPortal!=null && currentPower >=coolDown) {
+        Debug.Log("Meet portal!"+ other.gameObject.name);
+        if(linkedPortal!=null && currentPower >=coolDown && other.gameObject.tag=="Player") {
             other.transform.SetPositionAndRotation(linkedPortal.transform.position, other.transform.rotation);
             currentPower=0;
             linkedPortal.GetComponent<PortalInstance>().currentPower=0;

@@ -9,6 +9,7 @@ public class ItemObjectButton : MonoBehaviour {
     public Sprite wallBreakerImage;
     public Sprite GrenadeImage;
     public Sprite portalImage;
+    public Sprite portalBImage;
     public Sprite emptyImage;
 
     public string itemObjectType;
@@ -41,7 +42,7 @@ public class ItemObjectButton : MonoBehaviour {
             gameObject.GetComponentsInChildren<Image>()[1].sprite=portalImage;
             gameObject.GetComponentsInChildren<RectTransform>()[1].sizeDelta=new Vector2(90f, 90f);
         } else if (itemObjectType=="PortalB") {
-            gameObject.GetComponentsInChildren<Image>()[1].sprite=portalImage;
+            gameObject.GetComponentsInChildren<Image>()[1].sprite=portalBImage;
             gameObject.GetComponentsInChildren<RectTransform>()[1].sizeDelta=new Vector2(90f, 90f);
         } else {
             gameObject.GetComponentsInChildren<Image>()[1].sprite=emptyImage;

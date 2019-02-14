@@ -103,6 +103,7 @@ MonoBehaviour:
   wallBreakerImage: {fileID: 21300000, guid: 9704dafeef7cc3f4a9b8e3d19da25da4, type: 3}
   GrenadeImage: {fileID: 21300000, guid: 89ca45da8d7ca6a4b970bbf3073b0c83, type: 3}
   portalImage: {fileID: 21300000, guid: 4638ca4b7cc93c24e93f1a7cb5e848c5, type: 3}
+  portalBImage: {fileID: 21300000, guid: 138b41352f5af224cb1abe76df6a3c05, type: 3}
   emptyImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   itemObjectType: 
 --- !u!114 &114551657069937946

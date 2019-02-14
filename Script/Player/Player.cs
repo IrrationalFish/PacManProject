@@ -61,7 +61,13 @@ public class Player : MonoBehaviour {
         gameManagerScript.PlayerUseItem(index);
 
         if(itemName =="Portal") {
-            GetItem("PortalB");
+            //GetItem("PortalB");
+            Item item = ScriptableObject.CreateInstance<Item>();
+            item.SetName("PortalB");
+            itemsList[index]=item;
+            itemsNameList[index]=item.GetItemName();
+            ownedItems++;
+            gameManagerScript.PlayerGetItem(index, "PortalB");
         }
     }
 
@@ -164,5 +170,9 @@ public class Player : MonoBehaviour {
 
     private void CreateGrenadeInstance() {
         Instantiate(grenadeInstance, this.transform.position + new Vector3(0,0.75f,0), this.transform.rotation);
+    }
+
+    public int GetEnergy() {
+        return energy;
     }
 }
