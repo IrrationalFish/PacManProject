@@ -23,6 +23,7 @@ public class GameSceneManager : MonoBehaviour {
     [SerializeField] private List<GameObject> itemObjectButtonList;
     [SerializeField] private GameObject maze;
     [SerializeField] private GameObject pacMan;
+    private Maze mazeScript;
     private MazeGenerator mazeGenerator;
 
     public bool RD;
@@ -98,6 +99,7 @@ public class GameSceneManager : MonoBehaviour {
         } else {
             //do nothing
         }
+        mazeScript=maze.GetComponent<Maze>();
     }
 
     private GameObject RespawnPacMan(Transform point) {
@@ -108,5 +110,16 @@ public class GameSceneManager : MonoBehaviour {
 
     public GameObject GetPlayer() {
         return pacMan;
+    }
+
+    public bool MazeCubeIsBlocked(int x, int z) {
+        /*if (x<0||y<0||x>mazeWidth-1||y>mazeHeight-1) {
+            return true;
+        }*/
+        if(mazeScript.mazeObjects[x,z] == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
