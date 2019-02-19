@@ -26705,8 +26705,7 @@ MonoBehaviour:
   moveSpeed: 0.1
   end: {fileID: 1477744128}
   pathCube: {fileID: 1457348860744280, guid: e2fdbd96868272748be9f3b2e1f2ffde, type: 2}
-  targetsList: []
-  delta: 0.1
+  delta: 0.001
 --- !u!4 &1953261209
 Transform:
   m_ObjectHideFlags: 0

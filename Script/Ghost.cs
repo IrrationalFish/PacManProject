@@ -6,10 +6,11 @@ public abstract class Ghost : MonoBehaviour {
 
     public float moveSpeed;
     public Transform end;
-    public Stack<Vector3> path;
+    public Stack<Vector3> path = new Stack<Vector3>();
     public GameObject pathCube;
-    public List<Vector3> targetsList;
+    //public List<Vector3> targetsList;
     public float delta = 0.001f;
+    public static GameSceneManager gmScript;
 
     private class MazeNode {
         public Vector3 pos;
@@ -22,14 +23,15 @@ public abstract class Ghost : MonoBehaviour {
     }
 
     protected void Start() {
-        path = GetShortestPath(end.position);
-        while (path.Count>0) {
+        gmScript = GameObject.Find("GameManager").GetComponent<GameSceneManager>();
+        //path = GetShortestPath(end.position);
+        /*while (path.Count>0) {
             Instantiate(pathCube, path.Pop(), new Quaternion());
-        }
+        }*/
         Debug.Log("Start Called");
     }
 
-    protected void Update() {
+    /*protected void Update() {
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
             Debug.Log("Move Up!");
             targetsList.Add(transform.position+new Vector3(0, 0, 1));
@@ -43,19 +45,19 @@ public abstract class Ghost : MonoBehaviour {
             Debug.Log("Move Right!");
             targetsList.Add(transform.position+new Vector3(1, 0, 0));
         }
-    }
+    }*/
 
     protected void FixedUpdate() {
-        if (targetsList.Count>0) {
-            MoveToPosition(targetsList[0]);
+        if (path.Count>0) {
+            MoveToPosition(path.Peek());
         }
     }
 
     protected Stack<Vector3> GetShortestPath(Vector3 end) {
         int[] deltaX = { 0, 0, -1, 1 };
         int[] deltaZ = { -1, 1, 0, 0 };         //down up left right
-        Stack<Vector3> path = new Stack<Vector3>();
-        GameSceneManager gmScript = GameObject.Find("GameManager").GetComponent<GameSceneManager>();
+        Stack<Vector3> tempPath = new Stack<Vector3>();
+        //GameSceneManager gmScript = GameObject.Find("GameManager").GetComponent<GameSceneManager>();
         bool[,] visited = new bool[gmScript.mazeWidth, gmScript.mazeHeight];
         Queue<MazeNode> queue = new Queue<MazeNode>();
         MazeNode start = new MazeNode(this.transform.position, null);
@@ -71,12 +73,13 @@ public abstract class Ghost : MonoBehaviour {
                 }
                 if(!visited[xPos,zPos] && !gmScript.MazeCubeIsBlocked(xPos,zPos)){
                     if(xPos == end.x && zPos==end.z) {
+                        tempPath.Push(new Vector3(end.x,0,end.z));
                         MazeNode pathNode = p;
                         while (pathNode.parentNode!=null) {
-                            path.Push(pathNode.pos);
+                            tempPath.Push(pathNode.pos);
                             pathNode=pathNode.parentNode;
                         }
-                        return path;
+                        return tempPath;
                     }
                     queue.Enqueue(new MazeNode(new Vector3(xPos, 0, zPos), p));
                     visited[xPos, zPos]=true;
@@ -91,8 +94,8 @@ public abstract class Ghost : MonoBehaviour {
         bool xPositionReady = Mathf.Abs(this.transform.position.x-position.x)<delta;
         bool zPositionReady = Mathf.Abs(this.transform.position.z-position.z)<delta;
         if (xPositionReady&&zPositionReady) {          //到到指定位置
-            targetsList.RemoveAt(0);
             this.transform.position=position;
+            path.Pop();
             //transform.position=new Vector3((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
             Debug.Log("Arrive!");
         } else {
@@ -100,5 +103,11 @@ public abstract class Ghost : MonoBehaviour {
             Debug.Log("Not Arrive!");
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if(other.tag =="Test") {
+            Destroy(other.gameObject);
+        }
     }
 }
