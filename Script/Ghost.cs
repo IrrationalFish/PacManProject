@@ -5,10 +5,9 @@ using UnityEngine;
 public abstract class Ghost : MonoBehaviour {
 
     public float moveSpeed;
-    public Transform end;
+    //public Transform end;
     public Stack<Vector3> path = new Stack<Vector3>();
     public GameObject pathCube;
-    //public List<Vector3> targetsList;
     public float delta = 0.001f;
     public static GameSceneManager gmScript;
 
@@ -23,29 +22,19 @@ public abstract class Ghost : MonoBehaviour {
     }
 
     protected void Start() {
-        gmScript = GameObject.Find("GameManager").GetComponent<GameSceneManager>();
-        //path = GetShortestPath(end.position);
-        /*while (path.Count>0) {
-            Instantiate(pathCube, path.Pop(), new Quaternion());
-        }*/
-        Debug.Log("Start Called");
+        if(gmScript ==null) {
+            gmScript=GameObject.Find("GameManager").GetComponent<GameSceneManager>();
+
+        }
+        InitialiseGhost();
     }
 
-    /*protected void Update() {
-        if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            Debug.Log("Move Up!");
-            targetsList.Add(transform.position+new Vector3(0, 0, 1));
-        } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            Debug.Log("Move Down!");
-            targetsList.Add(transform.position+new Vector3(0, 0, -1));
-        } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-            Debug.Log("Move Left!");
-            targetsList.Add(transform.position+new Vector3(-1, 0, 0));
-        } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            Debug.Log("Move Right!");
-            targetsList.Add(transform.position+new Vector3(1, 0, 0));
+    protected void Update() {
+        if (path.Count<=0) {
+            Vector3 nextEnd = GetNextEnd();
+            path=GetShortestPath(nextEnd);
         }
-    }*/
+    }
 
     protected void FixedUpdate() {
         if (path.Count>0) {
@@ -53,11 +42,17 @@ public abstract class Ghost : MonoBehaviour {
         }
     }
 
+    abstract protected void InitialiseGhost();
+    abstract protected Vector3 GetNextEnd();
+
     protected Stack<Vector3> GetShortestPath(Vector3 end) {
         int[] deltaX = { 0, 0, -1, 1 };
         int[] deltaZ = { -1, 1, 0, 0 };         //down up left right
         Stack<Vector3> tempPath = new Stack<Vector3>();
-        //GameSceneManager gmScript = GameObject.Find("GameManager").GetComponent<GameSceneManager>();
+        if(end ==this.transform.position) {
+            tempPath.Push(new Vector3(end.x, 0, end.z));
+            return tempPath;
+        }
         bool[,] visited = new bool[gmScript.mazeWidth, gmScript.mazeHeight];
         Queue<MazeNode> queue = new Queue<MazeNode>();
         MazeNode start = new MazeNode(this.transform.position, null);
@@ -86,7 +81,7 @@ public abstract class Ghost : MonoBehaviour {
                 }
             }
         }
-        return null;
+        return tempPath;
     }
 
     protected void MoveToPosition(Vector3 position) {
@@ -96,7 +91,6 @@ public abstract class Ghost : MonoBehaviour {
         if (xPositionReady&&zPositionReady) {          //到到指定位置
             this.transform.position=position;
             path.Pop();
-            //transform.position=new Vector3((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
             Debug.Log("Arrive!");
         } else {
             transform.Translate(Vector3.forward*moveSpeed);
@@ -105,9 +99,10 @@ public abstract class Ghost : MonoBehaviour {
 
     }
 
-    private void OnTriggerEnter(Collider other) {
+    protected void OnTriggerEnter(Collider other) {
         if(other.tag =="Test") {
             Destroy(other.gameObject);
+            Debug.Log("Meet Test");
         }
     }
 }
