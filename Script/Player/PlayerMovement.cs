@@ -59,33 +59,35 @@ public class PlayerMovement : MonoBehaviour {
 
     bool Valid(char dir) {
         Vector3 dirVector = new Vector3(0, 0, 0);
+        int layerMask=1<<9 | 1<<12;
+        layerMask=~layerMask;       //不和9tem,12ghost反应
         bool lineOneHit;
         bool lineTwoHit;
         if (dir=='a') {         //想往左
             dirVector=new Vector3(-1, 0, 0);
             Debug.DrawLine(gameObject.transform.position+new Vector3(0, 0, -turningLineDistance), gameObject.transform.position+dirVector+new Vector3(0, 0, -turningLineDistance), Color.red);
             Debug.DrawLine(gameObject.transform.position+new Vector3(0, 0, turningLineDistance), gameObject.transform.position+dirVector+new Vector3(0, 0, turningLineDistance), Color.red);
-            lineOneHit=Physics.Linecast(gameObject.transform.position+new Vector3(0, 0, -turningLineDistance), gameObject.transform.position+dirVector+new Vector3(0, 0, -turningLineDistance), 9);
-            lineTwoHit=Physics.Linecast(gameObject.transform.position+new Vector3(0, 0, turningLineDistance), gameObject.transform.position+dirVector+new Vector3(0, 0, turningLineDistance), 9);
+            lineOneHit=Physics.Linecast(gameObject.transform.position+new Vector3(0, 0, -turningLineDistance), gameObject.transform.position+dirVector+new Vector3(0, 0, -turningLineDistance), layerMask);
+            lineTwoHit=Physics.Linecast(gameObject.transform.position+new Vector3(0, 0, turningLineDistance), gameObject.transform.position+dirVector+new Vector3(0, 0, turningLineDistance), layerMask);
         } else if(dir=='s') {      //想往下
             dirVector=new Vector3(0, 0, -1);
             Debug.DrawLine(gameObject.transform.position+new Vector3(-turningLineDistance, 0, 0), gameObject.transform.position+dirVector+new Vector3(-turningLineDistance, 0, 0), Color.red);
             Debug.DrawLine(gameObject.transform.position+new Vector3(turningLineDistance, 0, 0), gameObject.transform.position+dirVector+new Vector3(turningLineDistance, 0, 0), Color.red);
-            lineOneHit=Physics.Linecast(gameObject.transform.position+new Vector3(-turningLineDistance, 0, 0), gameObject.transform.position+dirVector+new Vector3(-turningLineDistance, 0, 0), 9);
-            lineTwoHit=Physics.Linecast(gameObject.transform.position+new Vector3(turningLineDistance, 0, 0), gameObject.transform.position+dirVector+new Vector3(turningLineDistance, 0, 0), 9);
+            lineOneHit=Physics.Linecast(gameObject.transform.position+new Vector3(-turningLineDistance, 0, 0), gameObject.transform.position+dirVector+new Vector3(-turningLineDistance, 0, 0), layerMask);
+            lineTwoHit=Physics.Linecast(gameObject.transform.position+new Vector3(turningLineDistance, 0, 0), gameObject.transform.position+dirVector+new Vector3(turningLineDistance, 0, 0), layerMask);
         } else if (dir=='d') {
             dirVector=new Vector3(1, 0, 0);
             Debug.DrawLine(gameObject.transform.position+new Vector3(0, 0, -turningLineDistance), gameObject.transform.position+dirVector+new Vector3(0, 0, -turningLineDistance), Color.red);
             Debug.DrawLine(gameObject.transform.position+new Vector3(0, 0, turningLineDistance), gameObject.transform.position+dirVector+new Vector3(0, 0, turningLineDistance), Color.red);
-            lineOneHit=Physics.Linecast(gameObject.transform.position+new Vector3(0, 0, -turningLineDistance), gameObject.transform.position+dirVector+new Vector3(0, 0, -turningLineDistance), 9);
-            lineTwoHit=Physics.Linecast(gameObject.transform.position+new Vector3(0, 0, turningLineDistance), gameObject.transform.position+dirVector+new Vector3(0, 0, turningLineDistance), 9);
+            lineOneHit=Physics.Linecast(gameObject.transform.position+new Vector3(0, 0, -turningLineDistance), gameObject.transform.position+dirVector+new Vector3(0, 0, -turningLineDistance), layerMask);
+            lineTwoHit=Physics.Linecast(gameObject.transform.position+new Vector3(0, 0, turningLineDistance), gameObject.transform.position+dirVector+new Vector3(0, 0, turningLineDistance), layerMask);
 
         } else if (dir=='w') {
             dirVector=new Vector3(0, 0, 1);
             Debug.DrawLine(gameObject.transform.position+new Vector3(-turningLineDistance, 0, 0), gameObject.transform.position+dirVector+new Vector3(-turningLineDistance, 0, 0), Color.red);
             Debug.DrawLine(gameObject.transform.position+new Vector3(turningLineDistance, 0, 0), gameObject.transform.position+dirVector+new Vector3(turningLineDistance, 0, 0), Color.red);
-            lineOneHit=Physics.Linecast(gameObject.transform.position+new Vector3(-turningLineDistance, 0, 0), gameObject.transform.position+dirVector+new Vector3(-turningLineDistance, 0, 0), 9);
-            lineTwoHit=Physics.Linecast(gameObject.transform.position+new Vector3(turningLineDistance, 0, 0), gameObject.transform.position+dirVector+new Vector3(turningLineDistance, 0, 0), 9);
+            lineOneHit=Physics.Linecast(gameObject.transform.position+new Vector3(-turningLineDistance, 0, 0), gameObject.transform.position+dirVector+new Vector3(-turningLineDistance, 0, 0), layerMask);
+            lineTwoHit=Physics.Linecast(gameObject.transform.position+new Vector3(turningLineDistance, 0, 0), gameObject.transform.position+dirVector+new Vector3(turningLineDistance, 0, 0), layerMask);
         } else {
             return false;
         }

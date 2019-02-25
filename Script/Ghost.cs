@@ -91,10 +91,10 @@ public abstract class Ghost : MonoBehaviour {
         if (xPositionReady&&zPositionReady) {          //到到指定位置
             this.transform.position=position;
             path.Pop();
-            Debug.Log("Arrive!");
+            //Debug.Log("Arrive!");
         } else {
             transform.Translate(Vector3.forward*moveSpeed);
-            Debug.Log("Not Arrive!");
+            //Debug.Log("Not Arrive!");
         }
 
     }

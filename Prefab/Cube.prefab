@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65518720559863576}
   - component: {fileID: 114652999850730218}
   - component: {fileID: 54498422888171948}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -127,3 +127,4 @@ MonoBehaviour:
   x: 0
   y: 0
   blockDir: 0
+  isBoundary: 0
