@@ -1,34 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
 
     public int maxItemsNumber;
     public string[] itemsNameList;
+    public float laserMaxTime;
+    public float laserLastTime;
+    public int maxEnergy;
+    public int currentEnergy;
+    public int energyCost;
+
     public bool isUsingItem = false;
+    public bool isUsingLaser;
+    public bool isBoosting = false;
+
     public GameObject wallBreaker;
     public GameObject portalAInstance;
     public GameObject portalBInstance;
     public GameObject laserChildInstance;
     public GameObject grenadeInstance;
-    public float laserMaxTime;
-    public float laserLastTime;
-    public bool isUsingLaser;
 
+    private Slider boostEnergySlider;
+    private Text energyText;
     private Item[] itemsList;
-    [SerializeField]private int energy = 0;
     [SerializeField]private int ownedItems = 0;
     private GameSceneManager gameManagerScript;
 
 	void Start () {
         gameManagerScript=GameObject.Find("GameManager").GetComponent<GameSceneManager>();
+        boostEnergySlider=gameManagerScript.boostEnergySlider;
+        energyText=gameManagerScript.energyText;
         maxItemsNumber=gameManagerScript.maxItemsNumber;
         itemsList=new Item[maxItemsNumber];
         itemsNameList=new string[maxItemsNumber];
+        maxEnergy=1001;
+        currentEnergy=1000;
+        boostEnergySlider.maxValue=maxEnergy;
+        boostEnergySlider.value=currentEnergy;
     }
 	
 	void Update () {
+        boostEnergySlider.value=currentEnergy;
+        energyText.text="Boost Energy: \n\n"+currentEnergy+"/"+maxEnergy;
         CheckItemButton();
         if (isUsingLaser) {
             laserLastTime=laserLastTime+Time.deltaTime;
@@ -37,11 +53,35 @@ public class Player : MonoBehaviour {
             isUsingLaser=false;
             isUsingItem=false;
         }
+        if (currentEnergy>0) {
+            if (Input.GetKey(KeyCode.Space)) {
+                this.GetComponent<PlayerMovement>().moveSpeed=0.2f;
+                isBoosting=true;
+            } else {
+                this.GetComponent<PlayerMovement>().moveSpeed=0.1f;
+                isBoosting=false;
+            }
+        } else {
+            this.GetComponent<PlayerMovement>().moveSpeed=0.1f;
+            isBoosting=false;
+        }
     }
 
     private void FixedUpdate() {
         if (isUsingLaser) {
             CreateLaserInstance();
+        }
+        if (isBoosting) {
+            currentEnergy--;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if(other.tag =="PacDot") {
+            Destroy(other.gameObject);
+            if (currentEnergy<maxEnergy) {
+                currentEnergy++;
+            }
         }
     }
 
@@ -86,7 +126,7 @@ public class Player : MonoBehaviour {
     }
 
     public void AddEnergy(int number) {
-        energy=energy+number;
+        currentEnergy=currentEnergy+number;
     }
 
     public bool ItemsListHasSpace() {
@@ -158,12 +198,6 @@ public class Player : MonoBehaviour {
     }
 
     private void CreateLaserInstance() {
-        //RaycastHit hit;
-        //GameObject laserParent = Instantiate(laserInstance,this.transform);
-        /*if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, 9)) {
-            Vector3 dir = transform.TransformDirection(Vector3.forward);
-            Instantiate(laserChildInstance, this.transform.position, this.transform.rotation);
-        }*/
         Instantiate(laserChildInstance, this.transform.position, this.transform.rotation);
         Debug.Log("Laser Instance created!");
     }
@@ -173,6 +207,6 @@ public class Player : MonoBehaviour {
     }
 
     public int GetEnergy() {
-        return energy;
+        return currentEnergy;
     }
 }

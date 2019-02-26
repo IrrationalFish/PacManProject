@@ -10,10 +10,16 @@ public class GameSceneManager : MonoBehaviour {
     public Transform startPoint;
     public int mazeWidth;           //长宽包含了边界的2格,一定是奇数
     public int mazeHeight;
-    public GameObject pacManPrefab;
     public int maxItemsNumber;
+    public int totalPacDots = 0;
+
+    public GameObject pacDotsParent;
+    public GameObject pacDotPrefab;
+    public GameObject pacManPrefab;
+
     public GameObject itemObjectButtonPrefab;
     public GameObject canvas;
+    public Slider boostEnergySlider;
     public Text energyText;
     public Button buildMazeBtn;
     public Button getGrenadeBtn;
@@ -36,6 +42,7 @@ public class GameSceneManager : MonoBehaviour {
         virtualCamera1.Follow=pacMan.transform;
         InitialiseItemObjectButtons();
         BuildMaze();
+        GeneratePacDot();
         buildMazeBtn.onClick.AddListener(delegate () { this.BuildMaze(); });
         getGrenadeBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("Grenade"); });
         getWallBreakerBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("WallBreaker"); });
@@ -43,9 +50,7 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     void Update() {
-        if(pacMan !=null) {
-            energyText.text="Energy: " +pacMan.GetComponent<Player>().GetEnergy();
-        }
+
     }
 
     public void PlayerGetItem(int index, string itemName) {
@@ -81,25 +86,31 @@ public class GameSceneManager : MonoBehaviour {
         if (RD) {
             mazeGenerator=GetComponent<MazeGenRD>();
             maze=mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
-            Debug.Log(maze.GetComponent<Maze>().mazeObjects[0, 0]!=null);
-            Debug.Log(maze.GetComponent<Maze>().mazeObjects[1, 2]!=null);
             Debug.Log("Maze is built by RD");
         } else if (Prim) {
             mazeGenerator=GetComponent<MazeGenPrim>();
             maze=mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
-            Debug.Log(maze.GetComponent<Maze>().mazeObjects[0, 0]!=null);
-            Debug.Log(maze.GetComponent<Maze>().mazeObjects[1, 2]!=null);
             Debug.Log("Maze is built by Prim");
         } else if (RB) {
             mazeGenerator=GetComponent<MazeGenRB>();
             maze=mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
-            Debug.Log(maze.GetComponent<Maze>().mazeObjects[0, 0]!=null);
-            Debug.Log(maze.GetComponent<Maze>().mazeObjects[1, 2]!=null);
             Debug.Log("Maze is built by RB");
         } else {
             //do nothing
         }
         mazeScript=maze.GetComponent<Maze>();
+    }
+
+    private void GeneratePacDot() {
+        for(int i = 1; i<mazeWidth-1; i++) {
+            for(int j = 1; j<mazeHeight-1; j++) {
+                if (!MazeCubeIsBlocked(i, j)) {
+                    GameObject pacDot = Instantiate(pacDotPrefab, new Vector3(i, 0, j), Quaternion.Euler(45, 0, 45));
+                    pacDot.transform.parent=pacDotsParent.transform;
+                    totalPacDots++;
+                }
+            }
+        }
     }
 
     private GameObject RespawnPacMan(Transform point) {

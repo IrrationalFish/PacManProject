@@ -5,6 +5,7 @@ using UnityEngine;
 public class Chaser : Ghost {
 
     public int detectDistance;
+    public int chaseDistance;
 
     protected override Vector3 GetNextEnd() {
         return new Vector3(1, 0, 1);
@@ -76,7 +77,7 @@ public class Chaser : Ghost {
             tempPath.Push(currentPos+dir*(i+1));
         }
         int turnCount = 1;
-        while (true) {
+        for(int i=0; i<chaseDistance; i++) { 
             Vector3 newPoint = turnPoint+nextDir*turnCount;
             int x = Mathf.RoundToInt(newPoint.x);
             int z = Mathf.RoundToInt(newPoint.z);
