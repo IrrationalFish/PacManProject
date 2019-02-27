@@ -36,8 +36,8 @@ public class Player : MonoBehaviour {
         maxItemsNumber=gameManagerScript.maxItemsNumber;
         itemsList=new Item[maxItemsNumber];
         itemsNameList=new string[maxItemsNumber];
-        maxEnergy=1001;
-        currentEnergy=1000;
+        maxEnergy=100;
+        currentEnergy=0;
         boostEnergySlider.maxValue=maxEnergy;
         boostEnergySlider.value=currentEnergy;
     }
@@ -78,7 +78,8 @@ public class Player : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if(other.tag =="PacDot") {
-            Destroy(other.gameObject);
+            PacDot pacDotScript = other.GetComponent<PacDot>();
+            gameManagerScript.PacDotIsEaten(pacDotScript.xPos,pacDotScript.zPos);
             if (currentEnergy<maxEnergy) {
                 currentEnergy++;
             }

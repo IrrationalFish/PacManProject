@@ -29,6 +29,7 @@ public class GameSceneManager : MonoBehaviour {
     [SerializeField] private List<GameObject> itemObjectButtonList;
     [SerializeField] private GameObject maze;
     [SerializeField] private GameObject pacMan;
+    private GameObject[,] pacDotsArray;
     private Maze mazeScript;
     private MazeGenerator mazeGenerator;
 
@@ -102,11 +103,14 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     private void GeneratePacDot() {
+        pacDotsArray=new GameObject[mazeWidth, mazeHeight];
         for(int i = 1; i<mazeWidth-1; i++) {
             for(int j = 1; j<mazeHeight-1; j++) {
                 if (!MazeCubeIsBlocked(i, j)) {
                     GameObject pacDot = Instantiate(pacDotPrefab, new Vector3(i, 0, j), Quaternion.Euler(45, 0, 45));
                     pacDot.transform.parent=pacDotsParent.transform;
+                    pacDot.GetComponent<PacDot>().SetXAndZPos(i, j);
+                    pacDotsArray[i, j]=pacDot;
                     totalPacDots++;
                 }
             }
@@ -131,6 +135,27 @@ public class GameSceneManager : MonoBehaviour {
             return false;
         } else {
             return true;
+        }
+    }
+
+    public void PacDotIsEaten(int x, int z) {
+        Destroy(pacDotsArray[x, z]);
+        pacDotsArray[x, z]=null;
+        Debug.Log("Pac dot "+x+","+z+" is eaten.");
+    }
+
+    public bool PointIsInsideMaze(int x, int z) {
+        if(x>0 && x<mazeWidth-1 && z>0 &&z<mazeHeight-1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public bool HasPacDotInPoint(int x, int z) {
+        if(pacDotsArray[x,z] !=null) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

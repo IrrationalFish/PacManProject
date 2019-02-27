@@ -32,7 +32,7 @@ public abstract class Ghost : MonoBehaviour {
     protected void Update() {
         if (path.Count<=0) {
             Vector3 nextEnd = GetNextEnd();
-            path=GetShortestPath(nextEnd);
+            path=GetShortestPath(this.transform.position,nextEnd);
         }
     }
 
@@ -45,19 +45,19 @@ public abstract class Ghost : MonoBehaviour {
     abstract protected void InitialiseGhost();
     abstract protected Vector3 GetNextEnd();
 
-    protected Stack<Vector3> GetShortestPath(Vector3 end) {
+    protected Stack<Vector3> GetShortestPath(Vector3 start, Vector3 end) {
         int[] deltaX = { 0, 0, -1, 1 };
         int[] deltaZ = { -1, 1, 0, 0 };         //down up left right
         Stack<Vector3> tempPath = new Stack<Vector3>();
-        if(end ==this.transform.position) {
+        if(end.Equals(start)) {
             tempPath.Push(new Vector3(end.x, 0, end.z));
             return tempPath;
         }
         bool[,] visited = new bool[gmScript.mazeWidth, gmScript.mazeHeight];
         Queue<MazeNode> queue = new Queue<MazeNode>();
-        MazeNode start = new MazeNode(this.transform.position, null);
-        queue.Enqueue(start);
-        visited[(int)start.pos.x, (int)start.pos.z]=true;
+        MazeNode startNode = new MazeNode(start, null);
+        queue.Enqueue(startNode);
+        visited[(int)startNode.pos.x, (int)startNode.pos.z]=true;
         while (queue.Count>0) {
             MazeNode p = queue.Dequeue();
             for (int i = 0; i<4; i++) {
