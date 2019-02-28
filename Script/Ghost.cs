@@ -103,6 +103,8 @@ public abstract class Ghost : MonoBehaviour {
         if(other.tag =="Test") {
             Destroy(other.gameObject);
             Debug.Log("Meet Test");
+        }else if(other.tag =="Player") {
+            Debug.Log("Meet Player");
         }
     }
 }

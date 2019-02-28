@@ -127,6 +127,14 @@ public class Player : MonoBehaviour {
     }
 
     public void AddEnergy(int number) {
+        if(currentEnergy + number >maxEnergy) {
+            currentEnergy=maxEnergy;
+        } else {
+            currentEnergy=currentEnergy+number;
+        }
+    }
+
+    public void AddEnergyIgnoreLimit(int number) {
         currentEnergy=currentEnergy+number;
     }
 

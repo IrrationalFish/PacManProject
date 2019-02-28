@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0aec943bf0dbcd4abb5909e7eec74e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.2
+  moveSpeed: 0.15
   pathCube: {fileID: 1457348860744280, guid: e2fdbd96868272748be9f3b2e1f2ffde, type: 2}
   delta: 0.001
   leftAndRightDistance: 3
