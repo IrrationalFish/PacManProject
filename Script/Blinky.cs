@@ -20,7 +20,7 @@ public class Blinky : Ghost {
                 continue;
             }
             if (!gmScript.MazeCubeIsBlocked(randomX, randomZ)) {
-                Instantiate(pathCube, new Vector3(randomX, 0, randomZ), new Quaternion());
+                //Instantiate(pathCube, new Vector3(randomX, 0, randomZ), new Quaternion());
                 return new Vector3(randomX, 0, randomZ);
             }
         }

@@ -22,6 +22,7 @@ public class Player : MonoBehaviour {
     public GameObject portalBInstance;
     public GameObject laserChildInstance;
     public GameObject grenadeInstance;
+    public GameObject deathParticleSystem;
 
     private Slider boostEnergySlider;
     private Text energyText;
@@ -41,8 +42,8 @@ public class Player : MonoBehaviour {
         boostEnergySlider.maxValue=maxEnergy;
         boostEnergySlider.value=currentEnergy;
     }
-	
-	void Update () {
+
+    void Update () {
         boostEnergySlider.value=currentEnergy;
         energyText.text="Boost Energy: \n\n"+currentEnergy+"/"+maxEnergy;
         CheckItemButton();
@@ -84,6 +85,10 @@ public class Player : MonoBehaviour {
                 currentEnergy++;
             }
         }
+    }
+
+    public GameObject PlayDeathParticleSystem() {
+        return Instantiate(deathParticleSystem, transform.position, Quaternion.Euler(-90,0,0));
     }
 
     public void UseItem(int index) {

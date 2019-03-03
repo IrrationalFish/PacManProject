@@ -30,12 +30,16 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         if (nextMoveDir=='a'&&Valid('a')) {
+            SetPosToInt();
             transform.localEulerAngles=new Vector3(0, -90, 0);
         } else if (nextMoveDir=='s'&&Valid('s')) {
+            SetPosToInt();
             transform.localEulerAngles=new Vector3(0, 180, 0);
         } else if (nextMoveDir=='d'&&Valid('d')) {
+            SetPosToInt();
             transform.localEulerAngles=new Vector3(0, 90, 0);
         } else if (nextMoveDir=='w'&&Valid('w')) {
+            SetPosToInt();
             transform.localEulerAngles=new Vector3(0, 0, 0);
         }
 
@@ -97,5 +101,11 @@ public class PlayerMovement : MonoBehaviour {
         } else {
             return false;       //遇到障碍，不可通过
         }
+    }
+
+    private void SetPosToInt() {
+        float xPos = Mathf.Round(transform.position.x);
+        float zPos = Mathf.Round(transform.position.z);
+        transform.position.Set(xPos, 0, zPos);
     }
 }

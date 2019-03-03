@@ -50,7 +50,7 @@ public class Ambusher : Ghost {
             }
             int randomNumber = Random.Range(0, potentialPoints.Count);
             Vector3 nextEnd = potentialPoints[randomNumber];
-            Instantiate(pathCube, nextEnd, new Quaternion());
+            //Instantiate(pathCube, nextEnd, new Quaternion());
             return nextEnd;
         }
         
