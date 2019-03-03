@@ -12,24 +12,27 @@ public class Thief : Ghost {
 
     private new void Update() {
         textCanvas.transform.rotation=Quaternion.Euler(60, 0, 0);
-        /*if (path.Count<=0) {
-            Vector3 nextEnd = GetNextEnd();
-            path=GetShortestPath(this.transform.position, nextEnd);
-        }*/
+        SetModelAndEye();
+
         Vector3 playerFarrestCorner = GetNextEnd();
-        if (playerFarrestCorner.Equals(currentEnd)) {
+        if (playerFarrestCorner.Equals(currentEnd)) {       //目的地不变
             if (path.Count<=0) {
+                Debug.Log("1");
                 Vector3 nextEnd = GetNextEnd();
                 path=GetShortestPath(this.transform.position, nextEnd);
+            } else {
+                Debug.Log("2");
             }
-        } else {
+        } else {                                            //目的地改变
             if (path.Count>0) {
+                Debug.Log("3");
                 Vector3 nextCube= path.Pop();
                 Vector3 nextEnd = GetNextEnd();
                 currentEnd=nextEnd;
                 path=GetShortestPath(nextCube, nextEnd);
                 path.Push(nextCube);
             } else {
+                Debug.Log("4");
                 Vector3 nextEnd = GetNextEnd();
                 currentEnd=nextEnd;
                 path=GetShortestPath(this.transform.position, nextEnd);

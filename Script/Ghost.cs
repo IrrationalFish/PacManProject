@@ -7,8 +7,13 @@ public abstract class Ghost : MonoBehaviour {
     public float moveSpeed;
     //public Transform end;
     public Stack<Vector3> path = new Stack<Vector3>();
-    public GameObject pathCube;
     public float delta = 0.001f;
+
+    public GameObject pathCube;
+    public GameObject ghostModel;
+    public GameObject leftEye;
+    public GameObject rightEye;
+
     public static GameSceneManager gmScript;
 
     private class MazeNode {
@@ -30,6 +35,7 @@ public abstract class Ghost : MonoBehaviour {
     }
 
     protected void Update() {
+        SetModelAndEye();
         if (path.Count<=0) {
             Vector3 nextEnd = GetNextEnd();
             path=GetShortestPath(this.transform.position,nextEnd);
@@ -51,6 +57,8 @@ public abstract class Ghost : MonoBehaviour {
         Stack<Vector3> tempPath = new Stack<Vector3>();
         if(end.Equals(start)) {
             tempPath.Push(new Vector3(end.x, 0, end.z));
+            this.GetComponent<Animator>().SetBool("isMoving", false);
+            Debug.Log("Change to notMoving");
             return tempPath;
         }
         bool[,] visited = new bool[gmScript.mazeWidth, gmScript.mazeHeight];
@@ -74,6 +82,7 @@ public abstract class Ghost : MonoBehaviour {
                             tempPath.Push(pathNode.pos);
                             pathNode=pathNode.parentNode;
                         }
+                        this.GetComponent<Animator>().SetBool("isMoving", true);
                         return tempPath;
                     }
                     queue.Enqueue(new MazeNode(new Vector3(xPos, 0, zPos), p));
@@ -81,6 +90,7 @@ public abstract class Ghost : MonoBehaviour {
                 }
             }
         }
+        this.GetComponent<Animator>().SetBool("isMoving", true);
         return tempPath;
     }
 
@@ -96,7 +106,6 @@ public abstract class Ghost : MonoBehaviour {
             transform.Translate(Vector3.forward*moveSpeed);
             //Debug.Log("Not Arrive!");
         }
-
     }
 
     protected void OnTriggerEnter(Collider other) {
@@ -105,6 +114,24 @@ public abstract class Ghost : MonoBehaviour {
             Debug.Log("Meet Test");
         }else if(other.tag =="Player") {
             Debug.Log("Meet Player");
+        }
+    }
+
+    protected void SetModelAndEye() {
+        ghostModel.transform.rotation=Quaternion.Euler(25, 0, 0);
+
+        if (transform.forward == new Vector3(0, 0, 1)) {     //up
+            leftEye.transform.rotation=Quaternion.Euler(0, 0, 180);
+            rightEye.transform.rotation=Quaternion.Euler(0, 0, 180);
+        } else if(transform.forward==new Vector3(0, 0, -1)) {     //down
+            leftEye.transform.rotation=Quaternion.Euler(0, 0, 0);
+            rightEye.transform.rotation=Quaternion.Euler(0, 0, 0);
+        } else if (transform.forward==new Vector3(1, 0, 0)) {   //right
+            leftEye.transform.rotation=Quaternion.Euler(0, 0, 90);
+            rightEye.transform.rotation=Quaternion.Euler(0, 0, 90);
+        } else if (transform.forward==new Vector3(-1, 0, 0)) {  //left
+            leftEye.transform.rotation=Quaternion.Euler(0, 0, -90);
+            rightEye.transform.rotation=Quaternion.Euler(0, 0, -90);
         }
     }
 }

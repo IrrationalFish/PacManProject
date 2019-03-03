@@ -18,10 +18,14 @@ public class Chaser : Ghost {
     private new void FixedUpdate() {
         if (path.Count>0) {
             MoveToPosition(path.Peek());
+        } else {
+            this.GetComponent<Animator>().SetBool("isMoving", false);
         }
     }
 
     private new void Update() {
+        SetModelAndEye();
+
         Vector3 pos = this.transform.position;
         bool xPositionReady = Mathf.Abs(pos.x-Mathf.RoundToInt(pos.x))<delta;
         bool zPositionReady = Mathf.Abs(pos.z-Mathf.RoundToInt(pos.z))<delta;
@@ -68,6 +72,9 @@ public class Chaser : Ghost {
     }
 
     private void SetPath(Vector3 dir, int cubeDistance, Vector3 nextDir) {
+
+        this.GetComponent<Animator>().SetBool("isMoving", true);
+
         Debug.Log("Next: "+nextDir);
         Stack<Vector3> tempPath = new Stack<Vector3>();
         Vector3 currentPos = new Vector3(Mathf.RoundToInt(this.transform.position.x), 0, Mathf.RoundToInt(this.transform.position.z));

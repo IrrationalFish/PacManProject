@@ -141,7 +141,7 @@ public class GameSceneManager : MonoBehaviour {
     public void PacDotIsEaten(int x, int z) {
         Destroy(pacDotsArray[x, z]);
         pacDotsArray[x, z]=null;
-        Debug.Log("Pac dot "+x+","+z+" is eaten.");
+        //Debug.Log("Pac dot "+x+","+z+" is eaten.");
     }
 
     public bool PointIsInsideMaze(int x, int z) {
