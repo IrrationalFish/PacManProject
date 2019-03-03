@@ -113,19 +113,9 @@ public abstract class Ghost : MonoBehaviour {
             Destroy(other.gameObject);
             Debug.Log("Meet Test");
         }else if(other.tag =="Player") {
-            StartCoroutine(MeetPlayer(other.gameObject,3f));
+            gmScript.GhostHitPlayer();
             Debug.Log("Meet Player");
         }
-    }
-
-    IEnumerator MeetPlayer(GameObject player, float second) {
-        GameObject particle = player.GetComponent<Player>().PlayDeathParticleSystem();
-        player.gameObject.SetActive(false);
-        yield return new WaitForSeconds(second);
-        player.gameObject.SetActive(true);
-        player.transform.SetPositionAndRotation(new Vector3(1, 0, 1), Quaternion.Euler(0, 0, 0));
-        player.GetComponent<PlayerMovement>().startMovement=false;
-        Destroy(particle);
     }
 
     protected void SetModelAndEye() {
