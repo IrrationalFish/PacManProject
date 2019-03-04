@@ -5,14 +5,15 @@ using UnityEngine;
 public abstract class Ghost : MonoBehaviour {
 
     public float moveSpeed;
-    //public Transform end;
     public Stack<Vector3> path = new Stack<Vector3>();
     public float delta = 0.001f;
 
-    //public GameObject pathCube;
     public GameObject ghostModel;
     public GameObject leftEye;
     public GameObject rightEye;
+
+    public GameObject ghostDeathParticleSystem;
+    public Material ghostMaterial;
 
     public static GameSceneManager gmScript;
 
@@ -134,5 +135,11 @@ public abstract class Ghost : MonoBehaviour {
             leftEye.transform.rotation=Quaternion.Euler(0, 0, -90);
             rightEye.transform.rotation=Quaternion.Euler(0, 0, -90);
         }
+    }
+
+    private void OnDestroy() {
+        ghostDeathParticleSystem.GetComponent<ParticleSystem>().GetComponent<Renderer>().material=ghostMaterial;
+        GameObject deathEffect = Instantiate(ghostDeathParticleSystem, transform.position, Quaternion.Euler(-90,0,0));
+        Destroy(deathEffect, 3f);
     }
 }

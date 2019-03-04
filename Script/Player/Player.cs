@@ -23,48 +23,48 @@ public class Player : MonoBehaviour {
     public GameObject laserChildInstance;
     public GameObject grenadeInstance;
     public GameObject deathParticleSystem;
+    public ParticleSystem moveParticleSystem;
+    public ParticleSystem boostParticleSystem;
+    public Material pacManMaterial;
 
     private Slider boostEnergySlider;
     private Text energyText;
     private Item[] itemsList;
     [SerializeField]private int ownedItems = 0;
     private GameSceneManager gameManagerScript;
+    private PlayerMovement playerMovementScript;
 
 	void Start () {
         gameManagerScript=GameObject.Find("GameManager").GetComponent<GameSceneManager>();
+        playerMovementScript=this.GetComponent<PlayerMovement>();
+
         boostEnergySlider=gameManagerScript.boostEnergySlider;
         energyText=gameManagerScript.energyText;
+
         maxItemsNumber=gameManagerScript.maxItemsNumber;
         itemsList=new Item[maxItemsNumber];
+
         itemsNameList=new string[maxItemsNumber];
         maxEnergy=100;
         currentEnergy=0;
+
         boostEnergySlider.maxValue=maxEnergy;
         boostEnergySlider.value=currentEnergy;
+        boostParticleSystem.Stop();
     }
 
     void Update () {
         boostEnergySlider.value=currentEnergy;
         energyText.text="Boost Energy: \n\n"+currentEnergy+"/"+maxEnergy;
         CheckItemButton();
+        CheckMovement();
+
         if (isUsingLaser) {
             laserLastTime=laserLastTime+Time.deltaTime;
         }
-        if(laserLastTime >=laserMaxTime) {
+        if (laserLastTime>=laserMaxTime) {
             isUsingLaser=false;
             isUsingItem=false;
-        }
-        if (currentEnergy>0) {
-            if (Input.GetKey(KeyCode.Space)) {
-                this.GetComponent<PlayerMovement>().moveSpeed=0.2f;
-                isBoosting=true;
-            } else {
-                this.GetComponent<PlayerMovement>().moveSpeed=0.1f;
-                isBoosting=false;
-            }
-        } else {
-            this.GetComponent<PlayerMovement>().moveSpeed=0.1f;
-            isBoosting=false;
         }
     }
 
@@ -88,6 +88,7 @@ public class Player : MonoBehaviour {
     }
 
     public GameObject PlayDeathParticleSystem() {
+        deathParticleSystem.GetComponent<ParticleSystem>().GetComponent<Renderer>().material=pacManMaterial;
         return Instantiate(deathParticleSystem, transform.position, Quaternion.Euler(-90,0,0));
     }
 
@@ -222,5 +223,31 @@ public class Player : MonoBehaviour {
 
     public int GetEnergy() {
         return currentEnergy;
+    }
+
+    private void CheckMovement() {
+        if (currentEnergy>0) {
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                boostParticleSystem.Play();
+                moveParticleSystem.Stop();
+            } else if (Input.GetKeyUp(KeyCode.Space)) {
+                boostParticleSystem.Stop();
+                moveParticleSystem.Play();
+            }
+            if (Input.GetKey(KeyCode.Space)) {
+                playerMovementScript.moveSpeed=0.2f;
+                isBoosting=true;
+            } else {
+                playerMovementScript.moveSpeed=0.1f;
+                isBoosting=false;
+            }
+        } else {
+            playerMovementScript.moveSpeed=0.1f;
+            boostParticleSystem.Stop();
+            if (playerMovementScript.startMovement==true&&moveParticleSystem.isStopped) {
+                moveParticleSystem.Play();
+            }
+            isBoosting=false;
+        }
     }
 }

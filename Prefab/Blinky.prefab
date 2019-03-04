@@ -103,11 +103,11 @@ GameObject:
   - component: {fileID: 95253471364923616}
   m_Layer: 12
   m_Name: Blinky
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1463140246850718
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,12 +508,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0aec943bf0dbcd4abb5909e7eec74e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.1
+  moveSpeed: 0
   delta: 0.001
-  pathCube: {fileID: 1457348860744280, guid: e2fdbd96868272748be9f3b2e1f2ffde, type: 2}
   ghostModel: {fileID: 1463140246850718}
   leftEye: {fileID: 1330361499065350}
   rightEye: {fileID: 1585543562454966}
+  ghostDeathParticleSystem: {fileID: 1060995460014466, guid: b3e9272ff9955a448ba1eff12b1d3989,
+    type: 2}
+  ghostMaterial: {fileID: 2100000, guid: 992588fc3f8d40f4ebdce1d97a4ef16b, type: 2}
   leftAndRightDistance: 3
   upAndDownDistance: 3
   startPosition: {x: 0, y: 0, z: 0}

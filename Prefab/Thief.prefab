@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224900732269200626}
   - component: {fileID: 222113055522947486}
   - component: {fileID: 114373574457601326}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,13 +40,13 @@ GameObject:
   - component: {fileID: 135647299138717972}
   - component: {fileID: 54427411619501760}
   - component: {fileID: 95180209320949540}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Thief
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1074699708024006
 GameObject:
   m_ObjectHideFlags: 1
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 4571134529336006}
   - component: {fileID: 33040496398412714}
   - component: {fileID: 23380599355011716}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4953552688156066}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GhostEyeRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 223788373520997432}
   - component: {fileID: 114103284158001182}
   - component: {fileID: 114773831379514800}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4014466807350340}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GhostModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4855373373298820}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ghost-01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4852520338709348}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GhostEyeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4427128835764950}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ghost-00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 4589199871115928}
   - component: {fileID: 33158254520419018}
   - component: {fileID: 23182712246949132}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 4011745251344062}
   - component: {fileID: 33687726640057164}
   - component: {fileID: 23867360472512870}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 4100741221365238}
   - component: {fileID: 33623671348228990}
   - component: {fileID: 23527238760710648}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -581,12 +581,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a831958315ddd4e87126d69631f460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.1
+  moveSpeed: 0
   delta: 0.001
-  pathCube: {fileID: 1457348860744280, guid: e2fdbd96868272748be9f3b2e1f2ffde, type: 2}
   ghostModel: {fileID: 1305495534205964}
   leftEye: {fileID: 1457339422014960}
   rightEye: {fileID: 1107761065805240}
+  ghostDeathParticleSystem: {fileID: 1060995460014466, guid: b3e9272ff9955a448ba1eff12b1d3989,
+    type: 2}
+  ghostMaterial: {fileID: 2100000, guid: 6b5a6b7842a37aa41afde26dddeb1bdf, type: 2}
   stolenPacDotsText: {fileID: 114373574457601326}
   stolenPacDots: 0
   textCanvas: {fileID: 1244584545599538}

@@ -10,21 +10,36 @@ public class PlayerMovement : MonoBehaviour {
     public bool startMovement;
     public float turningLineDistance;
 
+    public ParticleSystem moveParticleSystem;
+
     void Start() {
         startMovement=false;
+        //moveParticleSystem.Stop();
     }
 
     private void Update() {
         if (Input.GetKeyDown("w")) {
+            if(startMovement ==false) {
+                moveParticleSystem.Play();
+            }
             nextMoveDir='w';
             startMovement=true;
         } else if (Input.GetKeyDown("a")) {
+            if (startMovement==false) {
+                moveParticleSystem.Play();
+            }
             nextMoveDir='a';
             startMovement=true;
         } else if (Input.GetKeyDown("s")) {
+            if (startMovement==false) {
+                moveParticleSystem.Play();
+            }
             nextMoveDir='s';
             startMovement=true;
         } else if (Input.GetKeyDown("d")) {
+            if (startMovement==false) {
+                moveParticleSystem.Play();
+            }
             nextMoveDir='d';
             startMovement=true;
         }

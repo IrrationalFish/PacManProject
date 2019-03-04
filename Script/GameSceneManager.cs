@@ -25,6 +25,7 @@ public class GameSceneManager : MonoBehaviour {
     public Image livesIconThree;
     public Image livesIconTwo;
     public Image livesIconOne;
+
     public Button buildMazeBtn;
     public Button getGrenadeBtn;
     public Button getWallBreakerBtn;

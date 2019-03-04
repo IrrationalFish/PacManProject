@@ -90,11 +90,11 @@ GameObject:
   - component: {fileID: 95249817496218100}
   m_Layer: 12
   m_Name: Chaser
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1435418305809390
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,10 +510,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.05
   delta: 0.001
-  pathCube: {fileID: 0}
   ghostModel: {fileID: 1435418305809390}
   leftEye: {fileID: 1403524002744060}
   rightEye: {fileID: 1467908860493716}
+  ghostDeathParticleSystem: {fileID: 1060995460014466, guid: b3e9272ff9955a448ba1eff12b1d3989,
+    type: 2}
+  ghostMaterial: {fileID: 2100000, guid: 56f1a0786bdd66a4e8c3655a950f0f30, type: 2}
   detectDistance: 4
   chaseDistance: 5
 --- !u!135 &135889772077734188

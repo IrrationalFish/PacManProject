@@ -22,13 +22,13 @@ GameObject:
   - component: {fileID: 135230483804641550}
   - component: {fileID: 114077928556941914}
   - component: {fileID: 95457818309107062}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ambusher
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1115953997729762
 GameObject:
   m_ObjectHideFlags: 1
@@ -37,7 +37,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4194420983556098}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GhostEyeRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4525792802375740}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GhostModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 4346842870875786}
   - component: {fileID: 33499000186133132}
   - component: {fileID: 23256541931242154}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4886194572725618}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GhostEyeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4469326004993484}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ghost-01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 4920772826043654}
   - component: {fileID: 33933311846997488}
   - component: {fileID: 23936000672266004}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 4014483933847504}
   - component: {fileID: 33215404689572344}
   - component: {fileID: 23176934839509622}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4014803603779996}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ghost-00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 4476085527548148}
   - component: {fileID: 33245233519134166}
   - component: {fileID: 23825874000278868}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 4951892170897848}
   - component: {fileID: 33021974735809958}
   - component: {fileID: 23667076839896864}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,10 +583,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.1
   delta: 0.001
-  pathCube: {fileID: 1457348860744280, guid: e2fdbd96868272748be9f3b2e1f2ffde, type: 2}
   ghostModel: {fileID: 1144961290630932}
   leftEye: {fileID: 1533825210639106}
   rightEye: {fileID: 1115953997729762}
+  ghostDeathParticleSystem: {fileID: 1060995460014466, guid: b3e9272ff9955a448ba1eff12b1d3989,
+    type: 2}
+  ghostMaterial: {fileID: 2100000, guid: 8868fb32a3ab9674599e0460f36ca169, type: 2}
   awakeRadius: 5
   predictRadius: 5
 --- !u!135 &135230483804641550

@@ -31,11 +31,15 @@ public class GrenadeInstance : MonoBehaviour {
         GetComponentsInChildren<Transform>()[1].Rotate(new Vector3(0, 0, 1)*rotateSpeed);
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        if(collision.gameObject.tag =="Ghost") {
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag=="Ghost") {
             Destroy(gameObject);
-            Destroy(collision.gameObject);
-        }else if(collision.gameObject.tag =="Wall") {
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        if(collision.gameObject.tag =="Wall") {
             //GameSceneManager gm = GameObject.Find("GameManager").GetComponent<GameSceneManager>();
             //gm.GmBreakWall(collision.gameObject.GetComponent<Cube>().x, collision.gameObject.GetComponent<Cube>().y);
             Destroy(gameObject);

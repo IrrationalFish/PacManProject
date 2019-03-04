@@ -15,25 +15,22 @@ public class WallBreakerInstance : MonoBehaviour {
         transform.Rotate(new Vector3(0, 0, 1)*rotateSpeed);
     }
 
-    /*private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other) {
         if(other.tag =="Ghost") {
             Destroy(other.gameObject);
-        } else if(other.tag =="Wall" &&!other.GetComponent<Cube>().IsBoundary()) {
-            Cube wall = other.GetComponent<Cube>();
-            gmScript.GmBreakWall(wall.x, wall.y);
+            Debug.Log("WallBreaker Hit Ghost Triggrt");
+            Destroy(this.gameObject);
+            gmScript.GetPlayer().GetComponent<Player>().isUsingItem=false;
         }
-    }*/
+    }
 
     private void OnCollisionEnter(Collision other) {
         Debug.Log("WallBreaker Collide!");
-        if (other.gameObject.tag=="Ghost") {
-            Destroy(other.gameObject);
-        } else if (other.gameObject.tag=="Wall"&&!other.gameObject.GetComponent<Cube>().isBoundary) {
+        if (other.gameObject.tag=="Wall"&&!other.gameObject.GetComponent<Cube>().isBoundary) {
             Cube wall = other.gameObject.GetComponent<Cube>();
             gmScript.GmBreakWall(wall.x, wall.y);
+            Destroy(this.gameObject);
+            gmScript.GetPlayer().GetComponent<Player>().isUsingItem=false;
         }
-
-        Destroy(this.gameObject);
-        gmScript.GetPlayer().GetComponent<Player>().isUsingItem=false;
     }
 }
