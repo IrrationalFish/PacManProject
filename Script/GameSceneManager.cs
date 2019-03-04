@@ -201,6 +201,7 @@ public class GameSceneManager : MonoBehaviour {
             GameOver();
             yield break;
         }
+        virtualCamera1.GetComponent<Animator>().SetTrigger("PacManHitted");
         yield return new WaitForSeconds(second);
         pacMan.gameObject.SetActive(true);
         pacMan.transform.SetPositionAndRotation(new Vector3(1, 0, 1), Quaternion.Euler(0, 0, 0));
