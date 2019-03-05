@@ -13,10 +13,14 @@ public class GameSceneManager : MonoBehaviour {
     public int maxPacManLives = 3;
     public int currentPacManLives;
     public int totalPacDotsInCurrentStage = 0;
+    public float pacmanRespawnTime = 3f;
 
     public GameObject pacDotsParentPrefab;
     public GameObject pacDotPrefab;
     public GameObject pacManPrefab;
+    public GameObject wallBreakParticleSystem;
+    public Material wallMaterial;
+    public GameObject deathPoint;
 
     public GameObject itemObjectButtonPrefab;
     public GameObject canvas;
@@ -181,10 +185,14 @@ public class GameSceneManager : MonoBehaviour {
         GameObject[,] mazeArray = maze.GetComponent<Maze>().mazeObjects;
         Destroy(mazeArray[x, y]);
         mazeArray[x, y]=null;
+
+        wallBreakParticleSystem.GetComponent<ParticleSystem>().GetComponent<Renderer>().material=wallMaterial;
+        GameObject deathEffect = Instantiate(wallBreakParticleSystem, new Vector3(x,0,y), Quaternion.Euler(-90, 0, 0));
+        Destroy(deathEffect, 3f);
     }
 
     public void GhostHitPlayer() {
-        StartCoroutine(PacManHittedByGhost(3f));
+        StartCoroutine(PacManHittedByGhost(pacmanRespawnTime));
     }
 
     private IEnumerator PacManHittedByGhost(float second) {
@@ -201,15 +209,34 @@ public class GameSceneManager : MonoBehaviour {
             GameOver();
             yield break;
         }
+        GameObject deathPosition = Instantiate(deathPoint, pacMan.transform.position, pacMan.transform.rotation);
+        pacMan.transform.SetPositionAndRotation(new Vector3(1, 0, 1), Quaternion.Euler(0, 0, 0));
+        virtualCamera1.Follow=deathPosition.transform;
         virtualCamera1.GetComponent<Animator>().SetTrigger("PacManHitted");
         yield return new WaitForSeconds(second);
+        deathPosition.transform.SetPositionAndRotation(new Vector3(1, 0, 1), Quaternion.Euler(0, 0, 0));
+        virtualCamera1.Follow=pacMan.transform;
         pacMan.gameObject.SetActive(true);
-        pacMan.transform.SetPositionAndRotation(new Vector3(1, 0, 1), Quaternion.Euler(0, 0, 0));
         pacMan.GetComponent<PlayerMovement>().startMovement=false;
         Destroy(particle);
     }
 
     private void GameOver() {
         Debug.Log("GameOver!");
+    }
+
+    public void GhostSleep(GameObject ghost, float seconds) {
+        StartCoroutine(GhostEnterSleepMode(ghost,seconds));
+    }
+
+    private IEnumerator GhostEnterSleepMode(GameObject ghost, float seconds) {
+        Ghost ghostScript = ghost.GetComponent<Ghost>();
+        ghostScript.sleepModel.GetComponentInChildren<MeshRenderer>().material=ghostScript.ghostMaterial;
+        GameObject sleepGhost = Instantiate(ghostScript.sleepModel, ghost.transform.position, Quaternion.Euler(25, 0, 0));
+        ghost.SetActive(false);
+        yield return new WaitForSeconds(seconds);
+        Debug.Log("GhostEnterSleepMode Wait Finish");
+        ghost.SetActive(true);
+        Destroy(sleepGhost);
     }
 }

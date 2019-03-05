@@ -223,7 +223,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1455049268419178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11, y: 0, z: 5}
+  m_LocalPosition: {x: 9, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4004269402543150}
@@ -513,6 +513,7 @@ MonoBehaviour:
   ghostModel: {fileID: 1463140246850718}
   leftEye: {fileID: 1330361499065350}
   rightEye: {fileID: 1585543562454966}
+  sleepModel: {fileID: 1808251382422118, guid: 74d9601287faedc4086a3375b7773818, type: 2}
   ghostDeathParticleSystem: {fileID: 1060995460014466, guid: b3e9272ff9955a448ba1eff12b1d3989,
     type: 2}
   ghostMaterial: {fileID: 2100000, guid: 992588fc3f8d40f4ebdce1d97a4ef16b, type: 2}

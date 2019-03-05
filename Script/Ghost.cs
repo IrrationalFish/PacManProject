@@ -11,6 +11,7 @@ public abstract class Ghost : MonoBehaviour {
     public GameObject ghostModel;
     public GameObject leftEye;
     public GameObject rightEye;
+    public GameObject sleepModel;
 
     public GameObject ghostDeathParticleSystem;
     public Material ghostMaterial;
@@ -123,17 +124,17 @@ public abstract class Ghost : MonoBehaviour {
         ghostModel.transform.rotation=Quaternion.Euler(25, 0, 0);
 
         if (transform.forward == new Vector3(0, 0, 1)) {     //up
-            leftEye.transform.rotation=Quaternion.Euler(0, 0, 180);
-            rightEye.transform.rotation=Quaternion.Euler(0, 0, 180);
+            leftEye.transform.localRotation=Quaternion.Euler(0, 0, 180);
+            rightEye.transform.localRotation=Quaternion.Euler(0, 0, 180);
         } else if(transform.forward==new Vector3(0, 0, -1)) {     //down
-            leftEye.transform.rotation=Quaternion.Euler(0, 0, 0);
-            rightEye.transform.rotation=Quaternion.Euler(0, 0, 0);
+            leftEye.transform.localRotation=Quaternion.Euler(0, 0, 0);
+            rightEye.transform.localRotation=Quaternion.Euler(0, 0, 0);
         } else if (transform.forward==new Vector3(1, 0, 0)) {   //right
-            leftEye.transform.rotation=Quaternion.Euler(0, 0, 90);
-            rightEye.transform.rotation=Quaternion.Euler(0, 0, 90);
+            leftEye.transform.localRotation=Quaternion.Euler(0, 0, 90);
+            rightEye.transform.localRotation=Quaternion.Euler(0, 0, 90);
         } else if (transform.forward==new Vector3(-1, 0, 0)) {  //left
-            leftEye.transform.rotation=Quaternion.Euler(0, 0, -90);
-            rightEye.transform.rotation=Quaternion.Euler(0, 0, -90);
+            leftEye.transform.localRotation=Quaternion.Euler(0, 0, -90);
+            rightEye.transform.localRotation=Quaternion.Euler(0, 0, -90);
         }
     }
 
@@ -141,5 +142,11 @@ public abstract class Ghost : MonoBehaviour {
         ghostDeathParticleSystem.GetComponent<ParticleSystem>().GetComponent<Renderer>().material=ghostMaterial;
         GameObject deathEffect = Instantiate(ghostDeathParticleSystem, transform.position, Quaternion.Euler(-90,0,0));
         Destroy(deathEffect, 3f);
+    }
+
+    public void Sleep(float seconds) {
+        //StartCoroutine(EnterSleepMode(seconds));
+        //StartCoroutine(gmScript.GhostEnterSleepMode(this.gameObject, seconds));
+        gmScript.GhostSleep(this.gameObject, seconds);
     }
 }

@@ -586,6 +586,7 @@ MonoBehaviour:
   ghostModel: {fileID: 1305495534205964}
   leftEye: {fileID: 1457339422014960}
   rightEye: {fileID: 1107761065805240}
+  sleepModel: {fileID: 1808251382422118, guid: 74d9601287faedc4086a3375b7773818, type: 2}
   ghostDeathParticleSystem: {fileID: 1060995460014466, guid: b3e9272ff9955a448ba1eff12b1d3989,
     type: 2}
   ghostMaterial: {fileID: 2100000, guid: 6b5a6b7842a37aa41afde26dddeb1bdf, type: 2}

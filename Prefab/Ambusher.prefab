@@ -581,11 +581,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b2e9b0af16f444695dd62048f5ad34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.1
+  moveSpeed: 0
   delta: 0.001
   ghostModel: {fileID: 1144961290630932}
   leftEye: {fileID: 1533825210639106}
   rightEye: {fileID: 1115953997729762}
+  sleepModel: {fileID: 1808251382422118, guid: 74d9601287faedc4086a3375b7773818, type: 2}
   ghostDeathParticleSystem: {fileID: 1060995460014466, guid: b3e9272ff9955a448ba1eff12b1d3989,
     type: 2}
   ghostMaterial: {fileID: 2100000, guid: 8868fb32a3ab9674599e0460f36ca169, type: 2}
