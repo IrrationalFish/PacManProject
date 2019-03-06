@@ -15,7 +15,6 @@ public class ItemObjectButton : MonoBehaviour {
     public string itemObjectType;
 
     private void Start() {
-        //setItemObjectType("Grenade");
     }
 
     public void ItemISUsed() {

@@ -20,6 +20,7 @@ public class GameSceneManager : MonoBehaviour {
     public GameObject pacManPrefab;
     public GameObject wallBreakParticleSystem;
     public Material wallMaterial;
+    public GameObject endPoint;
     public GameObject deathPoint;
 
     public GameObject itemObjectButtonPrefab;
@@ -49,9 +50,9 @@ public class GameSceneManager : MonoBehaviour {
 
     void Start() {
         Physics.IgnoreLayerCollision(8, 10);
-        pacMan=RespawnPacMan(new Vector3(1,0,1));
+        //pacMan=RespawnPacMan(new Vector3(1,0,1));
         currentPacManLives=maxPacManLives;
-        virtualCamera1.Follow=pacMan.transform;
+        //virtualCamera1.Follow=pacMan.transform;
         InitialiseUI();
         StartNextStage();
         buildMazeBtn.onClick.AddListener(delegate () { this.StartNextStage(); });
@@ -65,8 +66,14 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     private void StartNextStage() {
+        foreach(GameObject itemButton in itemObjectButtonList) {
+            itemButton.GetComponent<ItemObjectButton>().ItemISUsed();
+        }
         BuildMaze();
         GeneratePacDot();
+        Instantiate(endPoint, new Vector3(mazeWidth-2, 0, mazeHeight-2), new Quaternion());
+        pacMan = RespawnPacMan(new Vector3(1, 0, 1));
+        virtualCamera1.Follow=pacMan.transform;
     }
 
     private void InitialiseUI() {
@@ -131,6 +138,9 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     private GameObject RespawnPacMan(Vector3 point) {
+        if (pacMan!=null) {
+            Destroy(pacMan);
+        }
         GameObject pacman = Instantiate(pacManPrefab, point, new Quaternion());
         pacman.GetComponent<Player>().maxItemsNumber=this.maxItemsNumber;
         return pacman;
