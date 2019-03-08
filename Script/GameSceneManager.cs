@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GameSceneManager : MonoBehaviour {
 
-    public CinemachineVirtualCamera virtualCamera1;
+    public int level;
     public int mazeWidth;           //长宽包含了边界的2格,一定是奇数
     public int mazeHeight;
     public int maxItemsNumber;
@@ -15,13 +15,14 @@ public class GameSceneManager : MonoBehaviour {
     public int totalPacDotsInCurrentStage = 0;
     public float pacmanRespawnTime = 3f;
 
+    public CinemachineVirtualCamera virtualCamera1;
     public GameObject pacDotsParentPrefab;
     public GameObject pacDotPrefab;
     public GameObject pacManPrefab;
     public GameObject wallBreakParticleSystem;
     public Material wallMaterial;
-    public GameObject endPoint;
-    public GameObject deathPoint;
+    public GameObject endPointPrefab;
+    public GameObject deathPointPrefab;
 
     public GameObject itemObjectButtonPrefab;
     public GameObject canvas;
@@ -39,6 +40,7 @@ public class GameSceneManager : MonoBehaviour {
     [SerializeField] private List<GameObject> itemObjectButtonList;
     [SerializeField] private GameObject maze;
     [SerializeField] private GameObject pacMan;
+    private GameObject endPoint;
     private GameObject pacDotsParent;
     private GameObject[,] pacDotsArray;
     private Maze mazeScript;
@@ -55,7 +57,7 @@ public class GameSceneManager : MonoBehaviour {
         //virtualCamera1.Follow=pacMan.transform;
         InitialiseUI();
         StartNextStage();
-        buildMazeBtn.onClick.AddListener(delegate () { this.StartNextStage(); });
+        buildMazeBtn.onClick.AddListener(delegate () { PacManArriveEndPoint(); });
         getGrenadeBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("Grenade"); });
         getWallBreakerBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("WallBreaker"); });
         getLaserBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("Laser"); });
@@ -66,12 +68,10 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     private void StartNextStage() {
-        foreach(GameObject itemButton in itemObjectButtonList) {
-            itemButton.GetComponent<ItemObjectButton>().ItemISUsed();
-        }
+        level++;
         BuildMaze();
         GeneratePacDot();
-        Instantiate(endPoint, new Vector3(mazeWidth-2, 0, mazeHeight-2), new Quaternion());
+        endPoint= Instantiate(endPointPrefab, new Vector3(mazeWidth-2, 0, mazeHeight-2), new Quaternion());
         pacMan = RespawnPacMan(new Vector3(1, 0, 1));
         virtualCamera1.Follow=pacMan.transform;
     }
@@ -96,9 +96,22 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     private void BuildMaze() {
-        if (maze!=null) {
+        /*if (maze!=null) {
             Destroy(maze);
+        }*/
+        if (level%3==1) {
+            RD=true;Prim=false;RB=false;
+        } else if (level%3==2) {
+            RD=false; Prim=true; RB=false;
+        } else {
+            RD=false; Prim=false; RB=true;
         }
+        int possibleWidth = 9+ ((level-1)/3)*6;
+        if(possibleWidth%2!=1) {        //is not odd number
+            possibleWidth--;
+        }
+        mazeWidth=possibleWidth;
+        mazeHeight=possibleWidth;
         if (RD) {
             mazeGenerator=GetComponent<MazeGenRD>();
             maze=mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
@@ -118,9 +131,9 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     private void GeneratePacDot() {
-        if (pacDotsParent!=null) {
+        /*if (pacDotsParent!=null) {
             Destroy(pacDotsParent);
-        }
+        }*/
         totalPacDotsInCurrentStage=0;
         pacDotsParent=Instantiate(pacDotsParentPrefab, new Vector3(0, 0, 0), new Quaternion());
         pacDotsArray=new GameObject[mazeWidth, mazeHeight];
@@ -134,6 +147,47 @@ public class GameSceneManager : MonoBehaviour {
                     totalPacDotsInCurrentStage++;
                 }
             }
+        }
+    }
+
+    public void PacManArriveEndPoint() {
+        ClearLastStage();
+        StartNextStage();
+    }
+
+    private void ClearLastStage() {
+        ClearAllGhost();
+        ClearLastMaze();
+        ClearAllPacDots();
+        ClearPlayerAndItems();
+    }
+
+    private void ClearAllGhost() {
+        Debug.Log("Clear all ghosts");
+    }
+
+    private void ClearAllPacDots() {
+        if (pacDotsParent!=null) {
+            Destroy(pacDotsParent);
+        }
+        pacDotsArray=null;
+    }
+
+    private void ClearLastMaze() {
+        if (maze!=null) {
+            Destroy(maze);
+        }
+        maze=null;
+        Destroy(endPoint);
+        endPoint=null;
+    }
+
+    private void ClearPlayerAndItems() {
+        if (pacMan!=null) {
+            Destroy(pacMan);
+        }
+        foreach (GameObject itemButton in itemObjectButtonList) {
+            itemButton.GetComponent<ItemObjectButton>().ItemISUsed();
         }
     }
 
@@ -219,7 +273,7 @@ public class GameSceneManager : MonoBehaviour {
             GameOver();
             yield break;
         }
-        GameObject deathPosition = Instantiate(deathPoint, pacMan.transform.position, pacMan.transform.rotation);
+        GameObject deathPosition = Instantiate(deathPointPrefab, pacMan.transform.position, pacMan.transform.rotation);
         pacMan.transform.SetPositionAndRotation(new Vector3(1, 0, 1), Quaternion.Euler(0, 0, 0));
         virtualCamera1.Follow=deathPosition.transform;
         virtualCamera1.GetComponent<Animator>().SetTrigger("PacManHitted");

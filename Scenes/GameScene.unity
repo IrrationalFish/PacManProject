@@ -27538,7 +27538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc307f85cc4fd6498556d48f4430cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCamera1: {fileID: 426333362}
+  level: 0
   mazeWidth: 9
   mazeHeight: 9
   maxItemsNumber: 3
@@ -27546,6 +27546,7 @@ MonoBehaviour:
   currentPacManLives: 0
   totalPacDotsInCurrentStage: 0
   pacmanRespawnTime: 3
+  virtualCamera1: {fileID: 426333362}
   pacDotsParentPrefab: {fileID: 1039547039613878, guid: fd24bf30545d65e4d95c13a601e1b5a9,
     type: 2}
   pacDotPrefab: {fileID: 1376975622757320, guid: 2f323f55797700449b9ff97058497782,
@@ -27555,8 +27556,10 @@ MonoBehaviour:
   wallBreakParticleSystem: {fileID: 1060995460014466, guid: b3e9272ff9955a448ba1eff12b1d3989,
     type: 2}
   wallMaterial: {fileID: 2100000, guid: a9014c26043a9734a8109d183fe04a50, type: 2}
-  endPoint: {fileID: 1252301458212628, guid: eb853ab893072674f8dc62c174f97fdd, type: 2}
-  deathPoint: {fileID: 1644432100198740, guid: db6c4e876b0587344aaa86e612aec7ce, type: 2}
+  endPointPrefab: {fileID: 1252301458212628, guid: eb853ab893072674f8dc62c174f97fdd,
+    type: 2}
+  deathPointPrefab: {fileID: 1644432100198740, guid: db6c4e876b0587344aaa86e612aec7ce,
+    type: 2}
   itemObjectButtonPrefab: {fileID: 1993008177580668, guid: 5b3c3be010b584741bf20d5d565fd777,
     type: 2}
   canvas: {fileID: 930286062}
