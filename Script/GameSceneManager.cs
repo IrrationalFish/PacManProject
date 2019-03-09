@@ -13,6 +13,8 @@ public class GameSceneManager : MonoBehaviour {
     public int maxPacManLives = 3;
     public int currentPacManLives;
     public int totalPacDotsInCurrentStage = 0;
+    public int pacDotsNeeded = 0;
+    public int pacDotsEatenByPlayer = 0;
     public float pacmanRespawnTime = 3f;
 
     public CinemachineVirtualCamera virtualCamera1;
@@ -31,6 +33,7 @@ public class GameSceneManager : MonoBehaviour {
     public Image livesIconThree;
     public Image livesIconTwo;
     public Image livesIconOne;
+    public Text levelText;
 
     public Button buildMazeBtn;
     public Button getGrenadeBtn;
@@ -135,6 +138,8 @@ public class GameSceneManager : MonoBehaviour {
             Destroy(pacDotsParent);
         }*/
         totalPacDotsInCurrentStage=0;
+        pacDotsNeeded=0;
+        pacDotsEatenByPlayer=0;
         pacDotsParent=Instantiate(pacDotsParentPrefab, new Vector3(0, 0, 0), new Quaternion());
         pacDotsArray=new GameObject[mazeWidth, mazeHeight];
         for(int i = 1; i<mazeWidth-1; i++) {
@@ -148,11 +153,16 @@ public class GameSceneManager : MonoBehaviour {
                 }
             }
         }
+        pacDotsNeeded=(int)(0.8*totalPacDotsInCurrentStage);
     }
 
     public void PacManArriveEndPoint() {
-        ClearLastStage();
-        StartNextStage();
+        if (pacDotsEatenByPlayer>=pacDotsNeeded) {
+            ClearLastStage();
+            StartNextStage();
+        } else {
+            levelText.GetComponent<Animator>().SetTrigger("playWarningAnim");
+        }
     }
 
     private void ClearLastStage() {
@@ -302,5 +312,10 @@ public class GameSceneManager : MonoBehaviour {
         Debug.Log("GhostEnterSleepMode Wait Finish");
         ghost.SetActive(true);
         Destroy(sleepGhost);
+    }
+
+    public void PlayerGetPacPoint(int number) {
+        pacDotsEatenByPlayer=pacDotsEatenByPlayer+number;
+        levelText.text="Level "+level+": "+pacDotsEatenByPlayer+"/"+pacDotsNeeded;
     }
 }

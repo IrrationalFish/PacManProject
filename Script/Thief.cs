@@ -73,6 +73,7 @@ public class Thief : Ghost {
     private new void OnTriggerEnter(Collider other) {
         if (other.tag=="Player") {
             other.GetComponent<Player>().AddEnergy(stolenPacDots);
+            gmScript.PlayerGetPacPoint(stolenPacDots);
             Destroy(gameObject);
         } else if(other.tag =="PacDot") {
             PacDot pacDotScript = other.GetComponent<PacDot>();

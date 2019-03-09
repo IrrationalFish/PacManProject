@@ -81,6 +81,7 @@ public class Player : MonoBehaviour {
         if(other.tag =="PacDot") {
             PacDot pacDotScript = other.GetComponent<PacDot>();
             gameManagerScript.PacDotIsEaten(pacDotScript.xPos,pacDotScript.zPos);
+            gameManagerScript.PlayerGetPacPoint(1);
             if (currentEnergy<maxEnergy) {
                 currentEnergy++;
             }
