@@ -43,6 +43,7 @@ public class GameSceneManager : MonoBehaviour {
     [SerializeField] private List<GameObject> itemObjectButtonList;
     [SerializeField] private GameObject maze;
     [SerializeField] private GameObject pacMan;
+    private GameSceneUIManager uiGmScript;
     private GameObject endPoint;
     private GameObject pacDotsParent;
     private GameObject[,] pacDotsArray;
@@ -54,6 +55,7 @@ public class GameSceneManager : MonoBehaviour {
     public bool RB;
 
     void Start() {
+        uiGmScript=gameObject.GetComponent<GameSceneUIManager>();
         Physics.IgnoreLayerCollision(8, 10);
         //pacMan=RespawnPacMan(new Vector3(1,0,1));
         currentPacManLives=maxPacManLives;
@@ -70,12 +72,20 @@ public class GameSceneManager : MonoBehaviour {
 
     }
 
-    private void StartNextStage() {
+    public void StartNextStage() {
         level++;
+        if (level!=1) {
+            uiGmScript.StageMenuReturn();
+        }
+        StartCoroutine(AfterStageClearMenuReturn());
+    }
+
+    IEnumerator AfterStageClearMenuReturn() {
+        yield return new WaitForSeconds(1f);
         BuildMaze();
         GeneratePacDot();
-        endPoint= Instantiate(endPointPrefab, new Vector3(mazeWidth-2, 0, mazeHeight-2), new Quaternion());
-        pacMan = RespawnPacMan(new Vector3(1, 0, 1));
+        endPoint=Instantiate(endPointPrefab, new Vector3(mazeWidth-2, 0, mazeHeight-2), new Quaternion());
+        pacMan=RespawnPacMan(new Vector3(1, 0, 1));
         virtualCamera1.Follow=pacMan.transform;
     }
 
@@ -153,13 +163,15 @@ public class GameSceneManager : MonoBehaviour {
                 }
             }
         }
-        pacDotsNeeded=(int)(0.8*totalPacDotsInCurrentStage);
+        pacDotsNeeded=(int)(0.1*totalPacDotsInCurrentStage);
     }
 
     public void PacManArriveEndPoint() {
         if (pacDotsEatenByPlayer>=pacDotsNeeded) {
             ClearLastStage();
-            StartNextStage();
+            uiGmScript.StageMenuEnter();
+            //stageClearMenu.GetComponent<Animator>().SetTrigger("StageMenuEnter");
+            //StartNextStage();
         } else {
             levelText.GetComponent<Animator>().SetTrigger("playWarningAnim");
         }
