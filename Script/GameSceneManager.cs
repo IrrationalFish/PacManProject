@@ -74,19 +74,28 @@ public class GameSceneManager : MonoBehaviour {
 
     public void StartNextStage() {
         level++;
-        if (level!=1) {
+        if (level==1) {
+            StartCoroutine(AfterStageClearMenuReturn(0f));
+        } else {
             uiGmScript.StageMenuReturn();
+            StartCoroutine(AfterStageClearMenuReturn(1f));
         }
-        StartCoroutine(AfterStageClearMenuReturn());
     }
 
-    IEnumerator AfterStageClearMenuReturn() {
-        yield return new WaitForSeconds(1f);
+    IEnumerator AfterStageClearMenuReturn(float time) {
+        yield return new WaitForSeconds(time);
         BuildMaze();
         GeneratePacDot();
         endPoint=Instantiate(endPointPrefab, new Vector3(mazeWidth-2, 0, mazeHeight-2), new Quaternion());
         pacMan=RespawnPacMan(new Vector3(1, 0, 1));
         virtualCamera1.Follow=pacMan.transform;
+    }
+
+    private void GameOver() {
+        Debug.Log("GameOver!");
+        ClearLastStage();
+        uiGmScript.GameOverMenuEnter();
+        //gameObject.GetComponent<GameSceneUIManager>().LoadScene("MainMenu");
     }
 
     private void InitialiseUI() {
@@ -104,7 +113,7 @@ public class GameSceneManager : MonoBehaviour {
             livesIconOne.enabled=false;
             livesIconTwo.enabled=false;
             livesIconThree.enabled=false;
-            GameOver();
+            //GameOver();
         }
     }
 
@@ -284,16 +293,15 @@ public class GameSceneManager : MonoBehaviour {
     private IEnumerator PacManHittedByGhost(float second) {
         GameObject particle = pacMan.GetComponent<Player>().PlayDeathParticleSystem();
         pacMan.gameObject.SetActive(false);
-        if (currentPacManLives ==3) {
-            currentPacManLives--;
+        currentPacManLives--;
+        if (currentPacManLives ==2) {
             livesIconThree.enabled=false;
-        }else if(currentPacManLives ==2) {
-            currentPacManLives--;
+        }else if(currentPacManLives ==1) {
             livesIconTwo.enabled=false;
-        } else if (currentPacManLives==1) {
+        } else if (currentPacManLives==0) {
             livesIconOne.enabled=false;
-            GameOver();
-            yield break;
+            //GameOver();
+            //yield break;
         }
         GameObject deathPosition = Instantiate(deathPointPrefab, pacMan.transform.position, pacMan.transform.rotation);
         pacMan.transform.SetPositionAndRotation(new Vector3(1, 0, 1), Quaternion.Euler(0, 0, 0));
@@ -305,10 +313,10 @@ public class GameSceneManager : MonoBehaviour {
         pacMan.gameObject.SetActive(true);
         pacMan.GetComponent<PlayerMovement>().startMovement=false;
         Destroy(particle);
-    }
-
-    private void GameOver() {
-        Debug.Log("GameOver!");
+        Destroy(deathPosition, 3f);
+        if (currentPacManLives==0) {
+            GameOver();
+        }
     }
 
     public void GhostSleep(GameObject ghost, float seconds) {

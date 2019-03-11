@@ -18,7 +18,7 @@ public class WallBreakerInstance : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if(other.tag =="Ghost") {
             Destroy(other.gameObject);
-            Debug.Log("WallBreaker Hit Ghost Triggrt");
+            Debug.Log("WallBreaker Hit Ghost Trigger");
             Destroy(this.gameObject);
             gmScript.GetPlayer().GetComponent<Player>().isUsingItem=false;
         }
