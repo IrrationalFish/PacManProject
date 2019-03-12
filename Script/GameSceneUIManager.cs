@@ -10,14 +10,17 @@ public class GameSceneUIManager : MonoBehaviour {
     public GameObject gameOverMenu;
 
     void Start () {
+        Debug.Log("UIGM");
         stageClearMenu.SetActive(true);
         gameOverMenu.SetActive(true);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        stageClearMenu.transform.position=new Vector3(0, 1000, 0);
+
+    }
+
+    // Update is called once per frame
+    void Update () {
+    }
+
 
     public void StageMenuEnter() {
         stageClearMenu.GetComponent<Animator>().SetTrigger("StageMenuEnter");

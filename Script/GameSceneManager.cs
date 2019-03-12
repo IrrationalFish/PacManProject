@@ -44,6 +44,7 @@ public class GameSceneManager : MonoBehaviour {
     [SerializeField] private GameObject maze;
     [SerializeField] private GameObject pacMan;
     private GameSceneUIManager uiGmScript;
+    private ItemAndShopManager itemAndShopGM;
     private GameObject endPoint;
     private GameObject pacDotsParent;
     private GameObject[,] pacDotsArray;
@@ -56,6 +57,7 @@ public class GameSceneManager : MonoBehaviour {
 
     void Start() {
         uiGmScript=gameObject.GetComponent<GameSceneUIManager>();
+        itemAndShopGM=gameObject.GetComponent<ItemAndShopManager>();
         Physics.IgnoreLayerCollision(8, 10);
         //pacMan=RespawnPacMan(new Vector3(1,0,1));
         currentPacManLives=maxPacManLives;
@@ -179,8 +181,7 @@ public class GameSceneManager : MonoBehaviour {
         if (pacDotsEatenByPlayer>=pacDotsNeeded) {
             ClearLastStage();
             uiGmScript.StageMenuEnter();
-            //stageClearMenu.GetComponent<Animator>().SetTrigger("StageMenuEnter");
-            //StartNextStage();
+            itemAndShopGM.AddPP(pacDotsEatenByPlayer);
         } else {
             levelText.GetComponent<Animator>().SetTrigger("playWarningAnim");
         }
