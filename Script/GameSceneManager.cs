@@ -26,6 +26,7 @@ public class GameSceneManager : MonoBehaviour {
     public Material wallMaterial;
     public GameObject endPointPrefab;
     public GameObject deathPointPrefab;
+    public GameObject planePrefab;
 
     public GameObject itemObjectButtonPrefab;
     public GameObject canvas;
@@ -47,6 +48,7 @@ public class GameSceneManager : MonoBehaviour {
     private GameSceneUIManager uiGmScript;
     private ItemAndShopManager itemAndShopGM;
     private GameObject endPoint;
+    private GameObject planeClone;
     private GameObject pacDotsParent;
     private GameObject[,] pacDotsArray;
     private Maze mazeScript;
@@ -89,6 +91,8 @@ public class GameSceneManager : MonoBehaviour {
         yield return new WaitForSeconds(time);
         BuildMaze();
         GeneratePacDot();
+        Destroy(planeClone);
+        GeneratePlane();
         endPoint=Instantiate(endPointPrefab, new Vector3(mazeWidth-2, 0, mazeHeight-2), new Quaternion());
         pacMan=RespawnPacMan(new Vector3(1, 0, 1));
         virtualCamera1.Follow=pacMan.transform;
@@ -132,6 +136,16 @@ public class GameSceneManager : MonoBehaviour {
         pacmanEnergyCapacity=pacmanEnergyCapacity+50;
         Player.boostEnergySlider.maxValue=pacmanEnergyCapacity;
         Player.energyText.text ="Boost Energy: \n\n"+"0"+"/"+pacmanEnergyCapacity;
+    }
+
+    public void GetExtraLife() {
+        if (currentPacManLives==1) {
+            currentPacManLives++;
+            livesIconTwo.enabled=true;
+        }else if (currentPacManLives==2) {
+            currentPacManLives++;
+            livesIconThree.enabled=true;
+        }
     }
 
     private void BuildMaze() {
@@ -190,6 +204,13 @@ public class GameSceneManager : MonoBehaviour {
             }
         }
         pacDotsNeeded=(int)(0.1*totalPacDotsInCurrentStage);
+    }
+
+    private void GeneratePlane() {
+        planeClone = Instantiate(planePrefab, GameObject.Find("EnvironmentSet").transform);
+        planeClone.transform.position=new Vector3(mazeWidth/2, -0.5f, mazeHeight/2);
+        int scaleMulti = Mathf.RoundToInt(mazeWidth/10)+6;
+        planeClone.transform.localScale=new Vector3(scaleMulti,1,scaleMulti);
     }
 
     public void PacManArriveEndPoint() {

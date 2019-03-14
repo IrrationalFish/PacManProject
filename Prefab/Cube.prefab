@@ -128,3 +128,6 @@ MonoBehaviour:
   y: 0
   blockDir: 0
   isBoundary: 0
+  boundaryMat: {fileID: 2100000, guid: aed77f0fb584f7a45a8f9b5db957cdc9, type: 2}
+  boundaryCube: {fileID: 1597752666232692, guid: 326f5c6ffbdcfa8489438a00793d0229,
+    type: 2}

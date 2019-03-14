@@ -15,15 +15,22 @@ public class MazeGenPrim : MazeGenerator {
         return maze;
     }
 
+    private void GenerateSingleCube(int xPar, int yPar) {
+        GameObject singleCell = Instantiate(cube, new Vector3(xPar, 0, yPar), new Quaternion());
+        mazeObjects[xPar, yPar]=singleCell;
+        singleCell.GetComponent<Cube>().SetCoordinateAttributeAndParent(xPar, yPar, maze.transform);
+    }
+
     private void GenMaze(int width, int height) {
         originPos = new Vector3(1, 0, 1);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                GameObject singleCube = Instantiate(cube, new Vector3(i, 0, j), new Quaternion());      //cube里的y对应的是实际的场景的z
+                GenerateSingleCube(i, j);
+                /*GameObject singleCube = Instantiate(cube, new Vector3(i, 0, j), new Quaternion());      //cube里的y对应的是实际的场景的z
                 singleCube.GetComponent<Cube>().x = i;
                 singleCube.GetComponent<Cube>().y = j;
-                mazeObjects[i, j] = singleCube;                                 //0代表墙，1代表可通过    //这里改一下
-                singleCube.transform.parent = maze.transform;
+                mazeObjects[i, j] = singleCube;                                 //0代表墙，1代表可通过    
+                singleCube.transform.parent = maze.transform;*/
             }
         }
         int xPos = (int)originPos.x;

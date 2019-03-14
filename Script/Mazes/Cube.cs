@@ -8,6 +8,8 @@ public class Cube : MonoBehaviour {
     public int y;
     public int blockDir;
     public bool isBoundary;
+    public Material boundaryMat;
+    public GameObject boundaryCube;
 
 	void Start () {
 		
@@ -33,6 +35,10 @@ public class Cube : MonoBehaviour {
         this.y = yPar;
         this.transform.parent = parentPar;
         isBoundary=IsBoundary();
+        if (isBoundary) {
+            gameObject.GetComponent<MeshRenderer>().enabled=false;
+            Instantiate(boundaryCube, this.gameObject.transform);
+        }
     }
 
     private bool IsBoundary() {

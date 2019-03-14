@@ -112,6 +112,21 @@ public class ItemAndShopManager : MonoBehaviour {
         }
     }
 
+    public void GetExtraLife() {
+        if (ownedPP>=lifePrice) {
+            gmScript.GetExtraLife();
+            ownedPP=ownedPP-lifePrice;
+            pacmanLifeIcon.GetComponentsInChildren<Text>()[1].text=lifePrice.ToString();
+        } else {
+            Debug.Log("No enough PP for extra life");
+        }
+        if (gmScript.currentPacManLives>=3) {
+            ShowUnlockedIcon(pacmanLifeIcon);
+            pacmanLifeIcon.GetComponentsInChildren<Text>()[1].text="Full";
+            pacmanLifeIcon.GetComponentsInChildren<Text>()[1].color=Color.blue;
+        }
+    }
+
     private void AddPP(int number) {
         ownedPP=ownedPP+number;
         ownedPPText.text="Owned Pac Points (PP): "+ownedPP;

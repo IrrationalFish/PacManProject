@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 135717684712657676}
   - component: {fileID: 114756942341614178}
   - component: {fileID: 54307586187985168}
+  - component: {fileID: 65889877223763152}
   m_Layer: 11
   m_Name: WallBreakerInstance
   m_TagString: Untagged
@@ -217,8 +218,20 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!65 &65889877223763152
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185836708818556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.35, z: 0.6}
+  m_Center: {x: 0, y: 0.03, z: 0}
 --- !u!108 &108543496918362910
 Light:
   m_ObjectHideFlags: 1
@@ -229,8 +242,8 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
+  m_Intensity: 3
+  m_Range: 0.5
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -266,8 +279,8 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
+  m_Intensity: 3
+  m_Range: 0.5
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -313,7 +326,7 @@ SphereCollider:
   m_GameObject: {fileID: 1185836708818556}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0}
