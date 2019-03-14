@@ -17,36 +17,158 @@ public class ItemAndShopManager : MonoBehaviour {
     public GameObject energyCapacityIcon;
     public GameObject pacmanLifeIcon;
 
-    public bool wallBreakerUnlocked;
-    public bool grenadeUnlocked;
-    public bool laserUnlocked;
-    public bool pelletUnlocked;
-    public bool portalUnlocked;
+    public int wallBreakerPrice;
+    public int grenadePrice;
+    public int laserPrice;
+    public int pelletPrice;
+    public int portalPrice;
+    public int itemCapacityPrice;
+    public int energyPrice;
+    public int lifePrice;
 
-    // Use this for initialization
+    private ItemGenerator itemGenScript;
+    private GameSceneManager gmScript;
+
     void Start () {
         ownedPP=0;
-        ShowCheckMarkIcon(wallBreakerIcon);
-        ShowItemIcon(grenadeIcon);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+        itemGenScript=gameObject.GetComponent<ItemGenerator>();
+        gmScript=gameObject.GetComponent<GameSceneManager>();
 	}
 
-    public void AddPP(int number) {
+    public void SetShopMenuState(int numberOfPP) {
+        AddPP(numberOfPP);
+        SetItemsPrice();
+        SetExtraPrice();
+    }
+
+    public void UnlockItem(GameObject icon) {
+        Debug.Log("Try to unlock item");
+        string itemName = icon.name;
+        if (itemName.Equals("WallBreakerIconInShop")) {
+            if (ownedPP>=wallBreakerPrice) {
+                itemGenScript.wallBreakerUnlocked=true;
+                SetIconAfterUnlocking(icon, wallBreakerPrice);
+            } else {
+                Debug.Log("No enough PP for wall breaker");
+            }
+        } else if (itemName.Equals("GrenadeIconInShop")) {
+            if (ownedPP>=grenadePrice) {
+                itemGenScript.grenadeUnlocked=true;
+                SetIconAfterUnlocking(icon, grenadePrice);
+            } else {
+                Debug.Log("No enough PP for grenade");
+            }
+        } else if (itemName.Equals("LaserIconInShop")) {
+            if (ownedPP>=laserPrice) {
+                itemGenScript.laserUnlocked=true;
+                SetIconAfterUnlocking(icon, laserPrice);
+            } else {
+                Debug.Log("No enough PP for laser");
+            }
+        } else if (itemName.Equals("PelletIconInShop")) {
+            if (ownedPP>=pelletPrice) {
+                itemGenScript.pelletUnlocked=true;
+                SetIconAfterUnlocking(icon, pelletPrice);
+            } else {
+                Debug.Log("No enough PP for pellet");
+            }
+        } else if (itemName.Equals("PortalIconInShop")) {
+            if (ownedPP>=portalPrice) {
+                itemGenScript.portalUnlocked=true;
+                SetIconAfterUnlocking(icon, portalPrice);
+            } else {
+                Debug.Log("No enough PP for portal");
+            }
+        }
+    }
+
+    public void GetExtraItemCapacity() {
+        if (ownedPP>=itemCapacityPrice) {
+            gmScript.GetOneMoreItemCapacity();
+            ownedPP=ownedPP-itemCapacityPrice;
+            itemCapacityIcon.GetComponentsInChildren<Text>()[1].text=itemCapacityPrice.ToString();
+        } else {
+            Debug.Log("No enough PP for Capacity");
+        }
+        if (gmScript.itemsCapacity>=6) {
+            ShowUnlockedIcon(itemCapacityIcon);
+            itemCapacityIcon.GetComponentsInChildren<Text>()[1].text="Full";
+            itemCapacityIcon.GetComponentsInChildren<Text>()[1].color=Color.blue;
+        }
+    }
+
+    public void GetExtraEnergyCapacity() {
+        if (ownedPP>=energyPrice) {
+            gmScript.GetExtraEnergyCapacity();
+            ownedPP=ownedPP-energyPrice;
+            energyCapacityIcon.GetComponentsInChildren<Text>()[1].text=energyPrice.ToString();
+        } else {
+            Debug.Log("No enough PP for extra energy");
+        }
+        if (gmScript.pacmanEnergyCapacity>=300) {
+            ShowUnlockedIcon(energyCapacityIcon);
+            energyCapacityIcon.GetComponentsInChildren<Text>()[1].text="Full";
+            energyCapacityIcon.GetComponentsInChildren<Text>()[1].color=Color.blue;
+        }
+    }
+
+    private void AddPP(int number) {
         ownedPP=ownedPP+number;
         ownedPPText.text="Owned Pac Points (PP): "+ownedPP;
     }
 
-    private void ShowCheckMarkIcon(GameObject icon) {       //1=checkmark 2=icon
-        icon.GetComponentsInChildren<Image>()[1].enabled=true;
-        icon.GetComponentsInChildren<Image>()[2].enabled=false;
+    private void SetItemsPrice() {
+        Debug.Log("Set items price");
+        if (!itemGenScript.wallBreakerUnlocked) {       //item is locked
+            wallBreakerIcon.GetComponentsInChildren<Text>()[1].text=wallBreakerPrice.ToString();
+        }
+        if (!itemGenScript.grenadeUnlocked) {       //item is locked
+            grenadeIcon.GetComponentsInChildren<Text>()[1].text=grenadePrice.ToString();
+        }
+        if (!itemGenScript.laserUnlocked) {       //item is locked
+            laserIcon.GetComponentsInChildren<Text>()[1].text=laserPrice.ToString();
+        }
+        if (!itemGenScript.pelletUnlocked) {       //item is locked
+            pelletIcon.GetComponentsInChildren<Text>()[1].text=pelletPrice.ToString();
+        }
+        if (!itemGenScript.portalUnlocked) {       //item is locked
+            portalIcon.GetComponentsInChildren<Text>()[1].text=portalPrice.ToString();
+        }
     }
 
-    private void ShowItemIcon(GameObject icon) {
+    private void SetExtraPrice() {
+        if (gmScript.itemsCapacity<6) {
+            itemCapacityIcon.GetComponentsInChildren<Text>()[1].text=itemCapacityPrice.ToString();
+        }
+
+        if (gmScript.pacmanEnergyCapacity<300) {
+            energyCapacityIcon.GetComponentsInChildren<Text>()[1].text=energyPrice.ToString();
+        }
+
+        if (gmScript.currentPacManLives<3) {
+            pacmanLifeIcon.GetComponentsInChildren<Text>()[1].text=lifePrice.ToString();
+        } else {
+            ShowUnlockedIcon(pacmanLifeIcon);
+            pacmanLifeIcon.GetComponentsInChildren<Text>()[1].text="Full";
+        }
+    }
+
+    private void ShowUnlockedIcon(GameObject icon) {       //1=checkmark 2=icon
+        icon.GetComponentsInChildren<Image>()[1].enabled=true;
+        icon.GetComponentsInChildren<Image>()[2].enabled=false;
+        icon.GetComponentsInChildren<Button>()[0].enabled=false;
+    }
+
+    private void SetIconAfterUnlocking(GameObject icon, int price) {
+        ShowUnlockedIcon(icon);
+        AddPP(-price);
+        icon.GetComponentsInChildren<Text>()[1].text="Unlocked";
+        icon.GetComponentsInChildren<Text>()[1].color=Color.blue;
+    }
+
+    /*private void ShowLockedIcon(GameObject icon) {
         icon.GetComponentsInChildren<Image>()[1].enabled=false;
         icon.GetComponentsInChildren<Image>()[2].enabled=true;
-    }
+        icon.GetComponentsInChildren<Button>()[0].enabled=true;
+    }*/
 }

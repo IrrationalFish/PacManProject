@@ -26,11 +26,16 @@ public class WallBreakerInstance : MonoBehaviour {
 
     private void OnCollisionEnter(Collision other) {
         Debug.Log("WallBreaker Collide!");
-        if (other.gameObject.tag=="Wall"&&!other.gameObject.GetComponent<Cube>().isBoundary) {
-            Cube wall = other.gameObject.GetComponent<Cube>();
-            gmScript.GmBreakWall(wall.x, wall.y);
-            Destroy(this.gameObject);
-            gmScript.GetPlayer().GetComponent<Player>().isUsingItem=false;
+        if (other.gameObject.tag=="Wall") {
+            if (!other.gameObject.GetComponent<Cube>().isBoundary) {
+                Cube wall = other.gameObject.GetComponent<Cube>();
+                gmScript.GmBreakWall(wall.x, wall.y);
+                Destroy(this.gameObject);
+                gmScript.GetPlayer().GetComponent<Player>().isUsingItem=false;
+            } else {
+                gmScript.GetPlayer().GetComponent<Player>().isUsingItem=false;
+                Destroy(gameObject);
+            }
         }
     }
 }

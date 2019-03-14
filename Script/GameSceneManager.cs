@@ -9,8 +9,9 @@ public class GameSceneManager : MonoBehaviour {
     public int level;
     public int mazeWidth;           //长宽包含了边界的2格,一定是奇数
     public int mazeHeight;
-    public int maxItemsNumber;
+    public int itemsCapacity;
     public int maxPacManLives = 3;
+    public int pacmanEnergyCapacity = 100;
     public int currentPacManLives;
     public int totalPacDotsInCurrentStage = 0;
     public int pacDotsNeeded = 0;
@@ -101,7 +102,7 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     private void InitialiseUI() {
-        for (int i = 0; i<maxItemsNumber; i++) {
+        for (int i = 0; i<itemsCapacity; i++) {
             GameObject button = Instantiate(itemObjectButtonPrefab, canvas.transform);
             button.transform.SetPositionAndRotation(new Vector3(100+150*i,50,0), new Quaternion());
             itemObjectButtonList.Add(button);
@@ -117,6 +118,20 @@ public class GameSceneManager : MonoBehaviour {
             livesIconThree.enabled=false;
             //GameOver();
         }
+    }
+
+    public void GetOneMoreItemCapacity() {
+        itemsCapacity++;
+        GameObject button = Instantiate(itemObjectButtonPrefab, canvas.transform);
+        button.transform.SetPositionAndRotation(new Vector3(100+150*(itemsCapacity-1), 50, 0), new Quaternion());
+        itemObjectButtonList.Add(button);
+        //pacMan.GetComponent<Player>().itemsCapacity++;
+    }
+
+    public void GetExtraEnergyCapacity() {
+        pacmanEnergyCapacity=pacmanEnergyCapacity+50;
+        Player.boostEnergySlider.maxValue=pacmanEnergyCapacity;
+        Player.energyText.text ="Boost Energy: \n\n"+"0"+"/"+pacmanEnergyCapacity;
     }
 
     private void BuildMaze() {
@@ -180,8 +195,8 @@ public class GameSceneManager : MonoBehaviour {
     public void PacManArriveEndPoint() {
         if (pacDotsEatenByPlayer>=pacDotsNeeded) {
             ClearLastStage();
+            itemAndShopGM.SetShopMenuState(pacDotsEatenByPlayer);
             uiGmScript.StageMenuEnter();
-            itemAndShopGM.AddPP(pacDotsEatenByPlayer);
         } else {
             levelText.GetComponent<Animator>().SetTrigger("playWarningAnim");
         }
@@ -228,7 +243,7 @@ public class GameSceneManager : MonoBehaviour {
             Destroy(pacMan);
         }
         GameObject pacman = Instantiate(pacManPrefab, point, new Quaternion());
-        pacman.GetComponent<Player>().maxItemsNumber=this.maxItemsNumber;
+        pacman.GetComponent<Player>().itemsCapacity=this.itemsCapacity;
         return pacman;
     }
 

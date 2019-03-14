@@ -570,7 +570,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 128692083}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2091401306}
+        m_MethodName: UnlockItem
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 984620057}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &128692083
@@ -1035,7 +1046,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 250559766}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2091401306}
+        m_MethodName: UnlockItem
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 395137678}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &250559766
@@ -1146,7 +1168,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 297054934}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2091401306}
+        m_MethodName: GetExtraItemCapacity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &297054934
@@ -1332,7 +1365,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 375509979}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2091401299}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &375509979
@@ -2940,7 +2984,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 857764461}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2091401306}
+        m_MethodName: UnlockItem
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 808687380}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &857764461
@@ -3836,7 +3891,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1001355126}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2091401306}
+        m_MethodName: UnlockItem
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1473606136}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1001355126
@@ -4307,7 +4373,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1158789923}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2091401306}
+        m_MethodName: GetExtraEnergyCapacity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1158789923
@@ -5259,7 +5336,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1469124497}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2091401306}
+        m_MethodName: UnlockItem
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2129275586}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1469124497
@@ -6969,6 +7057,7 @@ GameObject:
   - component: {fileID: 2091401302}
   - component: {fileID: 2091401303}
   - component: {fileID: 2091401306}
+  - component: {fileID: 2091401307}
   - component: {fileID: 2091401300}
   - component: {fileID: 2091401304}
   - component: {fileID: 2091401305}
@@ -7019,9 +7108,10 @@ MonoBehaviour:
   level: 0
   mazeWidth: 9
   mazeHeight: 9
-  maxItemsNumber: 3
-  maxPacManLives: 1
-  currentPacManLives: 0
+  itemsCapacity: 3
+  maxPacManLives: 3
+  pacmanEnergyCapacity: 100
+  currentPacManLives: 3
   totalPacDotsInCurrentStage: 0
   pacDotsNeeded: 0
   pacDotsEatenByPlayer: 0
@@ -7119,6 +7209,25 @@ MonoBehaviour:
   itemCapacityIcon: {fileID: 1922160476}
   energyCapacityIcon: {fileID: 1182413372}
   pacmanLifeIcon: {fileID: 666119060}
+  wallBreakerPrice: 100
+  grenadePrice: 200
+  laserPrice: 300
+  pelletPrice: 400
+  portalPrice: 500
+  itemCapacityPrice: 1
+  energyPrice: 1
+  lifePrice: 800
+--- !u!114 &2091401307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2091401299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae149fbe5dc366a43a2c4726dfed6d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   wallBreakerUnlocked: 0
   grenadeUnlocked: 0
   laserUnlocked: 0

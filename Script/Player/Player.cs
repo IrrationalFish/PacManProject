@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    public int maxItemsNumber;
+    public int itemsCapacity;
     public string[] itemsNameList;
     public float laserMaxTime;
     public float laserLastTime;
@@ -27,8 +27,8 @@ public class Player : MonoBehaviour {
     public ParticleSystem boostParticleSystem;
     public Material pacManMaterial;
 
-    private Slider boostEnergySlider;
-    private Text energyText;
+    public static Slider boostEnergySlider;
+    public static Text energyText;
     private Item[] itemsList;
     [SerializeField]private int ownedItems = 0;
     private GameSceneManager gameManagerScript;
@@ -41,11 +41,11 @@ public class Player : MonoBehaviour {
         boostEnergySlider=gameManagerScript.boostEnergySlider;
         energyText=gameManagerScript.energyText;
 
-        maxItemsNumber=gameManagerScript.maxItemsNumber;
-        itemsList=new Item[maxItemsNumber];
+        itemsCapacity=gameManagerScript.itemsCapacity;
+        itemsList=new Item[itemsCapacity];
 
-        itemsNameList=new string[maxItemsNumber];
-        maxEnergy=100;
+        itemsNameList=new string[itemsCapacity];
+        maxEnergy=gameManagerScript.pacmanEnergyCapacity;
         currentEnergy=0;
 
         boostEnergySlider.maxValue=maxEnergy;
@@ -94,6 +94,10 @@ public class Player : MonoBehaviour {
     }
 
     public void UseItem(int index) {
+        if (index>itemsCapacity-1) {
+            Debug.Log("input>capacity");
+            return;
+        }
         if (itemsList[index]==null) {
             Debug.Log("No available item");
             return;
@@ -122,7 +126,7 @@ public class Player : MonoBehaviour {
     public void GetItem(string itemName) {
         Item item = ScriptableObject.CreateInstance<Item>();
         item.SetName(itemName);
-        for (int i =0; i<maxItemsNumber; i++) {
+        for (int i =0; i<itemsCapacity; i++) {
             if(itemsList[i] ==null) {
                 itemsList[i]=item;
                 itemsNameList[i]=item.GetItemName();
@@ -146,7 +150,7 @@ public class Player : MonoBehaviour {
     }
 
     public bool ItemsListHasSpace() {
-        return ownedItems<maxItemsNumber;
+        return ownedItems<itemsCapacity;
     }
 
     private void CheckItemButton() {
@@ -250,5 +254,9 @@ public class Player : MonoBehaviour {
             }
             isBoosting=false;
         }
+    }
+
+    public Item[] GetItemsList() {
+        return itemsList;
     }
 }
