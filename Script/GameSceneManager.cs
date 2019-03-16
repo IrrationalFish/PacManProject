@@ -43,10 +43,12 @@ public class GameSceneManager : MonoBehaviour {
     public Button getLaserBtn;
 
     [SerializeField] private List<GameObject> itemObjectButtonList;
+    [SerializeField] private List<GameObject> itemObjectsList;
     [SerializeField] private GameObject maze;
     [SerializeField] private GameObject pacMan;
     private GameSceneUIManager uiGmScript;
     private ItemAndShopManager itemAndShopGM;
+    private ItemGenerator itemGenerator;
     private GameObject endPoint;
     private GameObject planeClone;
     private GameObject pacDotsParent;
@@ -61,13 +63,14 @@ public class GameSceneManager : MonoBehaviour {
     void Start() {
         uiGmScript=gameObject.GetComponent<GameSceneUIManager>();
         itemAndShopGM=gameObject.GetComponent<ItemAndShopManager>();
+        itemGenerator=gameObject.GetComponent<ItemGenerator>();
         Physics.IgnoreLayerCollision(8, 10);
         //pacMan=RespawnPacMan(new Vector3(1,0,1));
         currentPacManLives=maxPacManLives;
         //virtualCamera1.Follow=pacMan.transform;
         InitialiseUI();
         StartNextStage();
-        buildMazeBtn.onClick.AddListener(delegate () { PacManArriveEndPoint(); });
+        buildMazeBtn.onClick.AddListener(delegate () { ClearLastStage(); level++; StartCoroutine(AfterStageClearMenuReturn(0f)); ; });
         getGrenadeBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("Grenade"); });
         getWallBreakerBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("WallBreaker"); });
         getLaserBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("Laser"); });
@@ -89,13 +92,15 @@ public class GameSceneManager : MonoBehaviour {
 
     IEnumerator AfterStageClearMenuReturn(float time) {
         yield return new WaitForSeconds(time);
+        Destroy(planeClone);
         BuildMaze();
         GeneratePacDot();
-        Destroy(planeClone);
         GeneratePlane();
         endPoint=Instantiate(endPointPrefab, new Vector3(mazeWidth-2, 0, mazeHeight-2), new Quaternion());
         pacMan=RespawnPacMan(new Vector3(1, 0, 1));
         virtualCamera1.Follow=pacMan.transform;
+
+        itemObjectsList= itemGenerator.GenerateItemObejcts();
     }
 
     private void GameOver() {
@@ -149,9 +154,6 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     private void BuildMaze() {
-        /*if (maze!=null) {
-            Destroy(maze);
-        }*/
         if (level%3==1) {
             RD=true;Prim=false;RB=false;
         } else if (level%3==2) {
@@ -159,12 +161,20 @@ public class GameSceneManager : MonoBehaviour {
         } else {
             RD=false; Prim=false; RB=true;
         }
-        int possibleWidth = 9+ ((level-1)/3)*6;
+        int possibleWidth = 9+ ((level-1)/3)*5;
+        int possibleHeight = possibleWidth;
         if(possibleWidth%2!=1) {        //is not odd number
             possibleWidth--;
+            possibleHeight--;
+        }
+        if ((possibleWidth-2)%9==6) {
+            possibleWidth=possibleWidth-2;
+            possibleHeight=possibleHeight-2;
+        }else if ((possibleWidth-2)%9>=7) {
+            possibleHeight=possibleHeight+2;
         }
         mazeWidth=possibleWidth;
-        mazeHeight=possibleWidth;
+        mazeHeight=possibleHeight;
         if (RD) {
             mazeGenerator=GetComponent<MazeGenRD>();
             maze=mazeGenerator.GenerateMaze(mazeWidth, mazeHeight);
@@ -203,7 +213,7 @@ public class GameSceneManager : MonoBehaviour {
                 }
             }
         }
-        pacDotsNeeded=(int)(0.8*totalPacDotsInCurrentStage);
+        pacDotsNeeded=(int)(0*totalPacDotsInCurrentStage);
     }
 
     private void GeneratePlane() {
@@ -256,6 +266,11 @@ public class GameSceneManager : MonoBehaviour {
         }
         foreach (GameObject itemButton in itemObjectButtonList) {
             itemButton.GetComponent<ItemObjectButton>().ItemISUsed();
+        }
+        foreach(GameObject itemObject in itemObjectsList) {
+            if (itemObject!=null) {
+                Destroy(itemObject);
+            }
         }
     }
 
