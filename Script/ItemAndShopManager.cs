@@ -134,6 +134,13 @@ public class ItemAndShopManager : MonoBehaviour {
 
     private void SetItemsPrice() {
         Debug.Log("Set items price");
+        int level = gmScript.level;
+        float multiValue = 0.1f*((level-1)%3);    //0,0.1,0.2,0
+        wallBreakerPrice=Mathf.RoundToInt((2+multiValue)*gmScript.totalPacDotsInCurrentStage);
+        grenadePrice =Mathf.RoundToInt((1.2f+multiValue)*gmScript.totalPacDotsInCurrentStage);
+        laserPrice =Mathf.RoundToInt((1.6f+multiValue)*gmScript.totalPacDotsInCurrentStage);
+        pelletPrice =Mathf.RoundToInt((0.8f+multiValue)*gmScript.totalPacDotsInCurrentStage);
+        portalPrice =Mathf.RoundToInt((2.4f+multiValue)*gmScript.totalPacDotsInCurrentStage);
         if (!itemGenScript.wallBreakerUnlocked) {       //item is locked
             wallBreakerIcon.GetComponentsInChildren<Text>()[1].text=wallBreakerPrice.ToString();
         }
@@ -152,6 +159,10 @@ public class ItemAndShopManager : MonoBehaviour {
     }
 
     private void SetExtraPrice() {
+        int neededPacDotsInLastStage = gmScript.pacDotsNeeded;
+        itemCapacityPrice=neededPacDotsInLastStage;
+        energyPrice=neededPacDotsInLastStage;
+        lifePrice=neededPacDotsInLastStage;
         if (gmScript.itemsCapacity<6) {
             itemCapacityIcon.GetComponentsInChildren<Text>()[1].text=itemCapacityPrice.ToString();
         }

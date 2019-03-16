@@ -203,7 +203,7 @@ public class GameSceneManager : MonoBehaviour {
                 }
             }
         }
-        pacDotsNeeded=(int)(0.1*totalPacDotsInCurrentStage);
+        pacDotsNeeded=(int)(0.8*totalPacDotsInCurrentStage);
     }
 
     private void GeneratePlane() {
