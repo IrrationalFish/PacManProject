@@ -20,7 +20,10 @@ public class ItemGenerator : MonoBehaviour {
     public GameObject portalObjectPrefab;
     public GameObject testSphere;
 
+    public List<Vector3> GenerationAreaCenterList;
+
     private GameSceneManager gmScript;
+    private List<GameObject> availableItemList;
 
     void Start () {
         gmScript=gameObject.GetComponent<GameSceneManager>();
@@ -28,20 +31,45 @@ public class ItemGenerator : MonoBehaviour {
 
     public List<GameObject> GenerateItemObejcts() {
         List<GameObject> itemObjectsList = new List<GameObject>();
-        for (int i = gmScript.mazeWidth-2-generateRadius; i>=generateRadius+1; i=i-2*generateRadius-1) {
-            for (int j = gmScript.mazeHeight-2-generateRadius; j>=generateRadius+1; j=j-2*generateRadius-1) {
-                //itemObjectsList.Add(Instantiate(testSphere, new Vector3(i, 0, j), new Quaternion()));
-                while (true) {
-                    int xPos = Random.Range(i-randomRadius, i+randomRadius+1);
-                    int zPos = Random.Range(j-randomRadius, j+randomRadius+1);
-                    if (!gmScript.MazeCubeIsBlocked(xPos, zPos)) {
-                        itemObjectsList.Add(Instantiate(testSphere,new Vector3(xPos,0,zPos),new Quaternion()));
-                        break;
-                    }
+        availableItemList= SetAvailableItemsList();
+        SetGenerationCenterList();
+        foreach(Vector3 pos in GenerationAreaCenterList) {
+            //itemObjectsList.Add(Instantiate(testSphere, pos, new Quaternion()));
+            if (availableItemList.Count<=0) {
+                return itemObjectsList;
+            }
+            while (true) {
+                int centerX = Mathf.RoundToInt(pos.x);
+                int centerZ = Mathf.RoundToInt(pos.z);
+                int xPos = Random.Range(centerX-randomRadius, centerX+randomRadius+1);
+                int zPos = Random.Range(centerZ-randomRadius, centerZ+randomRadius+1);
+                if (!gmScript.MazeCubeIsBlocked(xPos, zPos)) {
+                    itemObjectsList.Add(GenerateARandomItem(xPos,zPos));
+                    break;
                 }
             }
         }
         return itemObjectsList;
+    }
+
+    private void SetGenerationCenterList() {
+        GenerationAreaCenterList=new List<Vector3>();
+        for (int i = gmScript.mazeWidth-2-generateRadius; i>=generateRadius+1; i=i-2*generateRadius-1) {
+            for (int j = gmScript.mazeHeight-2-generateRadius; j>=generateRadius+1; j=j-2*generateRadius-1) {
+                GenerationAreaCenterList.Add(new Vector3(i, 0, j));
+            }
+        }
+    }
+
+    private GameObject GenerateARandomItem(int xPos, int zPos) {
+        int randomIndex = Random.Range(0, availableItemList.Count);
+        GameObject item = Instantiate(availableItemList[randomIndex], new Vector3(xPos, 0, zPos), new Quaternion());
+        if(availableItemList[randomIndex] ==portalObjectPrefab) {
+            availableItemList.RemoveAt(randomIndex);
+        } else {
+            //do nothing
+        }
+        return item;
     }
 
     private List<GameObject> SetAvailableItemsList() {

@@ -35,7 +35,7 @@ public class ItemsController : MonoBehaviour {
     }
 
     private void MeetEnergyPellet() {
-        playerScript.AddEnergy(100);
+        playerScript.AddEnergyIgnoreLimit(100);
     }
 
 }
