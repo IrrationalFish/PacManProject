@@ -61,7 +61,7 @@ public abstract class Ghost : MonoBehaviour {
         if(end.Equals(start)) {
             tempPath.Push(new Vector3(end.x, 0, end.z));
             this.GetComponent<Animator>().SetBool("isMoving", false);
-            Debug.Log("Change to notMoving");
+            //Debug.Log("Change to notMoving");
             return tempPath;
         }
         bool[,] visited = new bool[gmScript.mazeWidth, gmScript.mazeHeight];

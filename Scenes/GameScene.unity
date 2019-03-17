@@ -114311,6 +114311,7 @@ GameObject:
   - component: {fileID: 2091401302}
   - component: {fileID: 2091401303}
   - component: {fileID: 2091401306}
+  - component: {fileID: 2091401308}
   - component: {fileID: 2091401307}
   - component: {fileID: 2091401300}
   - component: {fileID: 2091401304}
@@ -114401,6 +114402,7 @@ MonoBehaviour:
   getLaserBtn: {fileID: 1624966169}
   itemObjectButtonList: []
   itemObjectsList: []
+  ghostsList: []
   maze: {fileID: 0}
   pacMan: {fileID: 0}
   RD: 1
@@ -114501,6 +114503,28 @@ MonoBehaviour:
   pelletObjectPrefab: {fileID: 1249958643053414, guid: 57656430f1df37e44b05d34983a4f6c8,
     type: 2}
   portalObjectPrefab: {fileID: 1849131220364134, guid: 3b7cb5e883f0da141a589caabd8b556f,
+    type: 2}
+  testSphere: {fileID: 1457348860744280, guid: e2fdbd96868272748be9f3b2e1f2ffde, type: 2}
+  generationAreaCenterList: []
+--- !u!114 &2091401308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2091401299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cced8068bd2ed341b96e35973f078c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomRadius: 3
+  blinkyPrefab: {fileID: 1455049268419178, guid: ef62d71f439fdc842a0b804fcaa5bdd1,
+    type: 2}
+  ambusherPrefab: {fileID: 1105279145949304, guid: c82049255a1d551458aaec1c3cdb50bd,
+    type: 2}
+  chaserPrefab: {fileID: 1433094462249892, guid: 55f8e3b0bfcfaa24282e018341325c3b,
+    type: 2}
+  thiefPrefab: {fileID: 1068054795862228, guid: 0bb191270e2746549bc8461bd7acf578,
     type: 2}
   testSphere: {fileID: 1457348860744280, guid: e2fdbd96868272748be9f3b2e1f2ffde, type: 2}
 --- !u!1 &2091582189

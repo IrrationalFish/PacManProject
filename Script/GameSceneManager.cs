@@ -44,11 +44,13 @@ public class GameSceneManager : MonoBehaviour {
 
     [SerializeField] private List<GameObject> itemObjectButtonList;
     [SerializeField] private List<GameObject> itemObjectsList;
+    [SerializeField] private List<GameObject> ghostsList;
     [SerializeField] private GameObject maze;
     [SerializeField] private GameObject pacMan;
     private GameSceneUIManager uiGmScript;
     private ItemAndShopManager itemAndShopGM;
     private ItemGenerator itemGenerator;
+    private GhostGenerator ghostGenerator;
     private GameObject endPoint;
     private GameObject planeClone;
     private GameObject pacDotsParent;
@@ -64,10 +66,9 @@ public class GameSceneManager : MonoBehaviour {
         uiGmScript=gameObject.GetComponent<GameSceneUIManager>();
         itemAndShopGM=gameObject.GetComponent<ItemAndShopManager>();
         itemGenerator=gameObject.GetComponent<ItemGenerator>();
+        ghostGenerator=gameObject.GetComponent<GhostGenerator>();
         Physics.IgnoreLayerCollision(8, 10);
-        //pacMan=RespawnPacMan(new Vector3(1,0,1));
         currentPacManLives=maxPacManLives;
-        //virtualCamera1.Follow=pacMan.transform;
         InitialiseUI();
         StartNextStage();
         buildMazeBtn.onClick.AddListener(delegate () { ClearLastStage(); level++; StartCoroutine(AfterStageClearMenuReturn(0f)); ; });
@@ -101,6 +102,7 @@ public class GameSceneManager : MonoBehaviour {
         virtualCamera1.Follow=pacMan.transform;
 
         itemObjectsList= itemGenerator.GenerateItemObejcts();
+        ghostsList=ghostGenerator.GenerateGhosts();
     }
 
     private void GameOver() {
@@ -234,6 +236,7 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     private void ClearLastStage() {
+        Debug.Log("Start Clear Last Stage");
         ClearAllGhost();
         ClearLastMaze();
         ClearAllPacDots();
@@ -242,9 +245,15 @@ public class GameSceneManager : MonoBehaviour {
 
     private void ClearAllGhost() {
         Debug.Log("Clear all ghosts");
+        foreach(GameObject ghost in ghostsList) {
+            if (ghost!=null) {
+                Destroy(ghost);
+            }
+        }
     }
 
     private void ClearAllPacDots() {
+        Debug.Log("Clear all pac dots");
         if (pacDotsParent!=null) {
             Destroy(pacDotsParent);
         }
@@ -252,6 +261,7 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     private void ClearLastMaze() {
+        Debug.Log("Clear last maze");
         if (maze!=null) {
             Destroy(maze);
         }
@@ -261,6 +271,7 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     private void ClearPlayerAndItems() {
+        Debug.Log("Clear player and items");
         if (pacMan!=null) {
             Destroy(pacMan);
         }

@@ -20,7 +20,7 @@ public class ItemGenerator : MonoBehaviour {
     public GameObject portalObjectPrefab;
     public GameObject testSphere;
 
-    public List<Vector3> GenerationAreaCenterList;
+    public List<Vector3> generationAreaCenterList;
 
     private GameSceneManager gmScript;
     private List<GameObject> availableItemList;
@@ -33,7 +33,7 @@ public class ItemGenerator : MonoBehaviour {
         List<GameObject> itemObjectsList = new List<GameObject>();
         availableItemList= SetAvailableItemsList();
         SetGenerationCenterList();
-        foreach(Vector3 pos in GenerationAreaCenterList) {
+        foreach(Vector3 pos in generationAreaCenterList) {
             //itemObjectsList.Add(Instantiate(testSphere, pos, new Quaternion()));
             if (availableItemList.Count<=0) {
                 return itemObjectsList;
@@ -53,10 +53,10 @@ public class ItemGenerator : MonoBehaviour {
     }
 
     private void SetGenerationCenterList() {
-        GenerationAreaCenterList=new List<Vector3>();
+        generationAreaCenterList=new List<Vector3>();
         for (int i = gmScript.mazeWidth-2-generateRadius; i>=generateRadius+1; i=i-2*generateRadius-1) {
             for (int j = gmScript.mazeHeight-2-generateRadius; j>=generateRadius+1; j=j-2*generateRadius-1) {
-                GenerationAreaCenterList.Add(new Vector3(i, 0, j));
+                generationAreaCenterList.Add(new Vector3(i, 0, j));
             }
         }
     }

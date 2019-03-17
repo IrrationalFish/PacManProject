@@ -13,7 +13,7 @@ public class Thief : Ghost {
     private new void Update() {
         textCanvas.transform.rotation=Quaternion.Euler(60, 0, 0);
         SetModelAndEye();
-        Debug.Log(gmScript.GetPlayer().transform.position);
+        //Debug.Log(gmScript.GetPlayer().transform.position);
 
         Vector3 playerFarrestCorner = GetNextEnd();
         if (playerFarrestCorner.Equals(currentEnd)) {       //目的地不变

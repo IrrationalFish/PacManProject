@@ -21,7 +21,7 @@ public class Ambusher : Ghost {
         int playerZPos = Mathf.RoundToInt(player.transform.position.z);
         int xDistance = Mathf.Abs(playerXPos-Mathf.RoundToInt(transform.position.x));
         int zDistance = Mathf.Abs(playerZPos-Mathf.RoundToInt(transform.position.z));
-        Debug.Log("XDIS: "+xDistance+", zDis: "+zDistance);
+        //Debug.Log("XDIS: "+xDistance+", zDis: "+zDistance);
         if (xDistance>awakeRadius ||zDistance>awakeRadius) {        //不在awake范围内
             return new Vector3(Mathf.RoundToInt(transform.position.x), 0, Mathf.RoundToInt(transform.position.z));
         } else {
