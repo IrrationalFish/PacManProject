@@ -172,6 +172,7 @@ public class ItemAndShopManager : MonoBehaviour {
         }
 
         if (gmScript.currentPacManLives<3) {
+            ShowLockedIcon(pacmanLifeIcon);
             pacmanLifeIcon.GetComponentsInChildren<Text>()[1].text=lifePrice.ToString();
         } else {
             ShowUnlockedIcon(pacmanLifeIcon);
@@ -192,9 +193,9 @@ public class ItemAndShopManager : MonoBehaviour {
         icon.GetComponentsInChildren<Text>()[1].color=Color.blue;
     }
 
-    /*private void ShowLockedIcon(GameObject icon) {
+    private void ShowLockedIcon(GameObject icon) {
         icon.GetComponentsInChildren<Image>()[1].enabled=false;
         icon.GetComponentsInChildren<Image>()[2].enabled=true;
         icon.GetComponentsInChildren<Button>()[0].enabled=true;
-    }*/
+    }
 }
