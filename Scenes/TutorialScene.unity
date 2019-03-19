@@ -2645,9 +2645,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
-  m_Text: 'Wall-Breaker can be used to break a wal or kill a Ghost.
+  m_Text: 'Wall-Breaker can be used to break a wall or kill a Ghost.
 
-    But the boundary wall cannot be destoryed.'
+    But the boundary wall cannot be destroyed.'
 --- !u!222 &1057170279
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4143,7 +4143,7 @@ MonoBehaviour:
     m_LineSpacing: 1.5
   m_Text: 'Touch Energy Pellet to get 100 boost energy at once.
 
-    Energy bonous will ignore the energy limit.'
+    Energy bonus will ignore the energy limit.'
 --- !u!222 &1724687334
 CanvasRenderer:
   m_ObjectHideFlags: 0
