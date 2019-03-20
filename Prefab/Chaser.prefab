@@ -508,7 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c136cb83fd0d246a3fdc21c71b41b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.05
+  moveSpeed: 0.125
   delta: 0.001
   ghostModel: {fileID: 1435418305809390}
   leftEye: {fileID: 1403524002744060}

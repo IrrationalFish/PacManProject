@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4064272314459236}
   - component: {fileID: 65364608836836246}
   - component: {fileID: 114127644643734462}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: PacDot
   m_TagString: PacDot
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4008732696791208}
   - component: {fileID: 33218002385609908}
   - component: {fileID: 23400768053470770}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

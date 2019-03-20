@@ -215,7 +215,7 @@ public class GameSceneManager : MonoBehaviour {
                 }
             }
         }
-        pacDotsNeeded=(int)(0*totalPacDotsInCurrentStage);
+        pacDotsNeeded=(int)(0.8*totalPacDotsInCurrentStage);
     }
 
     private void GeneratePlane() {
@@ -375,6 +375,11 @@ public class GameSceneManager : MonoBehaviour {
         virtualCamera1.Follow=pacMan.transform;
         pacMan.gameObject.SetActive(true);
         pacMan.GetComponent<PlayerMovement>().startMovement=false;
+        foreach(GameObject ghost in ghostsList) {
+            if (ghost!=null) {
+                GhostSleep(ghost, 3.5f);
+            }
+        }
         Destroy(particle);
         Destroy(deathPosition, 3f);
         if (currentPacManLives==0) {
@@ -400,5 +405,9 @@ public class GameSceneManager : MonoBehaviour {
     public void PlayerGetPacPoint(int number) {
         pacDotsEatenByPlayer=pacDotsEatenByPlayer+number;
         levelText.text="Level "+level+": "+pacDotsEatenByPlayer+"/"+pacDotsNeeded;
+    }
+
+    public List<GameObject> GetItemObjectsList() {
+        return itemObjectsList;
     }
 }

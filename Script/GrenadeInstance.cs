@@ -11,7 +11,11 @@ public class GrenadeInstance : MonoBehaviour {
     private bool isMoving = false;
 
     void Start () {
-        if (Physics.Linecast(this.transform.position-new Vector3(0, 0.75f, 0), this.transform.position-new Vector3(0, 0.75f, 0)+this.transform.forward)) {
+        RaycastHit hit;
+        int layerMask = 1<<15;
+        layerMask=~layerMask;
+        if (Physics.Linecast(this.transform.position-new Vector3(0, 0.75f, 0), this.transform.position-new Vector3(0, 0.75f, 0)+this.transform.forward, out hit, layerMask)) {
+            Debug.Log(hit.transform.position);
             this.GetComponent<Rigidbody>().AddForce((this.transform.forward+this.transform.up)*movePower);
         } else {
             Debug.Log("Grenade No Wall");
@@ -23,7 +27,7 @@ public class GrenadeInstance : MonoBehaviour {
 	void Update () {
         if(isMoving ==true) {
             this.GetComponent<Rigidbody>().velocity=this.transform.forward*moveSpeed;
-            Debug.Log(this.transform.forward);
+            //Debug.Log(this.transform.forward);
         }
     }
 
@@ -40,8 +44,8 @@ public class GrenadeInstance : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.tag =="Wall") {
-            //GameSceneManager gm = GameObject.Find("GameManager").GetComponent<GameSceneManager>();
-            //gm.GmBreakWall(collision.gameObject.GetComponent<Cube>().x, collision.gameObject.GetComponent<Cube>().y);
+            ItemGenerator gm = GameObject.Find("GameManager").GetComponent<ItemGenerator>();
+            gm.GenerateGrenadeObject(Mathf.RoundToInt(gameObject.transform.position.x), Mathf.RoundToInt(gameObject.transform.position.z));
             Destroy(gameObject);
         }
     }

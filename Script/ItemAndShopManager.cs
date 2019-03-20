@@ -160,9 +160,10 @@ public class ItemAndShopManager : MonoBehaviour {
 
     private void SetExtraPrice() {
         int neededPacDotsInLastStage = gmScript.pacDotsNeeded;
-        itemCapacityPrice=neededPacDotsInLastStage;
-        energyPrice=neededPacDotsInLastStage;
-        lifePrice=neededPacDotsInLastStage;
+        int extraPrice = (int)neededPacDotsInLastStage;
+        itemCapacityPrice=extraPrice;
+        energyPrice=extraPrice;
+        lifePrice=extraPrice;
         if (gmScript.itemsCapacity<6) {
             itemCapacityIcon.GetComponentsInChildren<Text>()[1].text=itemCapacityPrice.ToString();
         }

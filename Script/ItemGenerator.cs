@@ -91,4 +91,9 @@ public class ItemGenerator : MonoBehaviour {
         }
         return availableItemsList;
     }
+
+    public void GenerateGrenadeObject(int xPos, int zPos) {
+        GameObject grenade = Instantiate(grenadeObjectPrefab, new Vector3(xPos, 0, zPos), new Quaternion());
+        gmScript.GetItemObjectsList().Add(grenade);
+    }
 }
