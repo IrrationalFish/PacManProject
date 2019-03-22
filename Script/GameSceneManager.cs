@@ -28,6 +28,8 @@ public class GameSceneManager : MonoBehaviour {
     public GameObject deathPointPrefab;
     public GameObject planePrefab;
 
+    public GameSceneSoundManager soundManager;
+
     public GameObject itemObjectButtonPrefab;
     public GameObject canvas;
     public Slider boostEnergySlider;
@@ -86,6 +88,11 @@ public class GameSceneManager : MonoBehaviour {
         if (level==1) {
             StartCoroutine(AfterStageClearMenuReturn(0f));
         } else {
+            if (soundManager.backgroundAudioSource.enabled==true) {
+                StartCoroutine(soundManager.RestartBGMAfterSeconds(soundManager.backgroundAudioSource.clip.length-soundManager.backgroundAudioSource.time+0.1f));
+            } else {
+                soundManager.backgroundAudioSource.enabled=true;
+            }
             uiGmScript.StageMenuReturn();
             StartCoroutine(AfterStageClearMenuReturn(1f));
         }
@@ -107,6 +114,7 @@ public class GameSceneManager : MonoBehaviour {
 
     private void GameOver() {
         Debug.Log("GameOver!");
+        soundManager.PlayGameOverAudio();
         ClearLastStage();
         uiGmScript.GameOverMenuEnter();
         //gameObject.GetComponent<GameSceneUIManager>().LoadScene("MainMenu");
@@ -227,6 +235,7 @@ public class GameSceneManager : MonoBehaviour {
 
     public void PacManArriveEndPoint() {
         if (pacDotsEatenByPlayer>=pacDotsNeeded) {
+            soundManager.PlayStageClearAudio();
             ClearLastStage();
             itemAndShopGM.SetShopMenuState(pacDotsEatenByPlayer);
             uiGmScript.StageMenuEnter();
@@ -354,6 +363,7 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     private IEnumerator PacManHittedByGhost(float second) {
+        soundManager.PlayDeathAudio();
         GameObject particle = pacMan.GetComponent<Player>().PlayDeathParticleSystem();
         pacMan.gameObject.SetActive(false);
         currentPacManLives--;
@@ -388,7 +398,9 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     public void GhostSleep(GameObject ghost, float seconds) {
-        StartCoroutine(GhostEnterSleepMode(ghost,seconds));
+        if (ghost!=null) {
+            StartCoroutine(GhostEnterSleepMode(ghost, seconds));
+        }
     }
 
     private IEnumerator GhostEnterSleepMode(GameObject ghost, float seconds) {

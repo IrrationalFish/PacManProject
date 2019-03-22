@@ -80,6 +80,7 @@ public class Player : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if(other.tag =="PacDot") {
             PacDot pacDotScript = other.GetComponent<PacDot>();
+            gameManagerScript.soundManager.PlaySingleAudio();
             gameManagerScript.PacDotIsEaten(pacDotScript.xPos,pacDotScript.zPos);
             gameManagerScript.PlayerGetPacPoint(1);
             if (currentEnergy<maxEnergy) {
@@ -234,9 +235,11 @@ public class Player : MonoBehaviour {
         if (currentEnergy>0) {
             if (Input.GetKeyDown(KeyCode.Space)) {
                 boostParticleSystem.Play();
+                gameManagerScript.soundManager.EnableBoostAudio();
                 moveParticleSystem.Stop();
             } else if (Input.GetKeyUp(KeyCode.Space)) {
                 boostParticleSystem.Stop();
+                gameManagerScript.soundManager.DisableBoostAudio();
                 moveParticleSystem.Play();
             }
             if (Input.GetKey(KeyCode.Space)) {
@@ -249,6 +252,7 @@ public class Player : MonoBehaviour {
         } else {
             playerMovementScript.moveSpeed=0.1f;
             boostParticleSystem.Stop();
+            gameManagerScript.soundManager.DisableBoostAudio();
             if (playerMovementScript.startMovement==true&&moveParticleSystem.isStopped) {
                 moveParticleSystem.Play();
             }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    public float moveSpeed = 0.1f;
+    public float moveSpeed;
 
     public char nextMoveDir;
     public bool startMovement;
@@ -73,6 +73,7 @@ public class PlayerMovement : MonoBehaviour {
         if (startMovement==false) {
             return;
         }
+        Debug.Log(moveSpeed);
         transform.Translate(Vector3.forward*moveSpeed);
     }
 

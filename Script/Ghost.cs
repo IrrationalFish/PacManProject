@@ -140,6 +140,7 @@ public abstract class Ghost : MonoBehaviour {
     }
 
     private void OnDestroy() {
+        gmScript.soundManager.PlayDeathAudio();
         ghostDeathParticleSystem.GetComponent<ParticleSystem>().GetComponent<Renderer>().material=ghostMaterial;
         GameObject deathEffect = Instantiate(ghostDeathParticleSystem, transform.position, Quaternion.Euler(-90,0,0));
         Destroy(deathEffect, 3f);
