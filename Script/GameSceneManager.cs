@@ -9,6 +9,7 @@ public class GameSceneManager : MonoBehaviour {
     public int level;
     public int mazeWidth;           //长宽包含了边界的2格,一定是奇数
     public int mazeHeight;
+    public float stageClearPacDotsRequirenment = 0.8f;
     public int itemsCapacity;
     public int maxPacManLives = 3;
     public int pacmanEnergyCapacity = 100;
@@ -99,6 +100,7 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     IEnumerator AfterStageClearMenuReturn(float time) {
+        ClearPlayerAndItems();
         yield return new WaitForSeconds(time);
         Destroy(planeClone);
         BuildMaze();
@@ -223,7 +225,7 @@ public class GameSceneManager : MonoBehaviour {
                 }
             }
         }
-        pacDotsNeeded=(int)(0.8*totalPacDotsInCurrentStage);
+        pacDotsNeeded=(int)(stageClearPacDotsRequirenment*totalPacDotsInCurrentStage);
     }
 
     private void GeneratePlane() {
@@ -236,6 +238,8 @@ public class GameSceneManager : MonoBehaviour {
     public void PacManArriveEndPoint() {
         if (pacDotsEatenByPlayer>=pacDotsNeeded) {
             soundManager.PlayStageClearAudio();
+            soundManager.DisableBoostAudio();
+            soundManager.DisableBreakerAudio();
             ClearLastStage();
             itemAndShopGM.SetShopMenuState(pacDotsEatenByPlayer);
             uiGmScript.StageMenuEnter();

@@ -14,11 +14,17 @@ public class GameSceneSoundManager : MonoBehaviour {
     public AudioSource deathAudioSource;
     public AudioSource singleAudioSource;
     public AudioSource boostAudioSource;
+    public AudioSource breakerAudioSource;
+    public AudioSource laserAudioSource;
+    public AudioSource grenadeAudioSource;
 
     private int currentBGMIndex;
 
 	void Start () {
         currentBGMIndex=-1;
+        boostAudioSource.enabled=false;
+        breakerAudioSource.enabled=false;
+        laserAudioSource.enabled=false;
 	}
 	
 	// Update is called once per frame
@@ -42,6 +48,26 @@ public class GameSceneSoundManager : MonoBehaviour {
 
     public void DisableBoostAudio() {
         boostAudioSource.enabled=false;
+    }
+
+    public void EnableBreakerAudio() {
+        breakerAudioSource.enabled=true;
+    }
+
+    public void DisableBreakerAudio() {
+        breakerAudioSource.enabled=false;
+    }
+
+    public void EnableLaserAudio() {
+        laserAudioSource.enabled=true;
+    }
+
+    public void DisableLaserAudio() {
+        laserAudioSource.enabled=false;
+    }
+
+    public void PlayGrenadeAudio() {
+        grenadeAudioSource.Play();
     }
 
     public void PlayGameOverAudio() {

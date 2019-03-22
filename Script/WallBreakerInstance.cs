@@ -9,6 +9,7 @@ public class WallBreakerInstance : MonoBehaviour {
 
 	void Start () {
         gmScript=GameObject.Find("GameManager").GetComponent<GameSceneManager>();
+        gmScript.soundManager.EnableBreakerAudio();
 	}
 
     private void FixedUpdate() {
@@ -29,13 +30,20 @@ public class WallBreakerInstance : MonoBehaviour {
         if (other.gameObject.tag=="Wall") {
             if (!other.gameObject.GetComponent<Cube>().isBoundary) {
                 Cube wall = other.gameObject.GetComponent<Cube>();
+                gmScript.soundManager.PlayDeathAudio();
                 gmScript.GmBreakWall(wall.x, wall.y);
                 Destroy(this.gameObject);
                 gmScript.GetPlayer().GetComponent<Player>().isUsingItem=false;
             } else {
+                ItemGenerator gm = gmScript.gameObject.GetComponent<ItemGenerator>();
+                gm.GenerateWallBreakerObject(Mathf.RoundToInt(gameObject.transform.position.x), Mathf.RoundToInt(gameObject.transform.position.z));
                 gmScript.GetPlayer().GetComponent<Player>().isUsingItem=false;
                 Destroy(gameObject);
             }
         }
+    }
+
+    private void OnDestroy() {
+        gmScript.soundManager.DisableBreakerAudio();
     }
 }

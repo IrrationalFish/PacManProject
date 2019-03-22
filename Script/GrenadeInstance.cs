@@ -22,6 +22,8 @@ public class GrenadeInstance : MonoBehaviour {
             this.transform.position=this.transform.position+new Vector3(0, -0.75f, 0);
             isMoving=true;
         }
+        GameSceneManager gmScript = GameObject.Find("GameManager").GetComponent<GameSceneManager>();
+        gmScript.soundManager.PlayGrenadeAudio();
     }
 	
 	void Update () {

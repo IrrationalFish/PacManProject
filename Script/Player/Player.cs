@@ -60,9 +60,11 @@ public class Player : MonoBehaviour {
         CheckMovement();
 
         if (isUsingLaser) {
+            gameManagerScript.soundManager.EnableLaserAudio();
             laserLastTime=laserLastTime+Time.deltaTime;
         }
         if (laserLastTime>=laserMaxTime) {
+            gameManagerScript.soundManager.DisableLaserAudio();
             isUsingLaser=false;
             isUsingItem=false;
         }
