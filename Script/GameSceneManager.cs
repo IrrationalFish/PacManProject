@@ -74,10 +74,10 @@ public class GameSceneManager : MonoBehaviour {
         currentPacManLives=maxPacManLives;
         InitialiseUI();
         StartNextStage();
-        buildMazeBtn.onClick.AddListener(delegate () { ClearLastStage(); level++; StartCoroutine(AfterStageClearMenuReturn(0f)); ; });
+        /*buildMazeBtn.onClick.AddListener(delegate () { ClearLastStage(); level++; StartCoroutine(AfterStageClearMenuReturn(0f)); ; });
         getGrenadeBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("Grenade"); });
         getWallBreakerBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("WallBreaker"); });
-        getLaserBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("Laser"); });
+        getLaserBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("Laser"); });*/
     }
 
     void Update() {
@@ -99,7 +99,7 @@ public class GameSceneManager : MonoBehaviour {
         }
     }
 
-    IEnumerator AfterStageClearMenuReturn(float time) {
+    public IEnumerator AfterStageClearMenuReturn(float time) {
         ClearPlayerAndItems();
         yield return new WaitForSeconds(time);
         Destroy(planeClone);
@@ -165,7 +165,7 @@ public class GameSceneManager : MonoBehaviour {
         }
     }
 
-    private void BuildMaze() {
+    public void BuildMaze() {
         if (level%3==1) {
             RD=true;Prim=false;RB=false;
         } else if (level%3==2) {
@@ -248,7 +248,7 @@ public class GameSceneManager : MonoBehaviour {
         }
     }
 
-    private void ClearLastStage() {
+    public void ClearLastStage() {
         Debug.Log("Start Clear Last Stage");
         ClearAllGhost();
         ClearLastMaze();
@@ -436,5 +436,9 @@ public class GameSceneManager : MonoBehaviour {
 
     public List<GameObject> GetItemObjectsList() {
         return itemObjectsList;
+    }
+
+    public GameObject getMaze() {
+        return maze;
     }
 }
