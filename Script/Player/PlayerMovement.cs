@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour {
     private void SetPosToInt() {
         float xPos = Mathf.Round(transform.position.x);
         float zPos = Mathf.Round(transform.position.z);
-        Debug.Log("Pos: "+xPos+","+zPos);
+        //Debug.Log("Pos: "+xPos+","+zPos);
         //transform.position.Set(xPos, 0, zPos);
         gameObject.transform.SetPositionAndRotation(new Vector3(xPos, 0, zPos), transform.rotation);
     }

@@ -86,6 +86,7 @@ public class ItemAndShopManager : MonoBehaviour {
         if (ownedPP>=itemCapacityPrice) {
             gmScript.GetOneMoreItemCapacity();
             ownedPP=ownedPP-itemCapacityPrice;
+            ownedPPText.text="Owned Pac Points (PP): "+ownedPP;
             itemCapacityIcon.GetComponentsInChildren<Text>()[1].text=itemCapacityPrice.ToString();
         } else {
             Debug.Log("No enough PP for Capacity");
@@ -101,6 +102,7 @@ public class ItemAndShopManager : MonoBehaviour {
         if (ownedPP>=energyPrice) {
             gmScript.GetExtraEnergyCapacity();
             ownedPP=ownedPP-energyPrice;
+            ownedPPText.text="Owned Pac Points (PP): "+ownedPP;
             energyCapacityIcon.GetComponentsInChildren<Text>()[1].text=energyPrice.ToString();
         } else {
             Debug.Log("No enough PP for extra energy");
@@ -116,6 +118,7 @@ public class ItemAndShopManager : MonoBehaviour {
         if (ownedPP>=lifePrice) {
             gmScript.GetExtraLife();
             ownedPP=ownedPP-lifePrice;
+            ownedPPText.text="Owned Pac Points (PP): "+ownedPP;
             pacmanLifeIcon.GetComponentsInChildren<Text>()[1].text=lifePrice.ToString();
         } else {
             Debug.Log("No enough PP for extra life");
