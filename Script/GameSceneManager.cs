@@ -296,6 +296,15 @@ public class GameSceneManager : MonoBehaviour {
                 Destroy(itemObject);
             }
         }
+
+        GameObject portala = GameObject.Find("PortalAInstance(Clone)");
+        GameObject portalb = GameObject.Find("PortalBInstance(Clone)");
+        if (portala!=null) {
+            Destroy(portala);
+        }
+        if (portalb!=null) {
+            Destroy(portalb);
+        }
     }
 
     private GameObject RespawnPacMan(Vector3 point) {
