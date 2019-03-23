@@ -11,7 +11,7 @@ public class Globe {
 public class AsyncLoadScene : MonoBehaviour {
 
     public Slider loadingSlider;
-    public Text loadingText;
+    //public Text loadingText;
 
     private float loadingSpeed = 1;
     private float targetValue;
@@ -38,7 +38,7 @@ public class AsyncLoadScene : MonoBehaviour {
             }
         }
 
-        loadingText.text = ((int)(loadingSlider.value * 100)).ToString() + "%";
+        //loadingText.text = ((int)(loadingSlider.value * 100)).ToString() + "%";
 
         if ((int)(loadingSlider.value * 100) == 100) {
             operation.allowSceneActivation = true;      //允许异步加载完毕后自动切换场景

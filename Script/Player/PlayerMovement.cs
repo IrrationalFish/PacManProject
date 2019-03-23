@@ -45,16 +45,24 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         if (nextMoveDir=='a'&&Valid('a')) {
-            SetPosToInt();
-            transform.localEulerAngles=new Vector3(0, -90, 0);
+            if(!transform.localEulerAngles.Equals(new Vector3(0, 270, 0))) {
+                SetPosToInt();
+            }
+            transform.localEulerAngles=new Vector3(0, 270, 0);
         } else if (nextMoveDir=='s'&&Valid('s')) {
-            SetPosToInt();
+            if (!transform.localEulerAngles.Equals(new Vector3(0, 180, 0))) {
+                SetPosToInt();
+            }
             transform.localEulerAngles=new Vector3(0, 180, 0);
         } else if (nextMoveDir=='d'&&Valid('d')) {
-            SetPosToInt();
+            if (!transform.localEulerAngles.Equals(new Vector3(0, 90, 0))) {
+                SetPosToInt();
+            }
             transform.localEulerAngles=new Vector3(0, 90, 0);
         } else if (nextMoveDir=='w'&&Valid('w')) {
-            SetPosToInt();
+            if (!transform.localEulerAngles.Equals(new Vector3(0, 0, 0))) {
+                SetPosToInt();
+            }
             transform.localEulerAngles=new Vector3(0, 0, 0);
         }
 
@@ -73,7 +81,6 @@ public class PlayerMovement : MonoBehaviour {
         if (startMovement==false) {
             return;
         }
-        Debug.Log(moveSpeed);
         transform.Translate(Vector3.forward*moveSpeed);
     }
 
@@ -122,6 +129,8 @@ public class PlayerMovement : MonoBehaviour {
     private void SetPosToInt() {
         float xPos = Mathf.Round(transform.position.x);
         float zPos = Mathf.Round(transform.position.z);
-        transform.position.Set(xPos, 0, zPos);
+        Debug.Log("Pos: "+xPos+","+zPos);
+        //transform.position.Set(xPos, 0, zPos);
+        gameObject.transform.SetPositionAndRotation(new Vector3(xPos, 0, zPos), transform.rotation);
     }
 }

@@ -642,7 +642,7 @@ MonoBehaviour:
   moveSpeed: 0.125
   nextMoveDir: 0
   startMovement: 0
-  turningLineDistance: 0.35
+  turningLineDistance: 0.18
   moveParticleSystem: {fileID: 198792926348739500}
 --- !u!135 &135951581865700176
 SphereCollider:

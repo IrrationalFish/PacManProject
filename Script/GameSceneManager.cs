@@ -368,6 +368,7 @@ public class GameSceneManager : MonoBehaviour {
 
     private IEnumerator PacManHittedByGhost(float second) {
         soundManager.PlayDeathAudio();
+        soundManager.DisableBoostAudio();
         GameObject particle = pacMan.GetComponent<Player>().PlayDeathParticleSystem();
         pacMan.gameObject.SetActive(false);
         currentPacManLives--;
@@ -412,10 +413,11 @@ public class GameSceneManager : MonoBehaviour {
         ghostScript.sleepModel.GetComponentInChildren<MeshRenderer>().material=ghostScript.ghostMaterial;
         GameObject sleepGhost = Instantiate(ghostScript.sleepModel, ghost.transform.position, Quaternion.Euler(25, 0, 0));
         ghost.SetActive(false);
+        Destroy(sleepGhost, seconds);
         yield return new WaitForSeconds(seconds);
         Debug.Log("GhostEnterSleepMode Wait Finish");
         ghost.SetActive(true);
-        Destroy(sleepGhost);
+        //Destroy(sleepGhost);
     }
 
     public void PlayerGetPacPoint(int number) {
