@@ -44,6 +44,7 @@ public class GameSceneManager : MonoBehaviour {
     public Button getGrenadeBtn;
     public Button getWallBreakerBtn;
     public Button getLaserBtn;
+    public Button moneyBtn;
 
     [SerializeField] private List<GameObject> itemObjectButtonList;
     [SerializeField] private List<GameObject> itemObjectsList;
@@ -74,10 +75,11 @@ public class GameSceneManager : MonoBehaviour {
         currentPacManLives=maxPacManLives;
         InitialiseUI();
         StartNextStage();
-        /*buildMazeBtn.onClick.AddListener(delegate () { ClearLastStage(); level++; StartCoroutine(AfterStageClearMenuReturn(0f)); ; });
+        buildMazeBtn.onClick.AddListener(delegate () { ClearLastStage(); level++; StartCoroutine(AfterStageClearMenuReturn(0f)); ; });
         getGrenadeBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("Grenade"); });
         getWallBreakerBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("WallBreaker"); });
-        getLaserBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("Laser"); });*/
+        getLaserBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("Laser"); });
+        moneyBtn.onClick.AddListener(delegate () { pacDotsEatenByPlayer+=1000; });
     }
 
     void Update() {
