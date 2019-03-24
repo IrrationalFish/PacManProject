@@ -7,6 +7,8 @@ public class Blinky : Ghost {
     public int leftAndRightDistance;
     public int upAndDownDistance;
     public Vector3 startPosition;
+    public bool isDemoBlinky = false;
+    public GameObject pathCube;
 
     protected override void InitialiseGhost() {
         startPosition=this.transform.position;
@@ -20,7 +22,9 @@ public class Blinky : Ghost {
                 continue;
             }
             if (!gmScript.MazeCubeIsBlocked(randomX, randomZ)) {
-                //Instantiate(pathCube, new Vector3(randomX, 0, randomZ), new Quaternion());
+                if (isDemoBlinky) {
+                    Destroy(Instantiate(pathCube, new Vector3(randomX, 0, randomZ), new Quaternion()),5f);
+                }
                 return new Vector3(randomX, 0, randomZ);
             }
         }

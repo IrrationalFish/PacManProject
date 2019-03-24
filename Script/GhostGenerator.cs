@@ -67,4 +67,24 @@ public class GhostGenerator : MonoBehaviour {
         ghostList.Add(thiefPrefab);
         return ghostList;
     }
+
+    public void GenerateStaticBlinky(int x, int z) {
+        /*availableGhostList=new List<GameObject>();
+        availableGhostList.Add(blinkyPrefab);
+        List<GameObject> ghostList = new List<GameObject>();
+        ghostList=GenerateGhosts();
+        foreach (GameObject ghost in ghostList) {
+            ghost.GetComponent<Ghost>().moveSpeed=0f;
+        }
+        return ghostList;*/
+        GameObject staticBlinky = Instantiate(blinkyPrefab, new Vector3(x, 0, z), new Quaternion());
+        staticBlinky.GetComponent<Ghost>().moveSpeed=0f;
+        gmScript.GetGhostList().Add(staticBlinky);
+    }
+
+    public void GenerateBlinky(int x, int z) {
+        GameObject staticBlinky = Instantiate(blinkyPrefab, new Vector3(x, 0, z), new Quaternion());
+        staticBlinky.GetComponent<Ghost>().moveSpeed=0.05f;
+        gmScript.GetGhostList().Add(staticBlinky);
+    }
 }

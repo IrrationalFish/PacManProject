@@ -256,7 +256,7 @@ public class GameSceneManager : MonoBehaviour {
         ClearPlayerAndItems();
     }
 
-    private void ClearAllGhost() {
+    public void ClearAllGhost() {
         Debug.Log("Clear all ghosts");
         foreach(GameObject ghost in ghostsList) {
             if (ghost!=null) {
@@ -265,7 +265,7 @@ public class GameSceneManager : MonoBehaviour {
         }
     }
 
-    private void ClearAllPacDots() {
+    public void ClearAllPacDots() {
         Debug.Log("Clear all pac dots");
         if (pacDotsParent!=null) {
             Destroy(pacDotsParent);
@@ -273,7 +273,7 @@ public class GameSceneManager : MonoBehaviour {
         pacDotsArray=null;
     }
 
-    private void ClearLastMaze() {
+    public void ClearLastMaze() {
         Debug.Log("Clear last maze");
         if (maze!=null) {
             Destroy(maze);
@@ -440,5 +440,13 @@ public class GameSceneManager : MonoBehaviour {
 
     public GameObject getMaze() {
         return maze;
+    }
+
+    public List<GameObject> GetGhostList() {
+        return ghostsList;
+    }
+
+    public void SetGhostList(List<GameObject> list) {
+        ghostsList=list;
     }
 }
