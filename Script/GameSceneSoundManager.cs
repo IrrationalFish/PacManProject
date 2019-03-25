@@ -10,6 +10,7 @@ public class GameSceneSoundManager : MonoBehaviour {
     public Text muteText;
     public AudioClip stageClearAudio;
     public AudioClip gameOverAudio;
+    public Text bgmText;
 
     public AudioSource deathAudioSource;
     public AudioSource singleAudioSource;
@@ -103,6 +104,7 @@ public class GameSceneSoundManager : MonoBehaviour {
             bgmIndex=Random.Range(0, bgmAudioList.Count);
         }
         backgroundAudioSource.clip=bgmAudioList[bgmIndex];
+        bgmText.text="BGM: "+backgroundAudioSource.clip.name;
         backgroundAudioSource.Play();
     }
 

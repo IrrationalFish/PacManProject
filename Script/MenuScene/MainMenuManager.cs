@@ -18,6 +18,10 @@ public class MainMenuManager : MonoBehaviour {
         SceneManager.LoadScene("LoadingScene");
     }
 
+    public void OpenMusicLicenseWeb() {
+        Application.OpenURL("https://www.jamendo.com/legal/creative-commons");
+    }
+
     public void ExitGame() {
         Debug.Log("ExitGame");
         Application.Quit();
