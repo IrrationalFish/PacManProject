@@ -29,7 +29,7 @@ public class GhostGenerator : MonoBehaviour {
         List<Vector3> generationAreaCenterList = gameObject.GetComponent<ItemGenerator>().generationAreaCenterList;
         availableGhostList=SetAvailableGhostList();
         foreach (Vector3 pos in generationAreaCenterList) {
-            if(pos.Equals(new Vector3(5, 0, 5))) {
+            if(pos.Equals(new Vector3(4, 0, 4))) {
                 continue;
             }
             //ghostList.Add(Instantiate(blinkyPrefab, pos, new Quaternion()));

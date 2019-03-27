@@ -178,6 +178,7 @@ public class ItemAndShopManager : MonoBehaviour {
         if (gmScript.currentPacManLives<3) {
             ShowLockedIcon(pacmanLifeIcon);
             pacmanLifeIcon.GetComponentsInChildren<Text>()[1].text=lifePrice.ToString();
+            pacmanLifeIcon.GetComponentsInChildren<Text>()[1].color=Color.black;
         } else {
             ShowUnlockedIcon(pacmanLifeIcon);
             pacmanLifeIcon.GetComponentsInChildren<Text>()[1].text="Full";

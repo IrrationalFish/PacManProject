@@ -24,12 +24,14 @@ public class ItemGenerator : MonoBehaviour {
 
     private GameSceneManager gmScript;
     private List<GameObject> availableItemList;
+    public int pelletCount = 0;
 
     void Start () {
         gmScript=gameObject.GetComponent<GameSceneManager>();
 	}
 
     public List<GameObject> GenerateItemObejcts() {
+        pelletCount=0;
         List<GameObject> itemObjectsList = new List<GameObject>();
         availableItemList= SetAvailableItemsList();
         SetGenerationCenterList();
@@ -66,6 +68,12 @@ public class ItemGenerator : MonoBehaviour {
         GameObject item = Instantiate(availableItemList[randomIndex], new Vector3(xPos, 0, zPos), new Quaternion());
         if(availableItemList[randomIndex] ==portalObjectPrefab) {
             availableItemList.RemoveAt(randomIndex);
+        } else if(availableItemList[randomIndex]==pelletObjectPrefab) {
+            pelletCount++;
+            if(pelletCount >generationAreaCenterList.Count/4) {
+                availableItemList.RemoveAt(randomIndex);
+                Debug.Log("Remove pellet");
+            }
         } else {
             //do nothing
         }

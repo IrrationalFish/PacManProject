@@ -9185,7 +9185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae149fbe5dc366a43a2c4726dfed6d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generateRadius: 4
+  generateRadius: 3
   randomRadius: 3
   wallBreakerUnlocked: 0
   grenadeUnlocked: 0

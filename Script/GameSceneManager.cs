@@ -113,7 +113,10 @@ public class GameSceneManager : MonoBehaviour {
         virtualCamera1.Follow=pacMan.transform;
 
         itemObjectsList= itemGenerator.GenerateItemObejcts();
-        ghostsList=ghostGenerator.GenerateGhosts();
+        if (level>3) {
+            ghostsList=ghostGenerator.GenerateGhosts();
+        }
+       
     }
 
     private void GameOver() {
