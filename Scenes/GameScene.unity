@@ -6526,7 +6526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1529553965
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6723,7 +6723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1624966168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7205,7 +7205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1695195169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7856,7 +7856,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1846062455
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8210,7 +8210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1900006855
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9204,6 +9204,7 @@ MonoBehaviour:
     type: 3}
   testSphere: {fileID: 1457348860744280, guid: e2fdbd96868272748be9f3b2e1f2ffde, type: 3}
   generationAreaCenterList: []
+  pelletCount: 0
 --- !u!114 &2091401308
 MonoBehaviour:
   m_ObjectHideFlags: 0
