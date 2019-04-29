@@ -75,11 +75,11 @@ public class GameSceneManager : MonoBehaviour {
         currentPacManLives=maxPacManLives;
         InitialiseUI();
         StartNextStage();
-        buildMazeBtn.onClick.AddListener(delegate () { ClearLastStage(); level++; StartCoroutine(AfterStageClearMenuReturn(0f)); ; });
+        /*buildMazeBtn.onClick.AddListener(delegate () { ClearLastStage(); level++; StartCoroutine(AfterStageClearMenuReturn(0f)); ; });
         getGrenadeBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("Grenade"); });
         getWallBreakerBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("WallBreaker"); });
         getLaserBtn.onClick.AddListener(delegate () { pacMan.GetComponent<Player>().GetItem("Laser"); });
-        moneyBtn.onClick.AddListener(delegate () { pacDotsEatenByPlayer+=1000; });
+        moneyBtn.onClick.AddListener(delegate () { pacDotsEatenByPlayer+=1000; });*/
     }
 
     void Update() {

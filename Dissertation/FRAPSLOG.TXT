@@ -1,0 +1,15 @@
+2019-04-29 21:49:13 - PacMan
+Frames: 2990 - Time: 50031ms - Avg: 59.763 - Min: 55 - Max: 62
+
+2019-04-29 21:51:59 - PacMan
+Frames: 4081 - Time: 69172ms - Avg: 58.998 - Min: 35 - Max: 61
+
+2019-04-29 21:53:50 - PacMan
+Frames: 2091 - Time: 34844ms - Avg: 60.010 - Min: 59 - Max: 61
+
+2019-04-29 21:55:13 - PacMan
+Frames: 7961 - Time: 140344ms - Avg: 56.725 - Min: 36 - Max: 61
+
+2019-04-29 21:57:54 - PacMan
+Frames: 8733 - Time: 150015ms - Avg: 58.214 - Min: 34 - Max: 62
+
