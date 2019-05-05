@@ -102,21 +102,21 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     public IEnumerator AfterStageClearMenuReturn(float time) {
-        ClearPlayerAndItems();
+        ClearPlayerAndItems();              //Shop UI disappear. Start next stage
+        Destroy(planeClone);    //Destroy old background
         yield return new WaitForSeconds(time);
-        Destroy(planeClone);
-        BuildMaze();
-        GeneratePacDot();
-        GeneratePlane();
-        endPoint=Instantiate(endPointPrefab, new Vector3(mazeWidth-2, 0, mazeHeight-2), new Quaternion());
-        pacMan=RespawnPacMan(new Vector3(1, 0, 1));
-        virtualCamera1.Follow=pacMan.transform;
-
-        itemObjectsList= itemGenerator.GenerateItemObejcts();
+        BuildMaze();        //generate a maze
+        GeneratePacDot();   //generate PacDots
+        GeneratePlane();    //generate new background
+        endPoint=Instantiate(endPointPrefab,    //generate new end point
+                                new Vector3(mazeWidth-2, 0, mazeHeight-2), 
+                                new Quaternion());
+        pacMan=RespawnPacMan(new Vector3(1, 0, 1)); //generate new PacMan
+        virtualCamera1.Follow=pacMan.transform;     //adjust camera
+        itemObjectsList= itemGenerator.GenerateItemObejcts();// generate items
         if (level>3) {
-            ghostsList=ghostGenerator.GenerateGhosts();
+            ghostsList=ghostGenerator.GenerateGhosts(); //generate ghosts
         }
-       
     }
 
     private void GameOver() {
@@ -240,15 +240,15 @@ public class GameSceneManager : MonoBehaviour {
         planeClone.transform.localScale=new Vector3(scaleMulti,1,scaleMulti);
     }
 
-    public void PacManArriveEndPoint() {
-        if (pacDotsEatenByPlayer>=pacDotsNeeded) {
+    public void PacManArriveEndPoint() { //PacMan reach end point
+        if (pacDotsEatenByPlayer>=pacDotsNeeded) {  //PacMan has enough points
             soundManager.PlayStageClearAudio();
             soundManager.DisableBoostAudio();
-            soundManager.DisableBreakerAudio();
-            ClearLastStage();
+            soundManager.DisableBreakerAudio(); //stop all sounds
+            ClearLastStage();   //clear last stage
             itemAndShopGM.SetShopMenuState(pacDotsEatenByPlayer);
-            uiGmScript.StageMenuEnter();
-        } else {
+            uiGmScript.StageMenuEnter();    //show shop UI
+        } else {    //PacMan reach end point without enough points
             levelText.GetComponent<Animator>().SetTrigger("playWarningAnim");
         }
     }

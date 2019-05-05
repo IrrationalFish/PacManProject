@@ -7,10 +7,6 @@ public class Chaser : Ghost {
     public int detectDistance;
     public int chaseDistance;
 
-    protected override Vector3 GetNextEnd() {
-        return new Vector3(1, 0, 1);
-    }
-
     protected override void InitialiseGhost() {
         //do nothing
     }
@@ -98,6 +94,10 @@ public class Chaser : Ghost {
         while (tempPath.Count>0) {
             path.Push(tempPath.Pop());
         }
+    }
+
+    protected override Vector3 GetNextEnd() {
+        return new Vector3(1, 0, 1);
     }
 
     private void DrawLine() {
