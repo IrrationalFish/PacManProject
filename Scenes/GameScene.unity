@@ -1342,8 +1342,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e4f10081f50157d4ebc1ab043e6b7893, type: 3}
   - {fileID: 8300000, guid: 3159df3d628d87146b71adfa470d12b6, type: 3}
   muteText: {fileID: 1982846231}
-  stageClearAudio: {fileID: 8300000, guid: b8eb8af57723ee44a8b406c9fdb81a4d, type: 3}
-  gameOverAudio: {fileID: 8300000, guid: e87f29a94698f2547af30ec43986b702, type: 3}
+  stageClearAudio: {fileID: 8300000, guid: 78cf1ba1ce2089242a7db0ea698cd54a, type: 3}
+  gameOverAudio: {fileID: 8300000, guid: 3114dcc380d06a64e8f66fb9550ecef3, type: 3}
   bgmText: {fileID: 1651997198}
   deathAudioSource: {fileID: 1755266723}
   singleAudioSource: {fileID: 883148750}

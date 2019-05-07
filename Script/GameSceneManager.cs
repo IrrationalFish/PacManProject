@@ -103,8 +103,8 @@ public class GameSceneManager : MonoBehaviour {
 
     public IEnumerator AfterStageClearMenuReturn(float time) {
         ClearPlayerAndItems();              //Shop UI disappear. Start next stage
-        Destroy(planeClone);    //Destroy old background
         yield return new WaitForSeconds(time);
+        Destroy(planeClone);    //Destroy old background
         BuildMaze();        //generate a maze
         GeneratePacDot();   //generate PacDots
         GeneratePlane();    //generate new background
