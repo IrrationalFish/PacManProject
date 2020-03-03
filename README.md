@@ -1,2 +1,2 @@
-# COMP390PacMan
+# PacManProject
 sadasdasdasd
