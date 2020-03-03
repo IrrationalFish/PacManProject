@@ -38,3 +38,15 @@
 ## Portal
 每个迷宫最多出现一次，可使用两次来放置一对传送门，可利用传送门在迷宫中移动
 ![Portal](https://github.com/NaughtyFishRei/PacManProject/raw/master/ScreenShots/portal.PNG)
+
+# 敌人（Ghost）
+实现了4种不同敌人，每个敌人有不同的行为逻辑
+![Ghosts](https://github.com/NaughtyFishRei/PacManProject/raw/master/ScreenShots/ghosts.PNG)
+# Blinky（红色）
+在一定范围内随机移动
+# Ambusher（黄色）
+根据玩家之前的移动路径，更倾向于在玩家还未到达的区域活动
+# Chaser（紫色）
+平时不移动，当视线追踪到玩家后会以较快速度追赶玩家，玩家需要通过多次转弯甩开
+# Thief（绿色）
+不会进攻，只会远离玩家，移动时会收集路径上的点数，玩家可以通过碰撞杀死它并夺回点数
