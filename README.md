@@ -39,7 +39,7 @@
 每个迷宫最多出现一次，可使用两次来放置一对传送门，可利用传送门在迷宫中移动
 ![Portal](https://github.com/NaughtyFishRei/PacManProject/raw/master/ScreenShots/portal.PNG)
 
-# 敌人（Ghost）
+# 敌人（Ghosts）
 实现了4种不同敌人，每个敌人有不同的行为逻辑
 ![Ghosts](https://github.com/NaughtyFishRei/PacManProject/raw/master/ScreenShots/ghosts.PNG)
 # Blinky（红色）
